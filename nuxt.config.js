@@ -47,9 +47,9 @@ export default {
         loader: 'eslint-loader',
         exclude: /(node_modules)/,
         options: {
-          fix: true
-        }
+          fix: true,
+        },
       })
-  }
-},
+    },
+  },
 }
