@@ -1,17 +1,42 @@
 <template>
   <div>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <div
       style="
         padding-top: 10px;
         position: fixed;
         background-color: white;
         width: 100%;
+        z-index: 5;
       "
     >
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       />
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      />
+      <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+      ></script>
       <div>
         <form>
           <div class="form-row">
@@ -30,6 +55,7 @@
                 style="margin-top: 6px"
               ></span>
               <input
+                id="search_restaurant"
                 type="text"
                 class="form-control bg-light"
                 placeholder="Search"
@@ -40,13 +66,7 @@
                   font-size: 18px;
                   line-height: 40px;
                 "
-                @click="
-                  {
-                    {
-                      created()
-                    }
-                  }
-                "
+                @change="created()"
               />
             </div>
           </div>
@@ -75,6 +95,7 @@
         </nav>
       </div>
     </div>
+    <br /><br /><br /><br /><br />
     <nuxt />
   </div>
 </template>
@@ -149,16 +170,20 @@ html {
 export default {
   methods: {
     created() {
+      console.log(5)
       const request = new XMLHttpRequest()
+      const searchRestaurant = document.getElementById('search_restaurant')
+        .value
       request.onreadystatechange = function () {
         if (this.status === 200 && this.readyState === 4) {
-          const parsed = JSON.parse(this.responseText)
-          console.log(parsed)
+          console.log(JSON.parse(this.responseText))
         }
       }
       request.open(
         'GET',
-        'https://tih-api.stb.gov.sg/content/v1/food-beverages/search?keyword=c&apikey=V9RImjwjM4y4T2GFlnwjdMJuIs3NoHV1',
+        'https://developers.zomato.com/api/v2.1/search?q=' +
+          searchRestaurant +
+          '&apikey=e5567dabfe03e800b9c322a7c552684d',
         true
       )
       request.send()
