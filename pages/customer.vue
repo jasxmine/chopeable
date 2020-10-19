@@ -5,6 +5,12 @@
       <br />
       <br />
     </div>
+
+    <div class="row" style="justify-content: flex-end">
+      <div class="col-auto" style="width: 100%">
+        <b-table responsive striped hover :items="items"></b-table>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -13,6 +19,48 @@ export default {
   name: 'Admin',
   layout: 'admin',
   meta: { template: 'admin' },
+  data() {
+    return {
+      items: [
+        {
+          booking_time: '12:30',
+          first_name: 'Dickerson',
+          last_name: 'Macdonald',
+          email: 'abc@gmail.com',
+          mobile: '654321',
+          reward: '50',
+          membership: 'yes',
+        },
+        {
+          booking_time: '15:30',
+          first_name: 'Larsen',
+          last_name: 'Shaw',
+          email: 'abc@gmail.com',
+          mobile: '654321',
+          reward: '40',
+          membership: 'yes',
+        },
+        {
+          booking_time: '16:30',
+          first_name: 'Geneva',
+          last_name: 'Wilson',
+          email: 'abc@gmail.com',
+          mobile: '654321',
+          reward: '10',
+          membership: 'No',
+        },
+        {
+          booking_time: '17:00',
+          first_name: 'Bob',
+          last_name: 'Carney',
+          email: 'abc@gmail.com',
+          mobile: '654321',
+          reward: '60',
+          membership: 'No',
+        },
+      ],
+    }
+  },
 }
 </script>
 <style>
