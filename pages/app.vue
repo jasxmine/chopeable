@@ -73,6 +73,9 @@
 </template>
 
 <script>
+import restaurantService from '../services/restaurantService'
+restaurantService.getRestaurants().then((res) => console.log(res))
+
 const successCallback = (position) => {
   const userLoc = position
   const latitude = userLoc.coords.latitude
@@ -141,7 +144,6 @@ export default {
   methods: {
     emptyFocusOut() {
       this.searchResult = []
-      document.getElementById('displaySearch').style.display = 'none'
     },
     canScroll() {
       document.documentElement.style['overflow-y'] = 'scroll'
