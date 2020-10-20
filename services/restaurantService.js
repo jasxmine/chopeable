@@ -10,7 +10,17 @@ const getRestaurants = () => {
     .catch()
 }
 
-const searchRestaurants = (query) => {}
+const searchRestaurants = (query) => {
+  return fetch(
+    `https://developers.zomato.com/api/v2.1/search?entity_id=52&entity_type=city&q=${query}&apikey=` +
+      process.env.ZOMATO_API_KEY
+  )
+    .then((res) => res.json())
+    .then((result) => {
+      return result
+    })
+    .catch()
+}
 
 const getCuisines = () => {
   return fetch(
