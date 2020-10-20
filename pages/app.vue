@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <div class="header">
+  <div
+    style="margin-top: 0px"
+    @click="emptyFocusOut"
+    @mouseover="canScroll"
+    @load="console.log(1)"
+  >
+    <div class="header" style="text-align: middle">
       <br /><br /><br /><br /><br />
       <br />
       <br />
-
+      <br />
       <h3 class="white_text" style="font-size: 50px">
         Don't know what to eat?
       </h3>
-      <h5
-        class="white_text"
-        style="margin-left: 42%; font-size: 25px; width: 250px"
-      >
+      <h5 class="white_text" style="font-size: 25px; width: 100%">
         discover, book, and dine with us
       </h5>
     </div>
@@ -23,7 +25,7 @@
       id="carousel"
       class="carousel slide"
       data-ride="true"
-      data-interval="5000"
+      data-interval="false"
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -81,7 +83,9 @@ const successCallback = (position) => {
     document.getElementById('restaurantListNearby0').innerHTML = ''
     document.getElementById('restaurantListNearby2').innerHTML = ''
     const parsed = JSON.parse(this.responseText).restaurants
+
     const smallerParsed = parsed.slice(0, 9)
+    console.log(smallerParsed)
     document.getElementById('discoverNearby').innerHTML = ''
     const discoverNearby = document.getElementById('discoverNearby')
     const h3 = document.createElement('h3')
@@ -90,11 +94,9 @@ const successCallback = (position) => {
     let i = 0
     for (const index of smallerParsed) {
       const restaurantName = index.restaurant.name
+      const imageThumb = index.restaurant.featured_image
       const image = document.createElement('img')
-      image.setAttribute(
-        'src',
-        'https://www.cookingclassy.com/wp-content/uploads/2019/07/steak-marinade-12-500x500.jpg'
-      )
+      image.setAttribute('src', imageThumb)
       image.setAttribute('alt', 'why though')
       image.setAttribute('width', '100%')
       let streetAddress = index.restaurant.location.address
@@ -134,8 +136,22 @@ const errorCallback = (error) => {
   console.log(error)
 }
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
-
-export default {}
+window.axios = require('axios')
+export default {
+  methods: {
+    emptyFocusOut() {
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      document.documentElement.style['overflow-y'] = 'scroll'
+      document.documentElement.style.position = 'static'
+    },
+    getCurrentLoc() {
+      console.log(1)
+    },
+  },
+}
 </script>
 
 <style>
@@ -154,5 +170,17 @@ li {
 }
 .leftMargin {
   margin-left: 10%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: #fc450d;
+  border-radius: 50%;
+  top: calc(50% - 25px);
+  opacity: 0.8;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 </style>
