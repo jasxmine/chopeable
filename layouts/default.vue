@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -8,11 +8,11 @@
     <div
       style="
         padding-top: 10px;
-        position: fixed;
-        background-color: white;
+        background-color: rgb(240, 240, 240);
         width: 100%;
-        z-index: 5;
+        z-index: 1;
       "
+      @mouseover.self="canScroll"
     >
       <link
         rel="stylesheet"
@@ -37,9 +37,14 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
       ></script>
-      <div>
-        <form>
-          <div class="form-row">
+
+      <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
+        <form @click.self="emptyFocusOut" @mouseover.self="canScroll">
+          <div
+            class="form-row"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          >
             <a href="/app">
               <img
                 src="../logo_2.png"
@@ -49,33 +54,70 @@
               />
             </a>
             <span style="margin-left: 150px"></span>
-            <div class="form-group has-search" style="margin-top: 10px">
-              <span
-                class="fa fa-search form-control-feedback bg-light"
-                style="margin-top: 6px"
-              ></span>
-              <input
-                id="search_restaurant"
-                type="text"
-                class="form-control bg-light"
-                placeholder="Search"
-                style="
-                  height: 45px;
-                  border: 0px;
-                  width: 750px;
-                  font-size: 18px;
-                  line-height: 40px;
-                "
-                @change="created()"
-              />
+            <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
+              <div
+                id="parenting"
+                class="form-group has-search"
+                style="margin-top: 10px"
+                @click.self="emptyFocusOut"
+                @mouseover.self="canScroll"
+              >
+                <input
+                  id="search_restaurant"
+                  list="restaurants"
+                  type="text"
+                  class="form-control randomizedClick"
+                  placeholder="Search"
+                  autocomplete="off"
+                  style="
+                    height: 45px;
+                    border: 0px;
+                    width: 750px;
+                    font-size: 18px;
+                    line-height: 40px;
+                  "
+                  @keyup="getUser"
+                  @focus="getUser"
+                />
+                <div
+                  id="displaySearch"
+                  style="
+                    position: absolute;
+                    width: 750px;
+                    background-color: rgb(255, 255, 255, 1);
+                    display: none;
+                    z-index: 5;
+                    max-height: 300px;
+                    overflow: scroll;
+                  "
+                  @mouseover="cannotScroll"
+                >
+                  <!-- create onfocusout to remove search list 
+                and show maximum 5 with scrollbar instead of showing all 20-->
+                  <br />
+                  <search :search="searchResult" />
+                </div>
+              </div>
             </div>
           </div>
         </form>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav
+          class="navbar navbar-expand-lg navbar-light"
+          style="margin-bottom: 0px"
+          @click="emptyFocusOut"
+          @mouseover="canScroll"
+        >
           <div id="navbarSupportedContent" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#"> Restaurant Directory </a>
+                <NuxtLink class="nav-link" to="/search">
+                  Restaurant Directory
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink class="nav-link" to="/visualiseTables">
+                  Visualise Tables
+                </NuxtLink>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -95,7 +137,6 @@
         </nav>
       </div>
     </div>
-    <br /><br /><br /><br /><br />
     <nuxt />
   </div>
 </template>
@@ -165,28 +206,62 @@ html {
   color: #aaa;
 }
 </style>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+import search from '../components/search'
+window.axios = require('axios')
 export default {
+  components: {
+    search,
+  },
+  data() {
+    return {
+      searchResult: [],
+      msg: 'hello',
+      isModalVisible: 'false',
+    }
+  },
   methods: {
-    created() {
-      console.log(5)
-      const request = new XMLHttpRequest()
-      const searchRestaurant = document.getElementById('search_restaurant')
-        .value
-      request.onreadystatechange = function () {
-        if (this.status === 200 && this.readyState === 4) {
-          console.log(JSON.parse(this.responseText))
+    async getUser() {
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'block'
+      const search = document.getElementById('search_restaurant').value
+      if (search.length > 2) {
+        try {
+          const response = await axios.get(
+            'https://developers.zomato.com/api/v2.1/search?q=' +
+              search +
+              '&apikey=e5567dabfe03e800b9c322a7c552684d'
+          )
+          for (let restaurant of response.data.restaurants) {
+            let restaurantObj = { name: '', location: '' }
+            let name = restaurant.restaurant.name
+            let locality = '(' + restaurant.restaurant.location.locality + ')'
+            restaurantObj.name = name
+            restaurantObj.location = locality
+            this.searchResult.push(restaurantObj)
+          }
+        } catch (error) {
+          console.error(error)
         }
+      } else {
+        document.getElementById('displaySearch').style.display = 'none'
       }
-      request.open(
-        'GET',
-        'https://developers.zomato.com/api/v2.1/search?q=' +
-          searchRestaurant +
-          '&apikey=e5567dabfe03e800b9c322a7c552684d',
-        true
-      )
-      request.send()
+    },
+    emptyFocusOut() {
+      console.log('empty function called')
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
+    cannotScroll() {
+      document.documentElement.style.position = 'fixed'
+      document.documentElement.style['overflow-y'] = 'scroll'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
   },
 }
