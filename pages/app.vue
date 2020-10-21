@@ -178,35 +178,37 @@ window.axios = require('axios')
 export default {
   components: { cuisine },
   data() {
-    return { cuisineResList1: '', cuisineResList2: '', cuisineResList3: '' }
+    return { cuisineResList1: [], cuisineResList2: [], cuisineResList3: [] }
   },
   mounted() {
     restaurantService.getCuisines().then((res) => {
       const cuisineResult = res.cuisines
-      cuisineResult[1].cuisine.url = '/american.jpg'
-      cuisineResult[15].cuisine.url = '/chinese.webp'
-      cuisineResult[18].cuisine.url = '/desserts.jpeg'
-      cuisineResult[25].cuisine.url = 'french.jpg'
-      cuisineResult[38].cuisine.url = '/italian.jpg'
-      cuisineResult[39].cuisine.url = '/japanese.jpg'
-      cuisineResult[45].cuisine.url = '/malaysian.jpg'
-      cuisineResult[66].cuisine.url = '/steak.jpg'
-      cuisineResult[67].cuisine.url = '/steamboat.jpg'
-      this.cuisineResList1 = [
-        cuisineResult[1].cuisine,
-        cuisineResult[15].cuisine,
-        cuisineResult[18].cuisine,
+      const cuisineList = [
+        'American',
+        'Chinese',
+        'Desserts',
+        'French',
+        'Italian',
+        'Japanese',
+        'Malaysian',
+        'Steak',
+        'Steamboat',
       ]
-      this.cuisineResList2 = [
-        cuisineResult[25].cuisine,
-        cuisineResult[38].cuisine,
-        cuisineResult[39].cuisine,
-      ]
-      this.cuisineResList3 = [
-        cuisineResult[45].cuisine,
-        cuisineResult[66].cuisine,
-        cuisineResult[67].cuisine,
-      ]
+      for (let i = 0; i < cuisineResult.length; i++) {
+        if (cuisineList.includes(cuisineResult[i].cuisine.cuisine_name)) {
+          let cuisineName = cuisineResult[i].cuisine.cuisine_name
+          cuisineName = cuisineName.toString()
+          cuisineName = cuisineName.toLowerCase()
+          cuisineResult[i].cuisine.url = `/${cuisineName}.jpg`
+          if (this.cuisineResList1.length < 3) {
+            this.cuisineResList1.push(cuisineResult[i].cuisine)
+          } else if (this.cuisineResList2.length < 3) {
+            this.cuisineResList2.push(cuisineResult[i].cuisine)
+          } else {
+            this.cuisineResList3.push(cuisineResult[i].cuisine)
+          }
+        }
+      }
     })
   },
   methods: {
