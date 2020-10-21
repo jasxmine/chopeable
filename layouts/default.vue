@@ -110,7 +110,9 @@
           <div id="navbarSupportedContent" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#"> Restaurant Directory </a>
+                <NuxtLink class="nav-link" to="/search">
+                  Restaurant Directory
+                </NuxtLink>
               </li>
               <li class="nav-item dropdown">
                 <a
