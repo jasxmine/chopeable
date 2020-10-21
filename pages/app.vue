@@ -111,69 +111,6 @@
 import restaurantService from '../services/restaurantService'
 import cuisine from '../components/cuisine'
 
-const successCallback = (position) => {
-  const userLoc = position
-  const latitude = userLoc.coords.latitude
-  const longitude = userLoc.coords.longitude
-  const request = new XMLHttpRequest()
-  request.onreadystatechange = function () {
-    document.getElementById('restaurantListNearby1').innerHTML = ''
-    document.getElementById('restaurantListNearby0').innerHTML = ''
-    document.getElementById('restaurantListNearby2').innerHTML = ''
-    const parsed = JSON.parse(this.responseText).restaurants
-
-    const smallerParsed = parsed.slice(0, 9)
-    document.getElementById('discoverNearby').innerHTML = ''
-    const discoverNearby = document.getElementById('discoverNearby')
-    const h3 = document.createElement('h3')
-    h3.innerHTML = 'Discover nearby restaurants'
-    discoverNearby.appendChild(h3)
-    let i = 0
-    for (const index of smallerParsed) {
-      const restaurantName = index.restaurant.name
-      const imageThumb = index.restaurant.featured_image
-      const image = document.createElement('img')
-      image.setAttribute('src', imageThumb)
-      image.setAttribute('alt', 'why though')
-      image.setAttribute('width', '100%')
-      image.setAttribute('height', '250px')
-      let streetAddress = index.restaurant.location.address
-      const indexComma = streetAddress.indexOf(',')
-      streetAddress = streetAddress.slice(0, indexComma)
-      const div = document.createElement('div')
-      div.setAttribute('class', 'col-md-4')
-      const divCard = document.createElement('div')
-      divCard.setAttribute('class', 'card mb-4')
-      div.appendChild(divCard)
-      const divCardBody = document.createElement('div')
-      divCardBody.setAttribute('class', 'card-body')
-      divCard.appendChild(image)
-      divCard.appendChild(divCardBody)
-      const p = document.createElement('p')
-      p.setAttribute('class', 'card-text')
-      p.innerHTML = `<b> ${restaurantName} </b> <br> ${streetAddress}`
-      const id = 'restaurantListNearby' + (i % 3)
-      divCardBody.appendChild(p)
-      document.getElementById(id).appendChild(div)
-      i++
-    }
-  }
-  request.open(
-    'GET',
-    'https://developers.zomato.com/api/v2.1/search?lat=' +
-      latitude +
-      '&lon=' +
-      longitude +
-      '&apikey=02296a90b8223f66ba4289b019fa8f42',
-    true
-  )
-  request.send()
-}
-
-const errorCallback = (error) => {
-  console.log(error)
-}
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
 window.axios = require('axios')
 export default {
   components: { cuisine },
@@ -181,6 +118,7 @@ export default {
     return { cuisineResList1: [], cuisineResList2: [], cuisineResList3: [] }
   },
   mounted() {
+    this.nearbyRes()
     restaurantService.getCuisines().then((res) => {
       const cuisineResult = res.cuisines
       const cuisineList = [
@@ -222,6 +160,71 @@ export default {
     successCallback2(result) {
       console.log(result)
     },
+    nearbyRes() {
+      const successCallback = (position) => {
+        const userLoc = position
+        const latitude = userLoc.coords.latitude
+        const longitude = userLoc.coords.longitude
+        const request = new XMLHttpRequest()
+        request.onreadystatechange = function () {
+          document.getElementById('restaurantListNearby1').innerHTML = ''
+          document.getElementById('restaurantListNearby0').innerHTML = ''
+          document.getElementById('restaurantListNearby2').innerHTML = ''
+          const parsed = JSON.parse(this.responseText).restaurants
+
+          const smallerParsed = parsed.slice(0, 9)
+          document.getElementById('discoverNearby').innerHTML = ''
+          const discoverNearby = document.getElementById('discoverNearby')
+          const h3 = document.createElement('h3')
+          h3.innerHTML = 'Discover nearby restaurants'
+          discoverNearby.appendChild(h3)
+          let i = 0
+          for (const index of smallerParsed) {
+            const restaurantName = index.restaurant.name
+            const imageThumb = index.restaurant.featured_image
+            const image = document.createElement('img')
+            image.setAttribute('src', imageThumb)
+            image.setAttribute('alt', 'why though')
+            image.setAttribute('width', '100%')
+            image.setAttribute('height', '250px')
+            let streetAddress = index.restaurant.location.address
+            const indexComma = streetAddress.indexOf(',')
+            streetAddress = streetAddress.slice(0, indexComma)
+            const div = document.createElement('div')
+            div.setAttribute('class', 'col-md-4')
+            const divCard = document.createElement('div')
+            divCard.setAttribute('class', 'card mb-4')
+            div.appendChild(divCard)
+            const divCardBody = document.createElement('div')
+            divCardBody.setAttribute('class', 'card-body')
+            divCard.appendChild(image)
+            divCard.appendChild(divCardBody)
+            const p = document.createElement('p')
+            p.setAttribute('class', 'card-text')
+            p.innerHTML = `<b> ${restaurantName} </b> <br> ${streetAddress}`
+            const id = 'restaurantListNearby' + (i % 3)
+            divCardBody.appendChild(p)
+            document.getElementById(id).appendChild(div)
+            i++
+          }
+        }
+        request.open(
+          'GET',
+          'https://developers.zomato.com/api/v2.1/search?lat=' +
+            latitude +
+            '&lon=' +
+            longitude +
+            '&apikey=02296a90b8223f66ba4289b019fa8f42',
+          true
+        )
+        request.send()
+      }
+
+      const errorCallback = (error) => {
+        console.log(error)
+      }
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+    },
   },
 }
 </script>
@@ -232,7 +235,7 @@ li {
   margin-right: 20px;
 }
 .header {
-  background-image: url('../header_wallp.jpg');
+  background-image: url('/header_wallp.jpg');
   height: 400px;
   text-align: center;
 }

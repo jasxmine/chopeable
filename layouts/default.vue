@@ -94,7 +94,6 @@
                 >
                   <!-- create onfocusout to remove search list 
                 and show maximum 5 with scrollbar instead of showing all 20-->
-                  <br />
                   <search :search="searchResult" />
                 </div>
               </div>
@@ -233,12 +232,18 @@ export default {
               search +
               '&apikey=e5567dabfe03e800b9c322a7c552684d'
           )
+          console.log(response.data.restaurants)
           for (let restaurant of response.data.restaurants) {
             let restaurantObj = { name: '', location: '' }
             let name = restaurant.restaurant.name
             let locality = '(' + restaurant.restaurant.location.locality + ')'
+            let imageUrl = restaurant.restaurant.featured_image
+            if (imageUrl == '') {
+              imageUrl = '/logo_photo.jpg'
+            }
             restaurantObj.name = name
             restaurantObj.location = locality
+            restaurantObj.imageUrl = imageUrl
             this.searchResult.push(restaurantObj)
           }
         } catch (error) {
