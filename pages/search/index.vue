@@ -131,7 +131,7 @@
               <h3 class="mb-1">Restaurant Name</h3>
               <small class="text-muted">%mil from location%</small>
             </div>
-            <img src="../../static/desserts.jpeg" alt="%Restaurant Pic" />
+            <img src="/desserts.jpg" alt="%Restaurant Pic" />
             <p class="mb-1">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -152,7 +152,7 @@
               <h3 class="mb-1">Restaurant Name</h3>
               <small class="text-muted">%mil from location%</small>
             </div>
-            <img src="../../static/malaysian.jpg" alt="%Restaurant Pic" />
+            <img src="/malaysian.jpg" alt="%Restaurant Pic" />
             <p class="mb-1">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -173,7 +173,7 @@
               <h3 class="mb-1">Restaurant Name</h3>
               <small class="text-muted">%mil from location%</small>
             </div>
-            <img src="../../static/italian.jpg" alt="%Restaurant Pic" />
+            <img src="/italian.jpg" alt="%Restaurant Pic" />
             <p class="mb-1">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -194,7 +194,7 @@
               <h3 class="mb-1">Restaurant Name</h3>
               <small class="text-muted">%mil from location%</small>
             </div>
-            <img src="../../static/american.jpg" alt="%Restaurant Pic" />
+            <img src="/american.jpg" alt="%Restaurant Pic" />
             <p class="mb-1">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
