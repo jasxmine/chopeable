@@ -58,45 +58,29 @@
               <img
                 src="../logo_2.png"
                 alt="why is this taking so long"
-                style="margin-left: 20px; margin-bottom: 50px"
+                style="margin-left: 20px"
                 width="200"
               />
             </a>
           </div>
         </form>
-        <div>
-          <div class="float-left">
-            <b-button v-b-toggle.sidebar-no-header>
-              <b-icon icon="list" aria-hidden="true"></b-icon>
-            </b-button>
+        <nav
+          class="navbar navbar-expand-lg navbar-light"
+          style="margin-bottom: 0px"
+        >
+          <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <NuxtLink class="nav-link" to="/dashboard">
+                  Dashboard
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink class="nav-link" to="/calendar"> Calendar </NuxtLink>
+              </li>
+            </ul>
           </div>
-          <b-sidebar
-            id="sidebar-no-header"
-            aria-labelledby="sidebar-no-header-title"
-            no-header
-            shadow
-          >
-            <template v-slot:default="{ hide }">
-              <div class="p-3">
-                <p style="text-align: center">Admin</p>
-                <nav class="mb-3">
-                  <b-nav vertical>
-                    <b-nav-item active href="/dashboard" @click="hide"
-                      >Dashboard</b-nav-item
-                    >
-                    <b-nav-item href="/calendar" @click="hide"
-                      >Calendar</b-nav-item
-                    >
-                    <b-nav-item href="/" @click="hide">Another Link</b-nav-item>
-                  </b-nav>
-                </nav>
-                <b-button variant="primary" block @click="hide"
-                  >Close Sidebar</b-button
-                >
-              </div>
-            </template>
-          </b-sidebar>
-        </div>
+        </nav>
       </div>
     </div>
     <br /><br /><br /><br /><br />

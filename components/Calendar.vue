@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-container>
-      <v-row no-gutters style="height: 50px"> </v-row>
+      <v-row no-gutters style="height: 100px"> </v-row>
     </v-container>
-    <v-row class="fill-height">
+    <v-row height="64">
       <h3 class="mx-auto">Calendar</h3>
     </v-row>
     <v-row class="fill-height">
