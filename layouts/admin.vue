@@ -14,16 +14,6 @@
         z-index: 5;
       "
     >
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"
-      />
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.css"
-      />
       <!-- Load Vue followed by BootstrapVueIcons -->
       <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
       <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
@@ -94,8 +84,8 @@
                     <b-nav-item active href="/dashboard" @click="hide"
                       >Dashboard</b-nav-item
                     >
-                    <b-nav-item href="/customer" @click="hide"
-                      >Customer</b-nav-item
+                    <b-nav-item href="/calendar" @click="hide"
+                      >Calendar</b-nav-item
                     >
                     <b-nav-item href="/" @click="hide">Another Link</b-nav-item>
                   </b-nav>
@@ -116,6 +106,7 @@
 
 <script>
 import Vue from 'vue'
+import Vuetify from 'vuetify'
 import {
   BootstrapVue,
   BIcon,
@@ -123,7 +114,7 @@ import {
   BIconArrowDown,
   BIconList,
 } from 'bootstrap-vue'
-
+Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 Vue.component('BIcon', BIcon)
 Vue.component('BIconArrowUp', BIconArrowUp)
@@ -132,6 +123,7 @@ Vue.component('BIconArrowDown', BIconArrowDown)
 
 export default {}
 </script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
