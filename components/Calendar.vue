@@ -44,7 +44,7 @@
           </v-toolbar>
         </v-sheet>
 
-        <v-dialog v-model="dialog" max-width="500">
+        <v-dialog v-model="dialog" max-width="700">
           <v-card>
             <v-container>
               <v-form @submit.prevent="addEvent">
@@ -86,7 +86,7 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogDate" max-width="500">
+        <v-dialog v-model="dialogDate" max-width="700">
           <v-card>
             <v-container>
               <v-form @submit.prevent="addEvent">
@@ -147,7 +147,6 @@
             v-model="selectedOpen"
             :close-on-content-click="false"
             :activator="selectedElement"
-            full-width
             offset-x
           >
             <v-card color="grey lighten-4" :width="350" flat>
@@ -355,3 +354,13 @@ export default {
   },
 }
 </script>
+<style scoped>
+/deep/ .v-text-field {
+  width: 400px;
+}
+
+/deep/ .v-dialog {
+  width: 500px;
+  overflow-x: hidden;
+}
+</style>
