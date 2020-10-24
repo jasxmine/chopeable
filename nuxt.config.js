@@ -16,7 +16,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [{src: '~/plugins/vuetify', ssr: false}],
+  plugins: [{ src: '~/plugins/vuetify', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -35,6 +35,23 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyBxbNnTzZGyrMjPKG_8fAM4HUc2d-aZ3eY",
+          authDomain: "vue-calendar-bda37.firebaseapp.com",
+          databaseURL: "https://vue-calendar-bda37.firebaseio.com",
+          projectId: "vue-calendar-bda37",
+          storageBucket: "vue-calendar-bda37.appspot.com",
+          messagingSenderId: "419034357848",
+          appId: "1:419034357848:web:4dce04cf47592266406a2d"
+        },
+        services: {
+          firestore: true 
+        }
+      }
+    ]
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

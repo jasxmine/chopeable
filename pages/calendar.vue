@@ -1,24 +1,23 @@
 <template>
-  <v-app>
-    <v-content>
-      <Calendar />
-    </v-content>
-  </v-app>
+  <div>
+    <v-app>
+      <v-content>
+        <Calendar />
+      </v-content>
+    </v-app>
+  </div>
 </template>
 
 <script>
-import Calendar from '../components/Calendar'
+import Calendar from '../components/Calendar.vue'
 
 export default {
-  path: '../layout/admin.vue',
   name: 'Admin',
-  layout: 'admin',
-  meta: { template: 'admin' },
   components: {
     Calendar,
   },
-  data: () => ({
-    //
-  }),
+  path: '../layout/admin.vue',
+  layout: 'admin',
+  meta: { template: 'admin' },
 }
 </script>
