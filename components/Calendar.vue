@@ -44,30 +44,31 @@
           </v-toolbar>
         </v-sheet>
 
-        <v-dialog v-model="dialog" max-width="700">
+        <v-dialog v-model="dialog" max-width="500">
           <v-card>
             <v-container>
               <v-form @submit.prevent="addEvent">
                 <v-text-field
                   v-model="name"
                   type="text"
-                  label="event name (required)"
+                  label="Name"
                 ></v-text-field>
                 <v-text-field
                   v-model="details"
                   type="text"
-                  label="detail"
+                  label="Details (e.g. No. of Customers)"
                 ></v-text-field>
                 <v-text-field
                   v-model="start"
                   type="date"
-                  label="start (required)"
+                  label="Booking Date"
                 ></v-text-field>
-                <v-text-field
-                  v-model="end"
-                  type="date"
-                  label="end (required)"
-                ></v-text-field>
+                <label for="time">Booking Time</label>
+                <vue-timepicker
+                  id="time"
+                  v-model="time"
+                  input-width="200px"
+                ></vue-timepicker>
                 <v-text-field
                   v-model="color"
                   type="color"
@@ -86,30 +87,31 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogDate" max-width="700">
+        <v-dialog v-model="dialogDate" max-width="500">
           <v-card>
             <v-container>
               <v-form @submit.prevent="addEvent">
                 <v-text-field
                   v-model="name"
                   type="text"
-                  label="event name (required)"
+                  label="Name"
                 ></v-text-field>
                 <v-text-field
                   v-model="details"
                   type="text"
-                  label="detail"
+                  label="Details (e.g. No. of Customers)"
                 ></v-text-field>
                 <v-text-field
                   v-model="start"
                   type="date"
-                  label="start (required)"
+                  label="Booking Date"
                 ></v-text-field>
-                <v-text-field
-                  v-model="end"
-                  type="date"
-                  label="end (required)"
-                ></v-text-field>
+                <label for="time">Booking Time</label>
+                <vue-timepicker
+                  id="time"
+                  v-model="time"
+                  input-width="200px"
+                ></vue-timepicker>
                 <v-text-field
                   v-model="color"
                   type="color"
@@ -147,6 +149,7 @@
             v-model="selectedOpen"
             :close-on-content-click="false"
             :activator="selectedElement"
+            full-width
             offset-x
           >
             <v-card color="grey lighten-4" :width="350" flat>
@@ -173,7 +176,6 @@
                   </textarea-autosize>
                 </form>
               </v-card-text>
-
               <v-card-actions>
                 <v-btn text color="secondary" @click="selectedOpen = false">
                   close
@@ -204,6 +206,7 @@
 
 <script>
 import { db } from '@/main'
+
 export default {
   data: () => ({
     today: new Date().toISOString().substr(0, 10),
@@ -217,6 +220,7 @@ export default {
     },
     name: null,
     details: null,
+    time: '10:30',
     start: null,
     end: null,
     color: '#1976D2', // default event color
@@ -295,12 +299,12 @@ export default {
       this.$refs.calendar.next()
     },
     async addEvent() {
-      if (this.name && this.start && this.end) {
+      if (this.name && this.start) {
         await db.collection('calEvent').add({
           name: this.name,
           details: this.details,
-          start: this.start,
-          end: this.end,
+          start: this.start + ' ' + this.time,
+          end: this.start + ' ' + this.time,
           color: this.color,
         })
         this.getEvents()
@@ -308,9 +312,10 @@ export default {
         this.details = ''
         this.start = ''
         this.end = ''
+        this.time = ''
         this.color = ''
       } else {
-        alert('You must enter event name, start, and end time')
+        alert('You must enter event name, start, and time')
       }
     },
     editEvent(ev) {
@@ -360,7 +365,6 @@ export default {
 }
 
 /deep/ .v-dialog {
-  width: 500px;
   overflow-x: hidden;
 }
 </style>
