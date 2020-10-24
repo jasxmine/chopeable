@@ -6,22 +6,12 @@
           <h3 class="card-title">Filter</h3>
           <br />
           <h4 class="card-subtitle">Location</h4>
-          <form id="location">
-            <input type="checkbox" /> West <br />
-            <input type="checkbox" /> East <br />
-            <input type="checkbox" /> South <br />
-            <input type="checkbox" /> North <br />
-            <input type="checkbox" /> Central <br />
-          </form>
+          <input id="location" type="text" />
+          <br />
           <br />
           <h4 class="card-subtitle">Cousine Type</h4>
-          <form id="location">
-            <input type="checkbox" /> Indian <br />
-            <input type="checkbox" /> Western <br />
-            <input type="checkbox" /> Korean <br />
-            <input type="checkbox" /> Japanese <br />
-            <input type="checkbox" /> Chinese <br />
-          </form>
+          <form id="cuisineTypes"></form>
+          <button type="button" class="btn btn-warning">Search</button>
         </div>
       </div>
       <div id="item" class="col-sm-9">
@@ -39,93 +29,14 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div id="alphaSearch" class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> A </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> B </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> C </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> D </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> E </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> F </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> G </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> H </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> I </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> J </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> K </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> L </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> M </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> N </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> O </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> P </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> Q </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> R </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> S </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> T </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> U </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> V </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> W </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> X </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> Y </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><strong> Z </strong></a>
-              </li>
-            </ul>
+            <ul id="alphaItems" class="navbar-nav"></ul>
           </div>
         </nav>
-        <div class="list-group">
-          <a
+        <div id="restaurants" class="list-group">
+          <!-- <a
             href="#"
             class="list-group-item list-group-item-action flex-column align-items-start"
-            style="border-top: 0px"
+            style="border-radius: 0"
           >
             <div class="d-flex w-100 justify-content-between">
               <h3 class="mb-1">Restaurant Name</h3>
@@ -143,70 +54,7 @@
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
             <small class="text-muted">%Additional Info% </small>
-          </a>
-          <a
-            href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start"
-          >
-            <div class="d-flex w-100 justify-content-between">
-              <h3 class="mb-1">Restaurant Name</h3>
-              <small class="text-muted">%mil from location%</small>
-            </div>
-            <img src="/malaysian.jpg" alt="%Restaurant Pic" />
-            <p class="mb-1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <small class="text-muted">%Additional Info% </small>
-          </a>
-          <a
-            href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start"
-          >
-            <div class="d-flex w-100 justify-content-between">
-              <h3 class="mb-1">Restaurant Name</h3>
-              <small class="text-muted">%mil from location%</small>
-            </div>
-            <img src="/italian.jpg" alt="%Restaurant Pic" />
-            <p class="mb-1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <small class="text-muted">%Additional Info% </small>
-          </a>
-          <a
-            href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start"
-          >
-            <div class="d-flex w-100 justify-content-between">
-              <h3 class="mb-1">Restaurant Name</h3>
-              <small class="text-muted">%mil from location%</small>
-            </div>
-            <img src="/american.jpg" alt="%Restaurant Pic" />
-            <p class="mb-1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <small class="text-muted">%Additional Info% </small>
-          </a>
+          </a> -->
         </div>
       </div>
     </div>
@@ -214,7 +62,112 @@
 </template>
 
 <script>
-export default {}
+import restaurantService from '../../services/restaurantService'
+
+window.axios = require('axios')
+
+export default {
+  mounted() {
+    this.getAlpha()
+    this.getCuisineTypes()
+    restaurantService.getRestaurants().then((res) => {
+      const restaurantsArr = res.restaurants
+      for (let i = 0; i < restaurantsArr.length; i++) {
+        this.generateCards(restaurantsArr[i].restaurant)
+      }
+    })
+  },
+  methods: {
+    getAlpha() {
+      const alphaList = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      for (let i = 0; i < alphaList.length; i++) {
+        console.log(alphaList[i])
+        const li = document.createElement('li')
+        li.classList.add('nav-item')
+
+        const a = document.createElement('a')
+        a.classList.add('nav-link')
+        a.href = '#'
+
+        const strong = document.createElement('strong')
+        strong.appendChild(document.createTextNode(alphaList[i]))
+
+        a.appendChild(strong)
+        li.appendChild(a)
+        document.getElementById('alphaItems').appendChild(li)
+      }
+    },
+    generateCards(obj) {
+      const mainA = document.createElement('a')
+      mainA.classList.add('list-group-item')
+      mainA.classList.add('list-group-item-action')
+      mainA.classList.add('flex-column')
+      mainA.classList.add('align-item-start')
+      mainA.style.borderRadius = '0'
+
+      const divTitle = document.createElement('div')
+      divTitle.classList.add('d-flex')
+      divTitle.classList.add('w-100')
+      divTitle.classList.add('justify-between-content')
+
+      const h3RestaurantName = document.createElement('h3')
+      h3RestaurantName.classList.add('mb-1')
+      h3RestaurantName.appendChild(document.createTextNode(obj.name))
+
+      // const smallLoc = document.createElement('small')
+      // smallLoc.classList.add('text-muted')
+      // smallLoc.appendChild(document.createTextNode(obj.location.locality))
+
+      divTitle.appendChild(h3RestaurantName)
+      // divTitle.appendChild(smallLoc)
+
+      const imgRestaurant = document.createElement('img')
+      imgRestaurant.src = obj.featured_image
+      imgRestaurant.width = '50%'
+      imgRestaurant.height = '50%'
+
+      const pRestaurantDescription = document.createElement('p')
+      pRestaurantDescription.classList.add('mb-1')
+      const sampleText = `Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.`
+      pRestaurantDescription.appendChild(document.createTextNode(sampleText))
+
+      mainA.appendChild(divTitle)
+      mainA.appendChild(imgRestaurant)
+      mainA.appendChild(pRestaurantDescription)
+
+      document.getElementById('restaurants').appendChild(mainA)
+    },
+    getCuisineTypes() {
+      restaurantService.getCuisines().then((res) => {
+        const cuisineTypes = res.cuisines
+        console.log(cuisineTypes)
+        for (let i = 0; i < cuisineTypes.length; i++) {
+          const checkboxCuisine = document.createElement('input')
+          checkboxCuisine.type = 'checkbox'
+          checkboxCuisine.value = cuisineTypes[i].cuisine.cuisine_name
+
+          const spanText = document.createElement('span')
+          spanText.appendChild(
+            document.createTextNode(cuisineTypes[i].cuisine.cuisine_name)
+          )
+
+          document.getElementById('cuisineTypes').appendChild(checkboxCuisine)
+          document.getElementById('cuisineTypes').appendChild(spanText)
+          document
+            .getElementById('cuisineTypes')
+            .appendChild(document.createElement('BR'))
+        }
+      })
+    },
+  },
+}
 </script>
 <style scoped>
 .navbar-custom {
