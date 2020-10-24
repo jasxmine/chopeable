@@ -96,47 +96,6 @@ export default {}
 </script>
 
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font: 15px/1.3 'Open Sans', sans-serif;
-  color: #5e5b64;
-  text-align: center;
-}
-
-a,
-a:visited {
-  outline: none;
-  color: #389dc1;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-section,
-footer,
-header,
-aside,
-nav {
-  display: block;
-}
-
 /*-------------------------
     The menu
 --------------------------*/
@@ -173,29 +132,6 @@ nav a:first-child {
 
 nav a:last-child {
   border-radius: 0 2px 2px 0;
-}
-
-nav.home .home,
-nav.projects .projects,
-nav.services .services,
-nav.contact .contact {
-  background-color: #e35885;
-}
-
-p {
-  font-size: 22px;
-  font-weight: bold;
-  color: #7d9098;
-}
-
-p b {
-  color: #ffffff;
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: #c4d7e0;
-  border-radius: 2px;
-  text-transform: uppercase;
-  font-size: 18px;
 }
 
 li {
