@@ -16,7 +16,6 @@
     >
       <!-- Load Vue followed by BootstrapVueIcons -->
       <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
-      <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
       <link
         type="text/css"
         rel="stylesheet"
@@ -27,7 +26,6 @@
         rel="stylesheet"
         href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
       />
-      <!-- Load Vue followed by BootstrapVue, and BootstrapVueIcons -->
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -91,19 +89,8 @@
 <script>
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import {
-  BootstrapVue,
-  BIcon,
-  BIconArrowUp,
-  BIconArrowDown,
-  BIconList,
-} from 'bootstrap-vue'
+
 Vue.use(Vuetify)
-Vue.use(BootstrapVue)
-Vue.component('BIcon', BIcon)
-Vue.component('BIconArrowUp', BIconArrowUp)
-Vue.component('BIconList', BIconList)
-Vue.component('BIconArrowDown', BIconArrowDown)
 
 export default {}
 </script>
