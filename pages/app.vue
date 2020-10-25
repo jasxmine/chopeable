@@ -182,6 +182,7 @@ export default {
             const image = document.createElement('img')
             const a = document.createElement('a')
             let restaurantUrl = index.restaurant.url
+            const cuisines = index.restaurant.cuisines
             const indexQuestion = restaurantUrl.indexOf('?')
             restaurantUrl = restaurantUrl.slice(33, indexQuestion)
             a.setAttribute('href', `/${restaurantUrl}`)
@@ -205,7 +206,7 @@ export default {
             divCard.appendChild(divCardBody)
             const p = document.createElement('p')
             p.setAttribute('class', 'card-text')
-            p.innerHTML = `<b> ${restaurantName} </b> <br> ${streetAddress}`
+            p.innerHTML = `<b> ${restaurantName} </b> <br> ${cuisines} <br> ${streetAddress}`
             const id = 'restaurantListNearby' + (i % 3)
             divCardBody.appendChild(p)
             document.getElementById(id).appendChild(div)
