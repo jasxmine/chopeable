@@ -2,18 +2,19 @@
   <div>
     <div v-for="a_cuisine in cuisine" :key="a_cuisine.id" class="centerize">
       <div class="col-md-4">
-        <div class="card mb-4">
-          <div>
-            <img
-              :src="a_cuisine.url"
-              alt="why though"
-              width="100%"
-              height="300px"
-            />
-
-            <div class="bottom-left">{{ a_cuisine.cuisine_name }}</div>
+        <a :href="'/search?cuisine=' + a_cuisine.cuisine_name">
+          <div class="card mb-4">
+            <div>
+              <img
+                :src="a_cuisine.url"
+                alt="why though"
+                width="100%"
+                height="300px"
+              />
+              <div class="bottom-left">{{ a_cuisine.cuisine_name }}</div>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>

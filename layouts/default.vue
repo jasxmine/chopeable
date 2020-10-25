@@ -6,12 +6,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <div
-      style="
-        padding-top: 10px;
-        background-color: rgb(240, 240, 240);
-        width: 100%;
-        z-index: 1;
-      "
+      style="padding-top: 10px; width: 100%; z-index: 1"
       @mouseover.self="canScroll"
     >
       <link
@@ -71,7 +66,6 @@
                   autocomplete="off"
                   style="
                     height: 45px;
-                    border: 0px;
                     width: 750px;
                     font-size: 18px;
                     line-height: 40px;
@@ -102,7 +96,7 @@
         </form>
         <nav
           class="navbar navbar-expand-lg navbar-light"
-          style="margin-bottom: 0px"
+          style="margin-bottom: 0px; margin-top: 15px"
           @click="emptyFocusOut"
           @mouseover="canScroll"
         >
@@ -117,19 +111,6 @@
                 <NuxtLink class="nav-link" to="/visualiseTables">
                   Visualise Tables
                 </NuxtLink>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  id="navbarDropdown"
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Dropdown (if ever needed)
-                </a>
               </li>
             </ul>
           </div>
@@ -238,14 +219,22 @@ export default {
             let name = restaurant.restaurant.name
             let locality = '(' + restaurant.restaurant.location.locality + ')'
             let imageUrl = restaurant.restaurant.featured_image
+            let restaurantUrl = restaurant.restaurant.url
+            let index_question = restaurantUrl.indexOf('?')
+            let restaurant_cuisine = restaurant.restaurant.cuisines
+            restaurantUrl = restaurantUrl.slice(33, index_question)
             if (imageUrl == '') {
               imageUrl = '/logo_photo.jpg'
             }
             restaurantObj.name = name
             restaurantObj.location = locality
             restaurantObj.imageUrl = imageUrl
+            restaurantObj.restaurantUrl = restaurantUrl
+            restaurantObj.cuisines = restaurant_cuisine
+            restaurantObj.styling = 'border-top: 1px solid black; clear: left;'
             this.searchResult.push(restaurantObj)
           }
+          this.searchResult[0].styling = 'clear: left'
         } catch (error) {
           console.error(error)
         }

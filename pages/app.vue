@@ -1,10 +1,7 @@
 <template>
   <div style="margin-top: 0px" @click="emptyFocusOut" @mouseover="canScroll">
     <div class="header" style="text-align: middle">
-      <br /><br /><br /><br /><br />
-      <br />
-      <br />
-      <br />
+      <br /><br /><br /><br />
       <h3 class="white_text" style="font-size: 50px">
         Don't know what to eat?
       </h3>
@@ -183,6 +180,12 @@ export default {
             const restaurantName = index.restaurant.name
             const imageThumb = index.restaurant.featured_image
             const image = document.createElement('img')
+            const a = document.createElement('a')
+            let restaurantUrl = index.restaurant.url
+            const indexQuestion = restaurantUrl.indexOf('?')
+            restaurantUrl = restaurantUrl.slice(33, indexQuestion)
+            a.setAttribute('href', `/${restaurantUrl}`)
+            a.setAttribute('style', 'text-decoration:none;color:black;')
             image.setAttribute('src', imageThumb)
             image.setAttribute('alt', 'why though')
             image.setAttribute('width', '100%')
@@ -194,7 +197,8 @@ export default {
             div.setAttribute('class', 'col-md-4')
             const divCard = document.createElement('div')
             divCard.setAttribute('class', 'card mb-4')
-            div.appendChild(divCard)
+            a.appendChild(divCard)
+            div.appendChild(a)
             const divCardBody = document.createElement('div')
             divCardBody.setAttribute('class', 'card-body')
             divCard.appendChild(image)
@@ -236,7 +240,7 @@ li {
 }
 .header {
   background-image: url('/header_wallp.jpg');
-  height: 400px;
+  height: 300px;
   text-align: center;
 }
 .white_text {
