@@ -113,11 +113,11 @@
                   Restaurant Directory
                 </NuxtLink>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <NuxtLink class="nav-link" to="/visualiseTables">
                   Visualise Tables
                 </NuxtLink>
-              </li>
+              </li> -->
               <li class="nav-item dropdown">
                 <a
                   id="navbarDropdown"

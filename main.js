@@ -1,11 +1,15 @@
 import Vue from 'vue'
+import VueKonva from 'vue-konva'
 import firebase from 'firebase'
 import VueTextareaAutosize from 'vue-textarea-autosize'
 import VueTimepicker from 'vue2-timepicker'
 import vuetify from './plugins/vuetify'
 import Calendar from './pages/calendar.vue'
 import 'vue2-timepicker/dist/VueTimepicker.css'
+
 Vue.use(VueTextareaAutosize)
+Vue.use(VueKonva)
+
 Vue.component('vue-timepicker', VueTimepicker)
 
 Vue.config.productionTip = false
