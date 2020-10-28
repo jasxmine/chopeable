@@ -244,7 +244,9 @@ li {
   background-image: url('/header_wallp.jpg');
   height: 300px;
   text-align: center;
-  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .white_text {
   color: white;
