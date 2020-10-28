@@ -191,6 +191,7 @@ export default {
             image.setAttribute('alt', 'why though')
             image.setAttribute('width', '100%')
             image.setAttribute('height', '250px')
+            image.setAttribute('class', 'hoverGrey')
             let streetAddress = index.restaurant.location.address
             const indexComma = streetAddress.indexOf(',')
             streetAddress = streetAddress.slice(0, indexComma)
@@ -256,11 +257,14 @@ li {
 .carousel-control-next {
   width: 50px;
   height: 50px;
-  background-color: #fc450d;
+  background-color: orange;
   border-radius: 50%;
   top: calc(50% - 25px);
   opacity: 0.8;
   margin-left: 5%;
   margin-right: 5%;
+}
+.hoverGrey:hover {
+  opacity: 0.7;
 }
 </style>

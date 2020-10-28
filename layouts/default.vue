@@ -49,7 +49,11 @@
               />
             </a>
             <span style="margin-left: 150px"></span>
-            <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
+            <div
+              style="width: 300px"
+              @click.self="emptyFocusOut"
+              @mouseover.self="canScroll"
+            >
               <div
                 id="parenting"
                 class="form-group has-search"
@@ -66,7 +70,7 @@
                   autocomplete="off"
                   style="
                     height: 45px;
-                    width: 750px;
+                    width: 300%;
                     font-size: 18px;
                     line-height: 40px;
                   "
@@ -86,8 +90,6 @@
                   "
                   @mouseover="cannotScroll"
                 >
-                  <!-- create onfocusout to remove search list 
-                and show maximum 5 with scrollbar instead of showing all 20-->
                   <search :search="searchResult" />
                 </div>
               </div>
@@ -95,24 +97,37 @@
           </div>
         </form>
         <nav
-          class="navbar navbar-expand-lg navbar-light"
+          class="navbar navbar-expand-md navbar-light"
           style="margin-bottom: 0px; margin-top: 15px"
           @click="emptyFocusOut"
           @mouseover="canScroll"
         >
-          <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <NuxtLink class="nav-link" to="/search">
-                  Restaurant Directory
-                </NuxtLink>
-              </li>
-              <li class="nav-item">
-                <NuxtLink class="nav-link" to="/visualiseTables">
-                  Visualise Tables
-                </NuxtLink>
-              </li>
-            </ul>
+          <div class="text-center" style="width: 100%">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <NuxtLink class="nav-link" to="/search">
+                    Restaurant Directory
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink class="nav-link" to="/visualiseTables">
+                    Visualise Tables
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
       </div>
@@ -185,6 +200,10 @@ html {
   pointer-events: none;
   color: #aaa;
 }
+
+a:hover {
+  background-color: rgb(240, 240, 240, 0.5);
+}
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -199,6 +218,7 @@ export default {
       searchResult: [],
       msg: 'hello',
       isModalVisible: 'false',
+      isHovering: false,
     }
   },
   methods: {
