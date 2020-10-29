@@ -102,6 +102,32 @@
           @click="emptyFocusOut"
           @mouseover="canScroll"
         >
+          <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <NuxtLink class="nav-link" to="/search">
+                  Restaurant Directory
+                </NuxtLink>
+              </li>
+              <!-- <li class="nav-item">
+                <NuxtLink class="nav-link" to="/visualiseTables">
+                  Visualise Tables
+                </NuxtLink>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a
+                  id="navbarDropdown"
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Dropdown (if ever needed)
+                </a>
+              </li>
+            </ul>
           <div class="text-center" style="width: 100%">
             <button
               class="navbar-toggler"
