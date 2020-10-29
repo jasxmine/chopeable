@@ -6,12 +6,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <div
-      style="
-        padding-top: 10px;
-        background-color: rgb(240, 240, 240);
-        width: 100%;
-        z-index: 1;
-      "
+      style="padding-top: 10px; width: 100%; z-index: 1"
       @mouseover.self="canScroll"
     >
       <link
@@ -54,7 +49,11 @@
               />
             </a>
             <span style="margin-left: 150px"></span>
-            <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
+            <div
+              style="width: 300px"
+              @click.self="emptyFocusOut"
+              @mouseover.self="canScroll"
+            >
               <div
                 id="parenting"
                 class="form-group has-search"
@@ -71,8 +70,7 @@
                   autocomplete="off"
                   style="
                     height: 45px;
-                    border: 0px;
-                    width: 750px;
+                    width: 300%;
                     font-size: 18px;
                     line-height: 40px;
                   "
@@ -92,8 +90,6 @@
                   "
                   @mouseover="cannotScroll"
                 >
-                  <!-- create onfocusout to remove search list 
-                and show maximum 5 with scrollbar instead of showing all 20-->
                   <search :search="searchResult" />
                 </div>
               </div>
@@ -101,8 +97,8 @@
           </div>
         </form>
         <nav
-          class="navbar navbar-expand-lg navbar-light"
-          style="margin-bottom: 0px"
+          class="navbar navbar-expand-md navbar-light"
+          style="margin-bottom: 0px; margin-top: 15px"
           @click="emptyFocusOut"
           @mouseover="canScroll"
         >
@@ -132,6 +128,32 @@
                 </a>
               </li>
             </ul>
+          <div class="text-center" style="width: 100%">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <NuxtLink class="nav-link" to="/search">
+                    Restaurant Directory
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink class="nav-link" to="/visualiseTables">
+                    Visualise Tables
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
       </div>
@@ -204,6 +226,10 @@ html {
   pointer-events: none;
   color: #aaa;
 }
+
+a:hover {
+  background-color: rgb(240, 240, 240, 0.5);
+}
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -218,6 +244,7 @@ export default {
       searchResult: [],
       msg: 'hello',
       isModalVisible: 'false',
+      isHovering: false,
     }
   },
   methods: {
@@ -238,14 +265,22 @@ export default {
             let name = restaurant.restaurant.name
             let locality = '(' + restaurant.restaurant.location.locality + ')'
             let imageUrl = restaurant.restaurant.featured_image
+            let restaurantUrl = restaurant.restaurant.url
+            let index_question = restaurantUrl.indexOf('?')
+            let restaurant_cuisine = restaurant.restaurant.cuisines
+            restaurantUrl = restaurantUrl.slice(33, index_question)
             if (imageUrl == '') {
               imageUrl = '/logo_photo.jpg'
             }
             restaurantObj.name = name
             restaurantObj.location = locality
             restaurantObj.imageUrl = imageUrl
+            restaurantObj.restaurantUrl = restaurantUrl
+            restaurantObj.cuisines = restaurant_cuisine
+            restaurantObj.styling = 'border-top: 1px solid black; clear: left;'
             this.searchResult.push(restaurantObj)
           }
+          this.searchResult[0].styling = 'clear: left'
         } catch (error) {
           console.error(error)
         }

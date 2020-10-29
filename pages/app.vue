@@ -1,10 +1,7 @@
 <template>
   <div style="margin-top: 0px" @click="emptyFocusOut" @mouseover="canScroll">
     <div class="header" style="text-align: middle">
-      <br /><br /><br /><br /><br />
-      <br />
-      <br />
-      <br />
+      <br /><br /><br /><br />
       <h3 class="white_text" style="font-size: 50px">
         Don't know what to eat?
       </h3>
@@ -183,10 +180,18 @@ export default {
             const restaurantName = index.restaurant.name
             const imageThumb = index.restaurant.featured_image
             const image = document.createElement('img')
+            const a = document.createElement('a')
+            let restaurantUrl = index.restaurant.url
+            const cuisines = index.restaurant.cuisines
+            const indexQuestion = restaurantUrl.indexOf('?')
+            restaurantUrl = restaurantUrl.slice(33, indexQuestion)
+            a.setAttribute('href', `/${restaurantUrl}`)
+            a.setAttribute('style', 'text-decoration:none;color:black;')
             image.setAttribute('src', imageThumb)
             image.setAttribute('alt', 'why though')
             image.setAttribute('width', '100%')
             image.setAttribute('height', '250px')
+            image.setAttribute('class', 'hoverGrey')
             let streetAddress = index.restaurant.location.address
             const indexComma = streetAddress.indexOf(',')
             streetAddress = streetAddress.slice(0, indexComma)
@@ -194,14 +199,15 @@ export default {
             div.setAttribute('class', 'col-md-4')
             const divCard = document.createElement('div')
             divCard.setAttribute('class', 'card mb-4')
-            div.appendChild(divCard)
+            a.appendChild(divCard)
+            div.appendChild(a)
             const divCardBody = document.createElement('div')
             divCardBody.setAttribute('class', 'card-body')
             divCard.appendChild(image)
             divCard.appendChild(divCardBody)
             const p = document.createElement('p')
             p.setAttribute('class', 'card-text')
-            p.innerHTML = `<b> ${restaurantName} </b> <br> ${streetAddress}`
+            p.innerHTML = `<b> ${restaurantName} </b> <br> ${cuisines} <br> ${streetAddress}`
             const id = 'restaurantListNearby' + (i % 3)
             divCardBody.appendChild(p)
             document.getElementById(id).appendChild(div)
@@ -236,8 +242,11 @@ li {
 }
 .header {
   background-image: url('/header_wallp.jpg');
-  height: 400px;
+  height: 300px;
   text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .white_text {
   color: white;
@@ -251,11 +260,14 @@ li {
 .carousel-control-next {
   width: 50px;
   height: 50px;
-  background-color: #fc450d;
+  background-color: orange;
   border-radius: 50%;
   top: calc(50% - 25px);
   opacity: 0.8;
   margin-left: 5%;
   margin-right: 5%;
+}
+.hoverGrey:hover {
+  opacity: 0.7;
 }
 </style>
