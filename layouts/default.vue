@@ -128,7 +128,6 @@
                 </li>
               </ul>
             </div>
-            >>>>>>> master
           </div>
         </nav>
       </div>
