@@ -1,7 +1,21 @@
 <template>
-  <h1>
-    {{ restaurantData.name }}
-  </h1>
+  <div>
+    <div class="container mt-5 p-0">
+      <img :src="restaurantData.featured_image" />
+      <div class="d-flex justify-content-between">
+        <h1>
+          {{ restaurantData.name }}
+        </h1>
+      </div>
+      <h4 class="text-muted">
+        {{ `${restaurantData.establishment} - ${restaurantData.cuisines}` }}
+      </h4>
+      <h5>
+        {{ restaurantData.location && restaurantData.location.locality }}
+      </h5>
+      <p>{{ restaurantData.timings }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -21,7 +35,6 @@ export default {
       .then((res) => {
         return res.restaurants[0].restaurant
       })
-    console.log(this.restaurantData)
   },
 }
 </script>
