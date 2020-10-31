@@ -38,12 +38,24 @@
           ></b-icon-calendar2-check
           >Book Now</b-button
         >
-        <b-button variant="outline-warning" class="text-dark mr-2 border"
-          ><b-icon-arrow90deg-right
-            class="mr-2"
-            scale="0.8"
-          ></b-icon-arrow90deg-right
-          >Directions</b-button
+        <a
+          v-if="restaurantData.location"
+          :href="
+            'https://www.google.com/maps/dir/?api=1&amp;destination=' +
+            restaurantData.location.latitude +
+            ',' +
+            restaurantData.location.longitude
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <b-button variant="outline-warning" class="text-dark mr-2 border"
+            ><b-icon-arrow90deg-right
+              class="mr-2"
+              scale="0.8"
+            ></b-icon-arrow90deg-right
+            >Directions</b-button
+          ></a
         >
         <b-button variant="outline-warning" class="text-dark mr-2 border"
           ><b-icon-bookmark class="mr-2" scale="0.8"></b-icon-bookmark
