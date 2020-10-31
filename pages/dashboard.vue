@@ -1,30 +1,23 @@
 <template>
   <div>
-    <div class="header">
-      <br /><br /><br /><br /><br />
-      <br />
-      <br />
-    </div>
+    <v-app>
+      <v-content>
+        <Counter />
+      </v-content>
+    </v-app>
   </div>
 </template>
+
 <script>
+import Counter from '../components/Counter.vue'
+
 export default {
-  path: '../layout/admin.vue',
   name: 'Admin',
+  components: {
+    Counter,
+  },
+  path: '../layout/admin.vue',
   layout: 'admin',
   meta: { template: 'admin' },
 }
 </script>
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-</style>
