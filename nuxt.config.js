@@ -16,7 +16,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [{ src: '~/plugins/vuetify', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vuetify', ssr: false },
+    { src: '~/plugins/google-maps', ssr: false },
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -48,7 +51,7 @@ export default {
           appId: "1:419034357848:web:4dce04cf47592266406a2d"
         },
         services: {
-          firestore: true 
+          firestore: true
         }
       }
     ]
@@ -70,5 +73,6 @@ export default {
         },
       })
     },
+    transpile: [/^vue2-google-maps($|\/)/],
   },
 }
