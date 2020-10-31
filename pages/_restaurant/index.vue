@@ -6,6 +6,22 @@
         <h1>
           {{ restaurantData.name }}
         </h1>
+        <div
+          v-if="restaurantData.user_rating"
+          class="d-flex align-content-center mt-5"
+        >
+          <div
+            v-for="ratings in parseInt(
+              restaurantData.user_rating.aggregate_rating
+            )"
+            :key="ratings"
+          >
+            <RatingComponent />
+          </div>
+          <h4 class="m-0 mt-1 ml-2">
+            {{ restaurantData.user_rating.aggregate_rating }}
+          </h4>
+        </div>
       </div>
       <h4 class="text-muted">
         {{ `${restaurantData.establishment} - ${restaurantData.cuisines}` }}
@@ -14,14 +30,55 @@
         {{ restaurantData.location && restaurantData.location.locality }}
       </h5>
       <p>{{ restaurantData.timings }}</p>
+      <div class="mt-4">
+        <b-button variant="warning" class="text-dark mr-2"
+          ><b-icon-calendar2-check
+            class="mr-2"
+            scale="0.8"
+          ></b-icon-calendar2-check
+          >Book Now</b-button
+        >
+        <b-button variant="outline-warning" class="text-dark mr-2 border"
+          ><b-icon-arrow90deg-right
+            class="mr-2"
+            scale="0.8"
+          ></b-icon-arrow90deg-right
+          >Directions</b-button
+        >
+        <b-button variant="outline-warning" class="text-dark mr-2 border"
+          ><b-icon-bookmark class="mr-2" scale="0.8"></b-icon-bookmark
+          >Bookmark</b-button
+        >
+        <b-button variant="outline-warning" class="text-dark mr-2 border"
+          ><b-icon-share class="mr-2" scale="0.8"></b-icon-share>Share</b-button
+        >
+      </div>
+      <BookingComponent />
     </div>
   </div>
 </template>
 
 <script>
+import {
+  BIconCalendar2Check,
+  BIconArrow90degRight,
+  BIconBookmark,
+  BIconShare,
+} from 'bootstrap-vue'
 import restaurantService from '../../services/restaurantService'
 
+import BookingComponent from '../../components/restaurant/BookingComponent'
+import RatingComponent from '../../components/restaurant/RatingComponent'
+
 export default {
+  components: {
+    BIconCalendar2Check,
+    BIconArrow90degRight,
+    BIconBookmark,
+    BIconShare,
+    BookingComponent,
+    RatingComponent,
+  },
   data() {
     return {
       restaurant: '',
@@ -38,3 +95,5 @@ export default {
   },
 }
 </script>
+
+<style scoped></style>
