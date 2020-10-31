@@ -1,8 +1,5 @@
 <template>
   <div>
-    <v-container>
-      <v-row no-gutters style="height: 100px"> </v-row>
-    </v-container>
     <b-alert show variant="info"
       ><p class="text-center">
         Due to safe distancing, please note that the number of customers will
