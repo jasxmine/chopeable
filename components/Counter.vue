@@ -3,25 +3,27 @@
     <v-container>
       <v-row no-gutters style="height: 100px"> </v-row>
     </v-container>
-    <div class="callout alert margin-bottom-2">
-      <p class="text-center">
+    <b-alert show variant="info"
+      ><p class="text-center">
         Due to safe distancing, please note that the number of customers will
         not cross the limit which is currently set at <strong>50</strong>!
-      </p>
-    </div>
+      </p></b-alert
+    >
 
     <div class="container">
       <div id="app">
         <!-- Increase Counter, with an `increaseLimit` of 50 -->
-        <b-button variant="success" @click="increaseCounter(50)"
+        <b-button variant="success" size="lg" @click="increaseCounter(50)"
           >Increase</b-button
         >
         <!-- Decrease Counter, with an `decreaseLimit` of 0 -->
-        <b-button variant="warning" @click="decreaseCounter(50)"
+        <b-button variant="warning" size="lg" @click="decreaseCounter(0)"
           >Decrease</b-button
         >
 
-        <b-button variant="danger" @click="resetCounter">Reset</b-button>
+        <b-button variant="danger" size="lg" @click="resetCounter"
+          >Reset</b-button
+        >
 
         <br /><br /><br />
         <p class="text-center">
@@ -66,10 +68,10 @@ export default {
 p {
   font-size: 20px;
 }
-.body {
+body {
   padding: 1.5rem;
 }
-.button {
+button {
   margin-bottom: 1rem;
   font-size: 15px;
 }
