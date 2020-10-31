@@ -3,15 +3,17 @@
     <v-app>
       <v-content>
         <v-container>
-          <v-row no-gutters style="height: 100px"> </v-row>
+          <v-row no-gutters style="height: 50px"> </v-row>
         </v-container>
         <v-row>
-          <v-col cols="8">
-            <Counter />
-          </v-col>
-          <v-col cols="4">
+          <v-col cols="1"> </v-col>
+          <v-col cols="3">
             <ToDo />
           </v-col>
+          <v-col cols="7">
+            <Counter />
+          </v-col>
+          <v-col cols="1"> </v-col>
         </v-row>
       </v-content>
     </v-app>

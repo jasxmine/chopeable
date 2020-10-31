@@ -1,31 +1,14 @@
 <template>
-  <div>
+  <div @mouseover.self="canScroll">
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <div
-      style="
-        padding-top: 10px;
-        position: fixed;
-        background-color: white;
-        width: 100%;
-        z-index: 5;
-      "
+      style="padding-top: 10px; width: 100%; z-index: 1"
+      @mouseover.self="canScroll"
     >
-      <!-- Load Vue followed by BootstrapVueIcons -->
-      <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"
-      />
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
-      />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -49,9 +32,10 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
       ></script>
-      <div>
-        <form>
-          <div class="form-row">
+
+      <div @mouseover.self="canScroll">
+        <form @mouseover.self="canScroll">
+          <div class="form-row" @mouseover.self="canScroll">
             <a href="/app">
               <img
                 src="../logo_2.png"
@@ -60,39 +44,68 @@
                 width="200"
               />
             </a>
+            <span style="margin-left: 150px"></span>
+            <div style="width: 300px" @mouseover.self="canScroll"></div>
           </div>
         </form>
         <nav
-          class="navbar navbar-expand-lg navbar-light"
-          style="margin-bottom: 0px"
+          class="navbar navbar-expand-md navbar-light"
+          style="margin-bottom: 0px; margin-top: 15px"
+          @mouseover="canScroll"
         >
-          <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <NuxtLink class="nav-link" to="/dashboard">
-                  Dashboard
-                </NuxtLink>
-              </li>
-              <li class="nav-item">
-                <NuxtLink class="nav-link" to="/calendar"> Calendar </NuxtLink>
-              </li>
-            </ul>
+          <div class="text-center" style="width: 100%">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <NuxtLink class="nav-link" to="/dashboard">
+                    Dashboard
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink class="nav-link" to="/calendar">
+                    Calendar
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
       </div>
     </div>
-    <br /><br /><br /><br /><br />
     <nuxt />
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
 
-export default {}
+export default {
+  methods: {
+    canScroll() {
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
+    cannotScroll() {
+      document.documentElement.style.position = 'fixed'
+      document.documentElement.style['overflow-y'] = 'scroll'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
+  },
+}
 </script>
 
 <style>
@@ -137,5 +150,61 @@ nav a:last-child {
 li {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.button--green {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #3b8070;
+  color: #3b8070;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button--green:hover {
+  color: #fff;
+  background-color: #3b8070;
+}
+
+.button--grey {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495e;
+  color: #35495e;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+
+.button--grey:hover {
+  color: #fff;
+  background-color: #35495e;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+a:hover {
+  background-color: rgb(240, 240, 240, 0.5);
 }
 </style>
