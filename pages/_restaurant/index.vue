@@ -30,6 +30,7 @@
         {{ restaurantData.location && restaurantData.location.locality }}
       </h5>
       <p>{{ restaurantData.timings }}</p>
+      <p>Contact Us @ {{ restaurantData.phone_numbers }}</p>
       <div class="mt-4">
         <b-button variant="warning" class="text-dark mr-2"
           ><b-icon-calendar2-check
@@ -85,6 +86,8 @@
       <div class="restaurantContent">
         <h2 class="mb-3">About this place</h2>
         <div v-if="restaurantData.location">
+          <h3 class="mt-5 mb-4">Address</h3>
+          <p>{{ restaurantData.location.address }}</p>
           <MapComponent
             :latitude="parseFloat(restaurantData.location.latitude)"
             :longitude="parseFloat(restaurantData.location.longitude)"
@@ -140,7 +143,11 @@
           <a class="text-warning" href="#">Write a Review</a>
         </div>
       </div>
-      <LoyaltyPointComponent />
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
     </div>
   </div>
 </template>
@@ -157,7 +164,6 @@ import StarRating from 'vue-star-rating'
 import restaurantService from '../../services/restaurantService'
 
 import RatingComponent from '../../components/restaurant/RatingComponent'
-import LoyaltyPointComponent from '../../components/restaurant/LoyaltyPointComponent'
 import MapComponent from '../../components/restaurant/MapComponent'
 
 export default {
@@ -168,7 +174,6 @@ export default {
     BIconBookmarkCheckFill,
     BIconShare,
     RatingComponent,
-    LoyaltyPointComponent,
     MapComponent,
     StarRating,
   },
