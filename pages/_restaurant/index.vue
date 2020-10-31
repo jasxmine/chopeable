@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container mt-5 p-0">
+    <div class="container vh-100 mt-5 p-0">
       <img :src="restaurantData.featured_image" />
       <div class="d-flex justify-content-between">
         <h1>
@@ -53,7 +53,14 @@
           ><b-icon-share class="mr-2" scale="0.8"></b-icon-share>Share</b-button
         >
       </div>
-      <BookingComponent />
+      <div class=""></div>
+      <div class="mt-5">
+        <h4>Tap to rate your experience</h4>
+        <star-rating v-model="rating" :star-size="30"></star-rating>
+        <div class="mt-3">
+          <a class="text-warning" href="#">Write a Review</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,9 +72,9 @@ import {
   BIconBookmark,
   BIconShare,
 } from 'bootstrap-vue'
+import StarRating from 'vue-star-rating'
 import restaurantService from '../../services/restaurantService'
 
-import BookingComponent from '../../components/restaurant/BookingComponent'
 import RatingComponent from '../../components/restaurant/RatingComponent'
 
 export default {
@@ -76,8 +83,8 @@ export default {
     BIconArrow90degRight,
     BIconBookmark,
     BIconShare,
-    BookingComponent,
     RatingComponent,
+    StarRating,
   },
   data() {
     return {

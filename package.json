@@ -26,6 +26,7 @@
     "nuxt": "^2.14.6",
     "rxjs-compat": "^6.6.3",
     "vue-konva": "^2.1.6",
+    "vue-star-rating": "^1.7.0",
     "vue-textarea-autosize": "^1.1.1",
     "vue2-timepicker": "^1.1.5",
     "vuetify": "^2.3.15"
