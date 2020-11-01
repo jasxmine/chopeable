@@ -109,7 +109,6 @@
 <script>
 import restaurantService from '../services/restaurantService'
 import cuisine from '../components/cuisine'
-
 window.axios = require('axios')
 export default {
   components: { cuisine },
@@ -196,7 +195,11 @@ export default {
             const image = document.createElement('img')
             const a = document.createElement('a')
             let restaurantUrl = index.restaurant.url
-            const cuisines = index.restaurant.cuisines
+            let cuisines = index.restaurant.cuisines
+            cuisines = cuisines.split(', ')
+            cuisines = cuisines.slice(0, 4)
+            console.log(cuisines)
+            cuisines = cuisines.join(', ')
             const indexQuestion = restaurantUrl.indexOf('?')
             restaurantUrl = restaurantUrl.slice(33, indexQuestion)
             a.setAttribute('href', `/${restaurantUrl}`)
@@ -210,7 +213,7 @@ export default {
             const indexComma = streetAddress.indexOf(',')
             streetAddress = streetAddress.slice(0, indexComma)
             const div = document.createElement('div')
-            div.setAttribute('class', 'col-md-4 py-2')
+            div.setAttribute('class', 'col-md-4')
             const divCard = document.createElement('div')
             divCard.setAttribute('class', 'card mb-4 h-100')
             a.appendChild(divCard)
