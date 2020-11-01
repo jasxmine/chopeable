@@ -32,13 +32,15 @@
       <p>{{ restaurantData.timings }}</p>
       <p>Contact Us @ {{ restaurantData.phone_numbers }}</p>
       <div class="mt-4">
-        <b-button variant="warning" class="text-dark mr-2"
-          ><b-icon-calendar2-check
-            class="mr-2"
-            scale="0.8"
-          ></b-icon-calendar2-check
-          >Book Now</b-button
-        >
+        <a :href="'/' + restaurant + '/reservation'">
+          <b-button variant="warning" class="text-dark mr-2"
+            ><b-icon-calendar2-check
+              class="mr-2"
+              scale="0.8"
+            ></b-icon-calendar2-check
+            >Book Now</b-button
+          >
+        </a>
         <a
           v-if="restaurantData.location"
           :href="
