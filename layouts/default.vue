@@ -70,7 +70,7 @@
                   autocomplete="off"
                   style="
                     height: 45px;
-                    width: 300%;
+                    width: 250%;
                     font-size: 18px;
                     line-height: 40px;
                   "
