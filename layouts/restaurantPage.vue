@@ -133,7 +133,6 @@
       </div>
     </div>
     <nuxt />
-    <theFooter v-if="loadFooter" />
   </div>
 </template>
 

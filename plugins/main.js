@@ -5,7 +5,7 @@ import vuetify from './vuetify' // path to vuetify export
 const vuetifyOptions = {}
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-Vue.use(Vuetify)
+Vue.use(vuetify)
 
 new Vue({
   el: '#app',

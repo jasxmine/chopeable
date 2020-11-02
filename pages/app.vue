@@ -43,6 +43,7 @@
         </div>
       </div>
       <a
+        v-if="carousel1"
         class="carousel-control-prev"
         href="#carousel"
         role="button"
@@ -52,6 +53,7 @@
         <span class="sr-only">Previous</span>
       </a>
       <a
+        v-if="carousel1"
         class="carousel-control-next"
         href="#carousel"
         role="button"
@@ -107,12 +109,16 @@
 <script>
 import restaurantService from '../services/restaurantService'
 import cuisine from '../components/cuisine'
-
 window.axios = require('axios')
 export default {
   components: { cuisine },
   data() {
-    return { cuisineResList1: [], cuisineResList2: [], cuisineResList3: [] }
+    return {
+      cuisineResList1: [],
+      cuisineResList2: [],
+      cuisineResList3: [],
+      carousel1: false,
+    }
   },
   mounted() {
     this.nearbyRes()
@@ -159,15 +165,19 @@ export default {
     },
     nearbyRes() {
       const successCallback = (position) => {
-        const userLoc = position
-        const latitude = userLoc.coords.latitude
-        const longitude = userLoc.coords.longitude
+        this.carousel1 = true
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        console.log(latitude)
+        console.log(longitude)
+
         const request = new XMLHttpRequest()
         request.onreadystatechange = function () {
           document.getElementById('restaurantListNearby1').innerHTML = ''
           document.getElementById('restaurantListNearby0').innerHTML = ''
           document.getElementById('restaurantListNearby2').innerHTML = ''
-          const parsed = JSON.parse(this.responseText).restaurants
+          console.log(JSON.parse(this.responseText))
+          const parsed = JSON.parse(this.responseText).nearby_restaurants
 
           const smallerParsed = parsed.slice(0, 9)
           document.getElementById('discoverNearby').innerHTML = ''
@@ -178,11 +188,18 @@ export default {
           let i = 0
           for (const index of smallerParsed) {
             const restaurantName = index.restaurant.name
-            const imageThumb = index.restaurant.featured_image
+            let imageThumb = index.restaurant.featured_image
+            if (imageThumb === '') {
+              imageThumb = '/logo_photo.jpg'
+            }
             const image = document.createElement('img')
             const a = document.createElement('a')
             let restaurantUrl = index.restaurant.url
-            const cuisines = index.restaurant.cuisines
+            let cuisines = index.restaurant.cuisines
+            cuisines = cuisines.split(', ')
+            cuisines = cuisines.slice(0, 4)
+            console.log(cuisines)
+            cuisines = cuisines.join(', ')
             const indexQuestion = restaurantUrl.indexOf('?')
             restaurantUrl = restaurantUrl.slice(33, indexQuestion)
             a.setAttribute('href', `/${restaurantUrl}`)
@@ -198,7 +215,7 @@ export default {
             const div = document.createElement('div')
             div.setAttribute('class', 'col-md-4')
             const divCard = document.createElement('div')
-            divCard.setAttribute('class', 'card mb-4')
+            divCard.setAttribute('class', 'card mb-4 h-100')
             a.appendChild(divCard)
             div.appendChild(a)
             const divCardBody = document.createElement('div')
@@ -216,7 +233,7 @@ export default {
         }
         request.open(
           'GET',
-          'https://developers.zomato.com/api/v2.1/search?lat=' +
+          'https://developers.zomato.com/api/v2.1/geocode?lat=' +
             latitude +
             '&lon=' +
             longitude +
