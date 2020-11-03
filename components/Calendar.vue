@@ -363,7 +363,6 @@ export default {
 /deep/ .v-text-field {
   width: 400px;
 }
-
 /deep/ .v-dialog {
   overflow-x: hidden;
 }
