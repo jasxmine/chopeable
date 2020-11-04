@@ -5,7 +5,7 @@
       :key="a_cuisine.id"
       class="centerize col-md-4"
     >
-      <a :href="'/search?cuisine=' + a_cuisine.cuisine_name">
+      <nuxt-link :to="'/search?cuisine=' + a_cuisine.cuisine_name">
         <div class="card mb-4">
           <div>
             <img
@@ -17,7 +17,7 @@
             <div class="bottom-left">{{ a_cuisine.cuisine_name }}</div>
           </div>
         </div>
-      </a>
+      </nuxt-link>
     </div>
   </div>
 </template>

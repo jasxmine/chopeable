@@ -57,7 +57,6 @@
                 </p>
               </div>
             </div>
-
           </div>
           <cardComponent
             v-for="restaurant in allRestaurants"

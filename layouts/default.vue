@@ -17,85 +17,125 @@
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       />
-      <script
-        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-      ></script>
 
       <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
-        <form @click.self="emptyFocusOut" @mouseover.self="canScroll">
-          <div
-            class="form-row"
-            @click.self="emptyFocusOut"
-            @mouseover.self="canScroll"
-          >
-            <a href="/app">
+        <div
+          class="row"
+          @click.self="emptyFocusOut"
+          @mouseover.self="canScroll"
+        >
+          <div class="col-2">
+            <nuxt-link to="/app">
               <img
                 src="../logo_2.png"
                 alt="why is this taking so long"
                 style="margin-left: 20px"
                 width="200"
               />
-            </a>
-            <span style="margin-left: 150px"></span>
+            </nuxt-link>
+          </div>
+          <div class="col-1"></div>
+          <div
+            class="col-6"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          >
             <div
-              style="width: 300px"
+              id="parenting"
+              class="form-group has-search"
+              style="margin-top: 10px"
               @click.self="emptyFocusOut"
               @mouseover.self="canScroll"
             >
+              <input
+                id="search_restaurant"
+                list="restaurants"
+                type="text"
+                class="form-control randomizedClick"
+                placeholder="Search"
+                autocomplete="off"
+                style="
+                  height: 45px;
+                  width: 100%;
+                  font-size: 18px;
+                  line-height: 40px;
+                "
+                @keyup="getUser"
+                @focus="getUser"
+              />
               <div
-                id="parenting"
-                class="form-group has-search"
-                style="margin-top: 10px"
-                @click.self="emptyFocusOut"
-                @mouseover.self="canScroll"
+                id="displaySearch"
+                style="
+                  position: absolute;
+                  width: 750px;
+                  background-color: rgb(255, 255, 255, 1);
+                  display: none;
+                  z-index: 5;
+                  max-height: 300px;
+                  overflow: scroll;
+                "
+                @mouseover="cannotScroll"
               >
-                <input
-                  id="search_restaurant"
-                  list="restaurants"
-                  type="text"
-                  class="form-control randomizedClick"
-                  placeholder="Search"
-                  autocomplete="off"
-                  style="
-                    height: 45px;
-                    width: 250%;
-                    font-size: 18px;
-                    line-height: 40px;
-                  "
-                  @keyup="getUser"
-                  @focus="getUser"
-                />
-                <div
-                  id="displaySearch"
-                  style="
-                    position: absolute;
-                    width: 750px;
-                    background-color: rgb(255, 255, 255, 1);
-                    display: none;
-                    z-index: 5;
-                    max-height: 300px;
-                    overflow: scroll;
-                  "
-                  @mouseover="cannotScroll"
-                >
-                  <search :search="searchResult" />
+                <search :search="searchResult" />
+              </div>
+            </div>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-2">
+            <div v-if="!user" style="margin-top: 10px">
+              <button
+                id="dropdownMenu1"
+                type="button"
+                data-toggle="dropdown"
+                class="btn btn-warning dropdown-toggle"
+                style="height: 45px"
+              >
+                Login
+              </button>
+              <ul
+                id="dropdownMenu1"
+                class="dropdown-menu dropdown-menu-right mt-2"
+              >
+                <li class="px-3 py-2">
+                  <div class="form-group">
+                    <input
+                      id="emailInput"
+                      v-model="inputEmail"
+                      placeholder="Email"
+                      class="form-control form-control-sm"
+                      type="text"
+                      required=""
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="passwordInput"
+                      placeholder="Password"
+                      class="form-control form-control-sm"
+                      type="password"
+                      required=""
+                    />
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-block" @click="login()">
+                      Login
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div v-else style="margin-top: 20px">
+              <div class="dropdown">
+                <img src="/profilePicture.jpg" width="40" />
+                Hi, {{ user.name }}!
+                <div class="dropdown-content" style="width: 40%">
+                  <nuxt-link to="/profile"> My Profile </nuxt-link> <br />
+                  <a href="/app"> Logout </a>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
         <nav
           class="navbar navbar-expand-md navbar-light"
           style="margin-bottom: 0px; margin-top: 15px"
@@ -134,6 +174,21 @@
     </div>
     <nuxt />
     <theFooter v-if="loadFooter" />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </div>
 </template>
 
@@ -149,14 +204,12 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
 }
-
 .button--green {
   display: inline-block;
   border-radius: 4px;
@@ -165,12 +218,10 @@ html {
   text-decoration: none;
   padding: 10px 30px;
 }
-
 .button--green:hover {
   color: #fff;
   background-color: #3b8070;
 }
-
 .button--grey {
   display: inline-block;
   border-radius: 4px;
@@ -180,16 +231,13 @@ html {
   padding: 10px 30px;
   margin-left: 15px;
 }
-
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
 }
-
 .has-search .form-control {
   padding-left: 2.375rem;
 }
-
 .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
@@ -201,15 +249,23 @@ html {
   pointer-events: none;
   color: #aaa;
 }
-
-a:hover {
-  background-color: rgb(240, 240, 240, 0.5);
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import search from '../components/search'
 import theFooter from '../components/theFooter'
+import { db } from '@/main'
 window.axios = require('axios')
 export default {
   components: {
@@ -223,6 +279,11 @@ export default {
       isModalVisible: 'false',
       isHovering: false,
       loadFooter: true,
+      inputEmail: '',
+      inputPassword: '',
+      isLoggedIn: false,
+      user: false,
+      unregisteredEmail: false,
     }
   },
   methods: {
@@ -280,6 +341,28 @@ export default {
       document.documentElement.style.position = 'fixed'
       document.documentElement.style['overflow-y'] = 'scroll'
       document.documentElement.style['overflow-x'] = 'hidden'
+    },
+    async login() {
+      let email = this.inputEmail
+      const userListGet = await db.collection('user').get()
+      let userList = []
+      userListGet.forEach((doc) => {
+        const userData = doc.data()
+        userList.push(userData)
+      })
+      for (let userElement of userList) {
+        if (this.inputEmail == userElement.email) {
+          this.isLoggedIn = true
+          this.user = userElement
+          console.log(userElement)
+        } else {
+          this.isLoggedIn = false
+          this.unregisteredEmail = true
+        }
+      }
+    },
+    logout() {
+      this.user = false
     },
   },
 }
