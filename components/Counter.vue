@@ -41,7 +41,7 @@ export default {
   computed: {
     output() {
       // Output for computed property!
-      return this.counter >= 50 ? 'Less than limit' : 'Reached limit'
+      return this.counter >= 50 ? 'Reached limit' : 'Less than limit'
     },
   },
   methods: {
