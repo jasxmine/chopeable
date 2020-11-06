@@ -5,26 +5,36 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta
+      name="google-signin-client_id"
+      content="766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com"
+    />
+    <meta name="google-signin-scope" content="profile email" />
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
     <div
       style="padding-top: 10px; width: 100%; z-index: 1"
       @mouseover.self="canScroll"
     >
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      />
-
       <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
         <div
           class="row"
           @click.self="emptyFocusOut"
           @mouseover.self="canScroll"
         >
-          <div class="col-2">
+          <div
+            class="col-2"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          >
             <nuxt-link to="/app">
               <img
                 src="../logo_2.png"
@@ -34,7 +44,11 @@
               />
             </nuxt-link>
           </div>
-          <div class="col-1"></div>
+          <div
+            class="col-1"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          ></div>
           <div
             class="col-6"
             @click.self="emptyFocusOut"
@@ -80,9 +94,18 @@
               </div>
             </div>
           </div>
-          <div class="col-1"></div>
+          <div
+            class="col-1"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          ></div>
           <div class="col-2">
-            <div v-if="!user" style="margin-top: 10px">
+            <div
+              v-if="!user"
+              style="margin-top: 10px"
+              @click.self="emptyFocusOut"
+              @mouseover.self="canScroll"
+            >
               <button
                 id="dropdownMenu1"
                 type="button"
@@ -97,6 +120,15 @@
                 class="dropdown-menu dropdown-menu-right mt-2"
               >
                 <li class="px-3 py-2">
+                  <GoogleLogin
+                    :params="params"
+                    :render-params="renderParams"
+                    :on-success="onSuccess"
+                    :on-failure="onFailure"
+                    data-theme="dark"
+                  ></GoogleLogin>
+                  <hr class="hr-text" data-content="OR" />
+
                   <div class="form-group">
                     <input
                       id="emailInput"
@@ -130,9 +162,12 @@
                 Hi, {{ user.name }}!
                 <div class="dropdown-content" style="width: 40%">
                   <nuxt-link to="/profile"> My Profile </nuxt-link> <br />
-                  <a href="/app"> Logout </a>
+                  <a href="/app" @click="signOut()"> Logout </a>
                 </div>
               </div>
+            </div>
+            <div id="loggedIn" style="color: red; display: none">
+              Your email does not exist in our database :(
             </div>
           </div>
         </div>
@@ -260,17 +295,53 @@ html {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.5;
+}
+.hr-text::after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+
+  padding: 0 0.5em;
+  line-height: 1.5em;
+  color: #818078;
+  background-color: #fcfcfa;
+}
+.hr-text::before {
+  content: '';
+  background: #818078;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+}
+html {
+  width: 100vw;
+}
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import search from '../components/search'
 import theFooter from '../components/theFooter'
 import { db } from '@/main'
+import GoogleLogin from 'vue-google-login'
+
 window.axios = require('axios')
 export default {
   components: {
     search,
     theFooter,
+    GoogleLogin,
   },
   data() {
     return {
@@ -284,8 +355,18 @@ export default {
       isLoggedIn: false,
       user: false,
       unregisteredEmail: false,
+      params: {
+        client_id:
+          '766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com',
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
     }
   },
+  mounted() {},
   methods: {
     async getUser() {
       this.searchResult = []
@@ -298,7 +379,6 @@ export default {
               search +
               '&apikey=e5567dabfe03e800b9c322a7c552684d'
           )
-          console.log(response.data.restaurants)
           for (let restaurant of response.data.restaurants) {
             let restaurantObj = { name: '', location: '' }
             let name = restaurant.restaurant.name
@@ -351,18 +431,43 @@ export default {
         userList.push(userData)
       })
       for (let userElement of userList) {
+        userElement.email = userElement.email.trim()
         if (this.inputEmail == userElement.email) {
           this.isLoggedIn = true
           this.user = userElement
-          console.log(userElement)
-        } else {
-          this.isLoggedIn = false
-          this.unregisteredEmail = true
+          document.getElementById('loggedIn').style.display = 'none'
         }
+      }
+      if (this.isLoggedIn == false) {
+        this.inputEmail = ''
+        this.logout()
+        this.signOut()
+        document.getElementById('loggedIn').style.display = 'inline'
       }
     },
     logout() {
       this.user = false
+    },
+    signOut() {
+      var auth2 = gapi.auth2.getAuthInstance()
+      auth2.signOut().then(function () {
+        console.log('User signed out.')
+      })
+    },
+
+    async onSuccess(googleUser) {
+      // This only gets the user information: id, name, imageUrl and email
+      const profile = googleUser.getBasicProfile()
+      this.inputEmail = profile.getEmail()
+      let name = profile.getName()
+      console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName())
+      console.log('Image URL: ' + profile.getImageUrl())
+      console.log('Email: ' + profile.getEmail()) // This is null if the 'email' scope is not present.
+      this.login()
+    },
+    onFailure() {
+      console.log('Please try logging in again :(')
     },
   },
 }

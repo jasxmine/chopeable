@@ -21,25 +21,13 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <div
-            id="restaurantListNearby0"
-            class="row mx-auto"
-            style="width: 90%"
-          ></div>
+          <nearbyRestaurant :nearby-restaurants="nearbyResList1" />
         </div>
         <div class="carousel-item">
-          <div
-            id="restaurantListNearby1"
-            class="row mx-auto"
-            style="width: 90%"
-          ></div>
+          <nearbyRestaurant :nearby-restaurants="nearbyResList2" />
         </div>
         <div class="carousel-item">
-          <div
-            id="restaurantListNearby2"
-            class="row mx-auto"
-            style="width: 90%"
-          ></div>
+          <nearbyRestaurant :nearby-restaurants="nearbyResList3" />
         </div>
       </div>
       <a
@@ -63,6 +51,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
     <div id="cuisineCarousel" class="leftMargin">
       <h3>Discover cuisines</h3>
     </div>
@@ -105,19 +94,24 @@
     </div>
   </div>
 </template>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
 import restaurantService from '../services/restaurantService'
 import cuisine from '../components/cuisine'
 window.axios = require('axios')
+import nearbyRestaurant from '../components/nearbyRestaurant'
 export default {
-  components: { cuisine },
+  components: { cuisine, nearbyRestaurant },
   data() {
     return {
       cuisineResList1: [],
       cuisineResList2: [],
       cuisineResList3: [],
       carousel1: false,
+      nearbyResList1: [],
+      nearbyResList2: [],
+      nearbyResList3: [],
     }
   },
   mounted() {
@@ -154,93 +148,87 @@ export default {
   },
   methods: {
     emptyFocusOut() {
+      console.log('empty function called')
       this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
     },
     canScroll() {
-      document.documentElement.style['overflow-y'] = 'scroll'
       document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
-    successCallback2(result) {
-      console.log(result)
+    cannotScroll() {
+      document.documentElement.style.position = 'fixed'
+      document.documentElement.style['overflow-y'] = 'scroll'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
-    nearbyRes() {
+    async nearbyRes() {
       const successCallback = (position) => {
         this.carousel1 = true
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
-        console.log(latitude)
-        console.log(longitude)
 
-        const request = new XMLHttpRequest()
-        request.onreadystatechange = function () {
-          document.getElementById('restaurantListNearby1').innerHTML = ''
-          document.getElementById('restaurantListNearby0').innerHTML = ''
-          document.getElementById('restaurantListNearby2').innerHTML = ''
-          console.log(JSON.parse(this.responseText))
-          const parsed = JSON.parse(this.responseText).nearby_restaurants
+        try {
+          axios
+            .get(
+              'https://developers.zomato.com/api/v2.1/geocode?lat=' +
+                latitude +
+                '&lon=' +
+                longitude +
+                '&apikey=02296a90b8223f66ba4289b019fa8f42'
+            )
+            .then((response) => {
+              let nearbyRestaurantList = response.data.nearby_restaurants
+              nearbyRestaurantList = nearbyRestaurantList.slice(0, 9)
+              for (let i = 0; i < nearbyRestaurantList.length; i++) {
+                let restaurant = nearbyRestaurantList[i].restaurant
+                // Name
+                let name = restaurant.name
+                // Cuisines
+                let cuisines = restaurant.cuisines
+                cuisines = cuisines.split(', ')
+                cuisines = cuisines.slice(0, 4)
+                cuisines = cuisines.join(', ')
+                // Image
+                let imageThumb = restaurant.featured_image
+                if (imageThumb === '') {
+                  imageThumb = '/logo_photo.jpg'
+                }
+                // URL
+                let restaurantUrl = restaurant.url
+                const indexQuestion = restaurantUrl.indexOf('?')
+                restaurantUrl = restaurantUrl.slice(33, indexQuestion)
+                // Address
+                let streetAddress = restaurant.location.address
+                const indexComma = streetAddress.indexOf(',')
+                streetAddress = streetAddress.slice(0, indexComma)
+                let restaurantObj = {
+                  name: name,
+                  address: streetAddress,
+                  image: imageThumb,
+                  url: restaurantUrl,
+                  cuisine: cuisines,
+                }
+                console.log(restaurantObj)
+                if (this.nearbyResList1.length < 3) {
+                  this.nearbyResList1.push(restaurantObj)
+                } else if (this.nearbyResList2.length < 3) {
+                  this.nearbyResList2.push(restaurantObj)
+                } else {
+                  this.nearbyResList3.push(restaurantObj)
+                }
+              }
+              document.getElementById('discoverNearby').innerHTML = ''
+              const discoverNearby = document.getElementById('discoverNearby')
+              const h3 = document.createElement('h3')
+              h3.innerHTML = 'Discover nearby restaurants'
+              discoverNearby.appendChild(h3)
 
-          const smallerParsed = parsed.slice(0, 9)
-          document.getElementById('discoverNearby').innerHTML = ''
-          const discoverNearby = document.getElementById('discoverNearby')
-          const h3 = document.createElement('h3')
-          h3.innerHTML = 'Discover nearby restaurants'
-          discoverNearby.appendChild(h3)
-          let i = 0
-          for (const index of smallerParsed) {
-            const restaurantName = index.restaurant.name
-            let imageThumb = index.restaurant.featured_image
-            if (imageThumb === '') {
-              imageThumb = '/logo_photo.jpg'
-            }
-            const image = document.createElement('img')
-            const a = document.createElement('a')
-            let restaurantUrl = index.restaurant.url
-            let cuisines = index.restaurant.cuisines
-            cuisines = cuisines.split(', ')
-            cuisines = cuisines.slice(0, 4)
-            console.log(cuisines)
-            cuisines = cuisines.join(', ')
-            const indexQuestion = restaurantUrl.indexOf('?')
-            restaurantUrl = restaurantUrl.slice(33, indexQuestion)
-            a.setAttribute('href', `/${restaurantUrl}`)
-            a.setAttribute('style', 'text-decoration:none;color:black;')
-            image.setAttribute('src', imageThumb)
-            image.setAttribute('alt', 'why though')
-            image.setAttribute('width', '100%')
-            image.setAttribute('height', '250px')
-            image.setAttribute('class', 'hoverGrey')
-            let streetAddress = index.restaurant.location.address
-            const indexComma = streetAddress.indexOf(',')
-            streetAddress = streetAddress.slice(0, indexComma)
-            const div = document.createElement('div')
-            div.setAttribute('class', 'col-md-4')
-            const divCard = document.createElement('div')
-            divCard.setAttribute('class', 'card mb-4 h-100')
-            a.appendChild(divCard)
-            div.appendChild(a)
-            const divCardBody = document.createElement('div')
-            divCardBody.setAttribute('class', 'card-body')
-            divCard.appendChild(image)
-            divCard.appendChild(divCardBody)
-            const p = document.createElement('p')
-            p.setAttribute('class', 'card-text')
-            p.innerHTML = `<b> ${restaurantName} </b> <br> ${cuisines} <br> ${streetAddress}`
-            const id = 'restaurantListNearby' + (i % 3)
-            divCardBody.appendChild(p)
-            document.getElementById(id).appendChild(div)
-            i++
-          }
-        }
-        request.open(
-          'GET',
-          'https://developers.zomato.com/api/v2.1/geocode?lat=' +
-            latitude +
-            '&lon=' +
-            longitude +
-            '&apikey=02296a90b8223f66ba4289b019fa8f42',
-          true
-        )
-        request.send()
+              console.log(this.nearbyResList1)
+              console.log(this.nearbyResList2)
+              console.log(this.nearbyResList3)
+            })
+        } catch {}
       }
 
       const errorCallback = (error) => {
