@@ -99,62 +99,68 @@
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           ></div>
-          <div class="col-2">
-            <div
-              v-if="!user"
-              style="margin-top: 10px"
-              @click.self="emptyFocusOut"
-              @mouseover.self="canScroll"
-            >
-              <button
-                id="dropdownMenu1"
-                type="button"
-                data-toggle="dropdown"
-                class="btn btn-warning dropdown-toggle"
-                style="height: 45px"
+          <div
+            class="col-2"
+            @click.self="emptyFocusOut"
+            @mouseover.self="canScroll"
+          >
+            <div v-if="!user" style="margin-top: 10px">
+              <b-dropdown
+                id="dropdown-form"
+                ref="dropdown"
+                text="Login"
+                class="m-2"
+                variant="warning"
+                size="lg"
+                right
               >
-                Login
-              </button>
-              <ul
-                id="dropdownMenu1"
-                class="dropdown-menu dropdown-menu-right mt-2"
-              >
-                <li class="px-3 py-2">
-                  <GoogleLogin
-                    :params="params"
-                    :render-params="renderParams"
-                    :on-success="onSuccess"
-                    :on-failure="onFailure"
-                    data-theme="dark"
-                  ></GoogleLogin>
+                <b-dropdown-form>
+                  <b-form-group>
+                    <GoogleLogin
+                      :params="params"
+                      :render-params="renderParams"
+                      :on-success="onSuccess"
+                      :on-failure="onFailure"
+                      data-theme="dark"
+                    ></GoogleLogin>
+                  </b-form-group>
                   <hr class="hr-text" data-content="OR" />
 
-                  <div class="form-group">
-                    <input
-                      id="emailInput"
+                  <b-form-group
+                    label-for="dropdown-form-email"
+                    @submit.stop.prevent
+                  >
+                    <b-form-input
+                      id="dropdown-form-email"
                       v-model="inputEmail"
+                      size="sm"
                       placeholder="Email"
-                      class="form-control form-control-sm"
-                      type="text"
-                      required=""
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      id="passwordInput"
-                      placeholder="Password"
-                      class="form-control form-control-sm"
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-for="dropdown-form-password">
+                    <b-form-input
+                      id="dropdown-form-password"
                       type="password"
-                      required=""
-                    />
-                  </div>
-                  <div class="form-group">
-                    <button class="btn btn-primary btn-block" @click="login()">
-                      Login
-                    </button>
-                  </div>
-                </li>
-              </ul>
+                      size="sm"
+                      placeholder="Password"
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-button
+                      variant="primary"
+                      size="sm"
+                      style="width: 100%"
+                      @click="login()"
+                      >Login</b-button
+                    >
+                  </b-form-group>
+                </b-dropdown-form>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item-button
+                  >New around here? Sign up</b-dropdown-item-button
+                >
+              </b-dropdown>
             </div>
             <div v-else style="margin-top: 20px">
               <div class="dropdown">
