@@ -4,16 +4,17 @@
       <div id="filter option" class="col-sm-3 card">
         <div class="card-body">
           <h1 class="card-title">Filter</h1>
-          <br />
+          <!-- <br />
           <h4 class="card-subtitle">Location</h4>
           <input id="location" type="text" width="500" height="100" />
           <br />
           <br />
-          <h4 class="card-subtitle">Cousine Type</h4>
+          <h4 class="card-subtitle">Cousine Type</h4> -->
           <checkboxComponent
             :key="checkboxId++"
             :first8="cType.slice(0, 8)"
             :other="cType.slice(8)"
+            @search="search"
           >
           </checkboxComponent>
           <br />
@@ -57,7 +58,6 @@
                 </p>
               </div>
             </div>
-
           </div>
           <cardComponent
             v-for="restaurant in allRestaurants"
@@ -72,8 +72,8 @@
 </template>
 
 <script>
-import cardComponent from '../../components/search/cardComponent'
-import checkboxComponent from '../../components/search/checkboxComponent'
+import cardComponent from '../../components/search/CardComponent'
+import checkboxComponent from '../../components/search/CheckboxComponent'
 import restaurantService from '../../services/restaurantService'
 
 window.axios = require('axios')
@@ -93,9 +93,7 @@ export default {
       const cuisineArr = JSON.parse(JSON.stringify(res))
       for (let i = 0; i < cuisineArr.cuisines.length; i++) {
         const toAdd = JSON.parse(JSON.stringify(cuisineArr.cuisines[i]))
-        console.log(toAdd)
         this.cType.push(toAdd)
-        // console.log(cuisineArr.cuisines[i])
       }
     })
     this.observerError(this.cType)
@@ -107,7 +105,6 @@ export default {
           toAdd.featured_image = '/logo_photo.jpg'
         }
         this.allRestaurants.push(toAdd)
-        // console.log(toAdd)
       }
     })
   },
@@ -136,6 +133,39 @@ export default {
         a.appendChild(strong)
         li.appendChild(a)
         document.getElementById('alphaItems').appendChild(li)
+      }
+    },
+    search() {
+      const checkboxes = document.getElementById('cuisineTypes')
+      const checkedCuisines = []
+      const items = []
+      let offset = 0
+      for (let i = 1; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          checkedCuisines.push(checkboxes[i].value)
+        }
+      }
+      while (items.length < 20 && offset < 100) {
+        restaurantService
+          .getRestaurantsCuisines(checkedCuisines, offset)
+          .then((res) => {
+            const restaurantsArr = res.restaurants
+            for (let i = 0; i < restaurantsArr.length; i++) {
+              const toAdd = restaurantsArr[i].restaurant
+              items.push(toAdd)
+            }
+          })
+        offset += 20
+      }
+      this.noImage(items)
+      this.allRestaurants = items
+    },
+    noImage(arr) {
+      console.log(arr)
+      for (let i = 0; i < arr.length; i++) {
+        if (arr.featured_image === '') {
+          arr.featured_image = '/logo_photo.jpg'
+        }
       }
     },
   },
