@@ -168,7 +168,7 @@
                 Hi, {{ user.name }}!
                 <div class="dropdown-content" style="width: 40%">
                   <nuxt-link to="/profile"> My Profile </nuxt-link> <br />
-                  <a href="/app" @click="signOut()"> Logout </a>
+                  <a href="/app" @click="signOut(), logout()"> Logout </a>
                 </div>
               </div>
             </div>
@@ -372,7 +372,14 @@ export default {
       },
     }
   },
-  mounted() {},
+  created() {
+    if (localStorage.user == 0) {
+    } else {
+      this.inputEmail = localStorage.user
+      this.login()
+      console.log(localStorage.user)
+    }
+  },
   methods: {
     async getUser() {
       this.searchResult = []
@@ -442,6 +449,7 @@ export default {
           this.isLoggedIn = true
           this.user = userElement
           document.getElementById('loggedIn').style.display = 'none'
+          localStorage.user = this.user.email
         }
       }
       if (this.isLoggedIn == false) {
@@ -453,6 +461,8 @@ export default {
     },
     logout() {
       this.user = false
+      localStorage.user = 0
+      console.log(localStorage.user)
     },
     signOut() {
       var auth2 = gapi.auth2.getAuthInstance()
