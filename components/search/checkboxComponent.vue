@@ -1,5 +1,5 @@
 <template>
-  <form id="cuisineTypes" class="container-fluid" @change="$emit('search')">
+  <div id="cuisineTypes" class="container-fluid" @change="$emit('search')">
     <h4>Location</h4>
     <input id="location" type="text" style="display: block" />
     <h4>Cuisine</h4>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <button id="moreButton" type="button" @click="seeMore()">See More</button>
-  </form>
+  </div>
 </template>
 
 <script>

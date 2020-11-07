@@ -10,13 +10,39 @@
           <br />
           <br />
           <h4 class="card-subtitle">Cousine Type</h4> -->
-          <checkboxComponent
+          <!-- <checkboxComponent
             :key="checkboxId++"
             :first8="cType.slice(0, 8)"
             :other="cType.slice(8)"
             @search="search"
           >
-          </checkboxComponent>
+          </checkboxComponent> -->
+          <div id="cuisineTypes" class="container-fluid" @change="search()">
+            <h4>Location</h4>
+            <input id="location" type="text" style="display: block" />
+            <h4>Cuisine</h4>
+            <div v-for="item in cType.slice(0, 8)" :key="item.id">
+              <input
+                v-model="checkedCuisines"
+                type="checkbox"
+                :value="item.cuisine.cuisine_id"
+              />
+              <label> {{ item.cuisine.cuisine_name }} </label>
+            </div>
+            <div id="more">
+              <div v-for="item in cType.slice(8)" :key="item.id">
+                <input
+                  v-model="checkedCuisines"
+                  type="checkbox"
+                  :value="item.cuisine.cuisine_id"
+                />
+                <label> {{ item.cuisine.cuisine_name }} </label>
+              </div>
+            </div>
+            <button id="moreButton" type="button" @click="seeMore()">
+              See More
+            </button>
+          </div>
           <br />
         </div>
       </div>
@@ -73,18 +99,19 @@
 
 <script>
 import cardComponent from '../../components/search/CardComponent'
-import checkboxComponent from '../../components/search/CheckboxComponent'
+// import checkboxComponent from '../../components/search/CheckboxComponent'
 import restaurantService from '../../services/restaurantService'
 
 window.axios = require('axios')
 
 export default {
-  components: { cardComponent, checkboxComponent },
+  components: { cardComponent },
   data() {
     return {
       allRestaurants: [],
       cType: [],
       checkboxId: 0,
+      checkedCuisines: [],
     }
   },
   mounted() {
@@ -136,29 +163,33 @@ export default {
       }
     },
     search() {
-      const checkboxes = document.getElementById('cuisineTypes')
-      const checkedCuisines = []
-      const items = []
-      let offset = 0
-      for (let i = 1; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-          checkedCuisines.push(checkboxes[i].value)
-        }
+      console.log(this.checkedCuisines)
+      this.allRestaurants = []
+      restaurantService
+        .getRestaurantsCuisines(this.checkedCuisines)
+        .then((res) => {
+          const restaurantsArr = res.restaurants
+          console.log(restaurantsArr)
+          for (let i = 0; i < restaurantsArr.length; i++) {
+            const toAdd = restaurantsArr[i].restaurant
+            this.allRestaurants.push(toAdd)
+          }
+        })
+      this.noImage(this.allRestaurants)
+      console.log(this.allRestaurants)
+    },
+    seeMore() {
+      const moreText = document.getElementById('more')
+      const btnText = document.getElementById('moreButton')
+
+      if (moreText.style.display === 'none') {
+        btnText.innerHTML = 'See Less'
+        moreText.style.display = 'block'
+        console.log('1st click')
+      } else {
+        btnText.innerHTML = 'See More'
+        moreText.style.display = 'none'
       }
-      while (items.length < 20 && offset < 100) {
-        restaurantService
-          .getRestaurantsCuisines(checkedCuisines, offset)
-          .then((res) => {
-            const restaurantsArr = res.restaurants
-            for (let i = 0; i < restaurantsArr.length; i++) {
-              const toAdd = restaurantsArr[i].restaurant
-              items.push(toAdd)
-            }
-          })
-        offset += 20
-      }
-      this.noImage(items)
-      this.allRestaurants = items
     },
     noImage(arr) {
       console.log(arr)
@@ -181,5 +212,8 @@ export default {
 }
 a {
   text-decoration: none;
+}
+#more {
+  display: none;
 }
 </style>

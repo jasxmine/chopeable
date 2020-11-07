@@ -46,11 +46,9 @@ const getEstablishments = () => {
     .catch()
 }
 
-const getRestaurantsCuisines = (cuisineArr, offset) => {
+const getRestaurantsCuisines = (cuisineArr) => {
   return fetch(
-    'https://developers.zomato.com/api/v2.1/search?entity_id=52&entity_type=city&start=' +
-      offset +
-      '&cuisines=' +
+    'https://developers.zomato.com/api/v2.1/search?entity_id=52&entity_type=city&start=&cuisines=' +
       cuisineArr.join('%2C%20') +
       '&apikey=' +
       process.env.ZOMATO_API_KEY
