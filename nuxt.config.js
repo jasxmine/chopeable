@@ -63,16 +63,18 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     extend(config, ctx) {
-      config.module.rules.push({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /(node_modules)/,
-        options: {
-          fix: true,
-        },
-      })
+      config.resolve.alias['vue'] = 'vue/dist/vue.common',
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
+        })
     },
+
     transpile: [/^vue2-google-maps($|\/)/],
   },
 }

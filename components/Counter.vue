@@ -65,9 +65,7 @@ export default {
 p {
   font-size: 20px;
 }
-body {
-  padding: 1.5rem;
-}
+
 button {
   margin-bottom: 1rem;
   font-size: 15px;

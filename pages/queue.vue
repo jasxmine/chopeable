@@ -5,12 +5,8 @@
         <v-container>
           <v-row no-gutters style="height: 50px"> </v-row>
         </v-container>
-
-        <div class="d-flex justify-content-center" style="width: 100%">
-          <div id="box 2" style="float: left; width: 70%">
-            <line-chart></line-chart>
-          </div>
-          <div style="clear: both"></div>
+        <div>
+          <Counter />
         </div>
       </v-content>
     </v-app>
@@ -18,12 +14,12 @@
 </template>
 
 <script>
-import LineChart from '@/components/LineChart'
+import Counter from '@/components/Counter'
 
 export default {
   name: 'Admin',
   components: {
-    LineChart,
+    Counter,
   },
   path: '../layout/admin.vue',
   layout: 'admin',

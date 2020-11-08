@@ -1,210 +1,201 @@
 <template>
-  <div @mouseover.self="canScroll">
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <div
-      style="padding-top: 10px; width: 100%; z-index: 1"
-      @mouseover.self="canScroll"
-    >
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      />
-      <script
-        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-      ></script>
+  <div id="demo" :class="[{ collapsed: collapsed }, { onmobile: isOnMobile }]">
+    <div class="demo">
+      <div class="container">
+        <h1>Admin Dashboard</h1>
 
-      <div @mouseover.self="canScroll">
-        <form @mouseover.self="canScroll">
-          <div class="form-row" @mouseover.self="canScroll">
-            <a href="/app">
-              <img
-                src="../logo_2.png"
-                alt="why is this taking so long"
-                style="margin-left: 20px"
-                width="200"
-              />
-            </a>
-            <span style="margin-left: 150px"></span>
-            <div style="width: 300px" @mouseover.self="canScroll"></div>
-          </div>
-        </form>
-        <nav
-          class="navbar navbar-expand-md navbar-light"
-          style="margin-bottom: 0px; margin-top: 15px"
-          @mouseover="canScroll"
-        >
-          <div class="text-center" style="width: 100%">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <NuxtLink class="nav-link" to="/dashboard">
-                    Dashboard
-                  </NuxtLink>
-                </li>
-                <li class="nav-item">
-                  <NuxtLink class="nav-link" to="/calendar">
-                    Calendar
-                  </NuxtLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <hr style="margin: 50px 0px; border: 1px solid #e3e3e3" />
+        <router-view />
       </div>
+
+      <sidebar-menu
+        :menu="menu"
+        :collapsed="collapsed"
+        :theme="selectedTheme"
+        :show-one-child="true"
+        @toggle-collapse="onToggleCollapse"
+        @item-click="onItemClick"
+      />
+      <div
+        v-if="isOnMobile && !collapsed"
+        class="sidebar-overlay"
+        @click="collapsed = true"
+      />
     </div>
-    <nuxt />
   </div>
 </template>
+
 <script>
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 
-Vue.use(Vuetify)
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faUserTie,
+  faCalendarAlt,
+  faChartBar,
+  faUserClock,
+  faEdit,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faUserTie, faCalendarAlt, faEdit, faChartBar, faUserClock)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.use(VueSidebarMenu)
+
+const separator = {
+  template: `<hr style="border-color: rgba(0, 0, 0, 0.1); margin: 20px;">`,
+}
 
 export default {
+  name: 'App',
+  data() {
+    return {
+      components: {
+        VueSidebarMenu,
+        FontAwesomeIcon,
+        faUserTie,
+        faCalendarAlt,
+        faEdit,
+        faChartBar,
+        faUserClock,
+      },
+      menu: [
+        {
+          header: true,
+          title: 'Main',
+          hiddenOnCollapse: true,
+        },
+        {
+          href: '/dashboard',
+          title: 'Dashboard',
+          icon: {
+            element: 'font-awesome-icon',
+            attributes: {
+              icon: 'user-tie',
+            },
+          },
+        },
+
+        {
+          header: true,
+          title: 'Management',
+          hiddenOnCollapse: true,
+        },
+        {
+          href: '/calendar',
+          title: 'Calendar',
+          icon: {
+            element: 'font-awesome-icon',
+            attributes: {
+              icon: 'calendar-alt',
+            },
+          },
+        },
+
+        {
+          href: '/table',
+          title: 'Table',
+          icon: {
+            element: 'font-awesome-icon',
+            attributes: {
+              icon: 'edit',
+            },
+          },
+        },
+        {
+          href: '/queue',
+          title: 'Queue',
+          icon: {
+            element: 'font-awesome-icon',
+            attributes: {
+              icon: 'user-clock',
+            },
+          },
+        },
+        {
+          component: separator,
+        },
+      ],
+      collapsed: false,
+      selectedTheme: 'Default-theme',
+      isOnMobile: false,
+    }
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
   methods: {
-    canScroll() {
-      document.documentElement.style.position = 'static'
-      document.documentElement.style['overflow-y'] = 'auto'
-      document.documentElement.style['overflow-x'] = 'hidden'
+    onToggleCollapse(collapsed) {
+      console.log(collapsed)
+      this.collapsed = collapsed
     },
-    cannotScroll() {
-      document.documentElement.style.position = 'fixed'
-      document.documentElement.style['overflow-y'] = 'scroll'
-      document.documentElement.style['overflow-x'] = 'hidden'
+    onItemClick(event, item, node) {
+      console.log('onItemClick')
+    },
+    onResize() {
+      if (window.innerWidth <= 767) {
+        this.isOnMobile = true
+        this.collapsed = true
+      } else {
+        this.isOnMobile = false
+        this.collapsed = false
+      }
     },
   },
 }
 </script>
 
-<style>
-/*-------------------------
-    The menu
---------------------------*/
-
-nav {
-  display: inline-block;
-  margin: 60px auto 45px;
-  background-color: #ffb607;
-  box-shadow: 0 1px 1px #ccc;
-  border-radius: 2px;
-  text-align: center;
-}
-
-nav a {
-  display: inline-block;
-  padding: 18px 200px;
-  color: black !important;
-  font-weight: bold;
-  font-size: 16px;
-  text-decoration: none !important;
-  text-align: center;
-  line-height: 1;
-  text-transform: uppercase;
-  background-color: transparent;
-
-  -webkit-transition: background-color 0.25s;
-  -moz-transition: background-color 0.25s;
-  transition: background-color 0.25s;
-}
-
-nav a:first-child {
-  border-radius: 2px 0 0 2px;
-}
-
-nav a:last-child {
-  border-radius: 0 2px 2px 0;
-}
-
-li {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+body,
+html {
   margin: 0;
+  padding: 0;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  background-color: white;
+  color: #262626;
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+#demo {
+  padding-left: 350px;
+  transition: 0.3s ease;
 }
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+#demo.collapsed {
+  padding-left: 50px;
 }
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+#demo.onmobile {
+  padding-left: 50px;
 }
-
-.has-search .form-control {
-  padding-left: 2.375rem;
+.sidebar-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 900;
 }
-
-.has-search .form-control-feedback {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
-  text-align: center;
-  pointer-events: none;
-  color: #aaa;
+.demo {
+  padding: 50px;
 }
-
-a:hover {
-  background-color: rgb(240, 240, 240, 0.5);
+.container {
+  max-width: 900px;
+}
+pre {
+  font-family: Consolas, monospace;
+  color: #000;
+  background: white;
+  border-radius: 2px;
+  padding: 15px;
+  line-height: 1.5;
+  overflow: auto;
 }
 </style>
