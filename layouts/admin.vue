@@ -97,7 +97,7 @@ export default {
         },
 
         {
-          href: '/table',
+          href: '/doughnut',
           title: 'Table',
           icon: {
             element: 'font-awesome-icon',
