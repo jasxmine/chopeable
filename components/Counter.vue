@@ -1,33 +1,33 @@
 <template>
-  <div>
-    <b-alert show variant="info"
-      ><p class="text-center">
-        Due to safe distancing, please note that the number of customers will
-        not cross the limit which is currently set at <strong>50</strong>!
-      </p></b-alert
-    >
+  <div class="container">
+    <div>
+      <b-alert show variant="info"
+        ><p class="text-center">
+          Due to safe distancing, please note that the number of customers will
+          not cross the limit which is currently set at <strong>50</strong>!
+        </p></b-alert
+      >
+    </div>
 
-    <div class="container">
-      <div id="app">
-        <!-- Increase Counter, with an `increaseLimit` of 50 -->
-        <b-button variant="success" size="lg" @click="increaseCounter(50)"
-          >Increase</b-button
-        >
-        <!-- Decrease Counter, with an `decreaseLimit` of 0 -->
-        <b-button variant="warning" size="lg" @click="decreaseCounter(0)"
-          >Decrease</b-button
-        >
+    <div id="app" class="justify-content-center">
+      <!-- Increase Counter, with an `increaseLimit` of 50 -->
+      <b-button variant="success" size="lg" @click="increaseCounter(50)"
+        >Increase</b-button
+      >
+      <!-- Decrease Counter, with an `decreaseLimit` of 0 -->
+      <b-button variant="warning" size="lg" @click="decreaseCounter(0)"
+        >Decrease</b-button
+      >
 
-        <b-button variant="danger" size="lg" @click="resetCounter"
-          >Reset</b-button
-        >
+      <b-button variant="danger" size="lg" @click="resetCounter"
+        >Reset</b-button
+      >
 
-        <br /><br /><br />
-        <p class="text-center">
-          <strong> Counter: {{ counter }}</strong> <br />
-          <strong>Result: {{ output }} </strong><br />
-        </p>
-      </div>
+      <br /><br /><br />
+      <p class="text-center">
+        <strong> Counter: {{ counter }}</strong> <br />
+        <strong>Result: {{ output }} </strong><br />
+      </p>
     </div>
   </div>
 </template>
@@ -73,9 +73,10 @@ button {
   font-size: 15px;
 }
 .container {
-  display: flex;
-  flex-wrap: wrap;
+  position: absolute;
   text-align: center;
   justify-content: center;
+  width: auto;
+  display: block;
 }
 </style>

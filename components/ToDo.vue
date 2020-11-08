@@ -1,60 +1,53 @@
 <script src="https://unpkg.com/vue"></script>
 <template>
-  <div id="todoApp">
-    <div class="todo-container">
-      <vue-scroll :ops="ops">
-        <header class="current-date">
-          <div class="date">
-            <span class="day-number">{{ date.dayNum }}</span>
-            <div class="month-year-wrapper">
-              <span class="month">{{ date.month }}</span>
-              <span class="year">{{ date.year }}</span>
-            </div>
+  <div id="todoApp" class="todo-container">
+    <vue-scroll :ops="ops">
+      <header class="current-date">
+        <div class="date">
+          <span class="day-number">{{ date.dayNum }}</span>
+          <div class="month-year-wrapper">
+            <span class="month">{{ date.month }}</span>
+            <span class="year">{{ date.year }}</span>
           </div>
-          <div class="today">
-            <span>{{ date.dayName }}</span>
-          </div>
-        </header>
-        <h3>{{ message }}</h3>
-        <form
-          name="todo-form"
-          method="post"
-          action=""
-          @submit.prevent="addTask"
-        >
-          <input
-            v-model="addTodoInput"
-            name="add-todo"
-            type="text"
-            :class="{ error: hasError }"
-          />
-          <button type="submit">Add</button>
-        </form>
-
-        <div v-if="lists.length" class="todo-lists">
-          <h3>Tasks</h3>
-          <ul>
-            <li v-for="(list, index) in filterLists" :key="list.id">
-              <input
-                :id="'todo-' + index"
-                type="checkbox"
-                :checked="list.isComplete"
-                @change="completeTask($event, list)"
-              />
-              <span
-                class="title"
-                contenteditable="true"
-                :class="{ completed: list.isComplete }"
-                @keydown.enter="updateTask($event, list)"
-                @blur="updateTask($event, list)"
-                >{{ list.title }}</span
-              >
-              <span class="remove" @click="removeTask(list)">x</span>
-            </li>
-          </ul>
         </div>
-      </vue-scroll>
-    </div>
+        <div class="today">
+          <span>{{ date.dayName }}</span>
+        </div>
+      </header>
+      <h3>{{ message }}</h3>
+      <form name="todo-form" method="post" action="" @submit.prevent="addTask">
+        <input
+          v-model="addTodoInput"
+          name="add-todo"
+          type="text"
+          :class="{ error: hasError }"
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <div v-if="lists.length" class="todo-lists">
+        <h3>Tasks</h3>
+        <ul>
+          <li v-for="(list, index) in filterLists" :key="list.id">
+            <input
+              :id="'todo-' + index"
+              type="checkbox"
+              :checked="list.isComplete"
+              @change="completeTask($event, list)"
+            />
+            <span
+              class="title"
+              contenteditable="true"
+              :class="{ completed: list.isComplete }"
+              @keydown.enter="updateTask($event, list)"
+              @blur="updateTask($event, list)"
+              >{{ list.title }}</span
+            >
+            <span class="remove" @click="removeTask(list)">x</span>
+          </li>
+        </ul>
+      </div>
+    </vue-scroll>
   </div>
 </template>
 
@@ -180,10 +173,12 @@ body {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.18);
   height: 24em; /*490px*/
   padding: 2em;
-  position: relative;
-  width: 380px;
+  position: absolute;
+  text-align: center;
+  justify-content: center;
+  width: auto;
+  display: block;
 }
-
 ul {
   list-style: none;
 }
@@ -303,7 +298,7 @@ input[type='text'].error {
 
 .title {
   display: inline-block;
-  width: 200px;
+  width: auto;
   border: 1px solid transparent;
   padding: 8px;
   font-size: 16px;
