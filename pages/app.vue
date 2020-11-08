@@ -164,7 +164,6 @@ export default {
     },
     async nearbyRes() {
       const successCallback = (position) => {
-        this.carousel1 = true
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
 
@@ -223,10 +222,7 @@ export default {
               const h3 = document.createElement('h3')
               h3.innerHTML = 'Discover nearby restaurants'
               discoverNearby.appendChild(h3)
-
-              console.log(this.nearbyResList1)
-              console.log(this.nearbyResList2)
-              console.log(this.nearbyResList3)
+              this.carousel1 = true
             })
         } catch {}
       }

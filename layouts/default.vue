@@ -172,9 +172,6 @@
                 </div>
               </div>
             </div>
-            <div id="loggedIn" style="color: red; display: none">
-              Your email does not exist in our database :(
-            </div>
           </div>
         </div>
         <nav
@@ -448,7 +445,6 @@ export default {
         if (this.inputEmail == userElement.email) {
           this.isLoggedIn = true
           this.user = userElement
-          document.getElementById('loggedIn').style.display = 'none'
           localStorage.user = this.user.email
         }
       }
@@ -456,7 +452,7 @@ export default {
         this.inputEmail = ''
         this.logout()
         this.signOut()
-        document.getElementById('loggedIn').style.display = 'inline'
+        alert('Your email does not exist in our database :(')
       }
     },
     logout() {
