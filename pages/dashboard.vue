@@ -5,11 +5,26 @@
         <v-container>
           <v-row no-gutters style="height: 50px"> </v-row>
         </v-container>
-
+        <h2>Upcoming Appointments</h2>
         <b-row>
           <b-col cols="7">
             <div>
-              <b-table striped hover :items="items" :fields="fields"></b-table>
+              <b-table-simple responsive="true" hover outlined>
+                <b-thead head-variant="light">
+                  <b-tr>
+                    <b-th rowspan="2">Booking Time</b-th>
+                    <b-th rowspan="2">Customer's Name</b-th>
+                    <b-th colspan="4">Pax</b-th>
+                  </b-tr>
+                </b-thead>
+                <b-tbody>
+                  <b-tr v-for="event in events" :key="event.key">
+                    <b-td>{{ event.start }}</b-td>
+                    <b-td>{{ event.name }}</b-td>
+                    <b-td>{{ event.details }}</b-td>
+                  </b-tr>
+                </b-tbody>
+              </b-table-simple>
             </div>
           </b-col>
           <b-col cols="5">
@@ -41,6 +56,8 @@
 <script>
 import LineChart from '@/components/LineChart'
 import DoughnutChart from '@/components/DoughnutChart'
+import { db } from '@/main'
+
 export default {
   name: 'Admin',
   components: {
@@ -49,54 +66,35 @@ export default {
   },
   path: '../layout/admin.vue',
   layout: 'admin',
-  meta: { template: 'admin' },
-  data() {
-    return {
-      percent: '25',
-      fields: [
-        {
-          key: 'booking_time',
-          label: 'Booking Time',
-          sortable: true,
-          variant: 'primary',
-        },
-
-        {
-          key: 'name',
-          sortable: true,
-        },
-        {
-          key: 'pax',
-          sortable: true,
-        },
-      ],
-      items: [
-        {
-          isActive: true,
-          booking_time: '10:00',
-          name: 'Tim',
-          pax: 5,
-        },
-        {
-          isActive: false,
-          booking_time: '15:30',
-          name: 'Larsen',
-          pax: 4,
-        },
-        {
-          isActive: false,
-          booking_time: '16:00',
-          name: 'Geneva',
-          pax: 3,
-        },
-        {
-          isActive: true,
-          booking_time: '12:00',
-          name: 'Kate',
-          pax: 2,
-        },
-      ],
-    }
+  meta: {
+    template: 'admin',
+  },
+  data: () => ({
+    events: [],
+    testCollection: [],
+    percent: '25',
+  }),
+  mounted() {
+    db.collection('calEvent')
+      .orderBy('start')
+      .where('start', '>', new Date().toISOString().substr(0, 10))
+      .get()
+      .then((snap) => {
+        const testCollection = []
+        const events = []
+        snap.forEach((doc) => {
+          testCollection.push({
+            [doc.id]: doc.data(),
+          })
+        })
+        snap.forEach((doc) => {
+          const appData = doc.data()
+          appData.id = doc.id
+          events.push(doc.data())
+        })
+        this.testCollection = testCollection
+        this.events = events
+      })
   },
 }
 </script>
