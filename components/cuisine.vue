@@ -5,7 +5,7 @@
       :key="a_cuisine.id"
       class="centerize col-md-4"
     >
-      <nuxt-link :to="'/search?cuisine=' + a_cuisine.cuisine_name">
+      <nuxt-link :to="'/search?cuisine=' + a_cuisine.cuisine_id">
         <div class="card mb-4">
           <div>
             <img
