@@ -268,6 +268,10 @@ li {
   margin-left: 5%;
   margin-right: 5%;
 }
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 0.5;
+}
 .hoverGrey:hover {
   opacity: 0.7;
 }

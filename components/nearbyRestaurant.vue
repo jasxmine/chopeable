@@ -5,8 +5,8 @@
       :key="a_restaurant.id"
       class="centerize col-md-4"
     >
-      <nuxt-link
-        :to="'/' + a_restaurant.url"
+      <a
+        :href="'/' + a_restaurant.url"
         style="text-decoration: none; color: black"
       >
         <div class="card mb-4 h-100">
@@ -27,7 +27,7 @@
             </p>
           </div>
         </div>
-      </nuxt-link>
+      </a>
     </div>
   </div>
 </template>

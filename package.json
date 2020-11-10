@@ -36,6 +36,7 @@
     "rxjs-compat": "^6.6.3",
     "vue-chartjs": "^3.5.1",
     "vue-doughnut-chart": "^0.3.0",
+    "vue-fontawesome": "0.0.2",
     "vue-google-login": "^2.0.5",
     "vue-grid-responsive": "^0.2.0",
     "vue-konva": "^2.1.6",

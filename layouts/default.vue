@@ -1,3 +1,4 @@
+<!-- Sign up functionality, profile page, add margin-top to "Google sign in" button -->
 <template>
   <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
     <meta charset="utf-8" />
@@ -35,14 +36,14 @@
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           >
-            <nuxt-link to="/app">
+            <a href="/app">
               <img
                 src="../logo_2.png"
                 alt="why is this taking so long"
                 style="margin-left: 20px"
                 width="200"
               />
-            </nuxt-link>
+            </a>
           </div>
           <div
             class="col-1"
@@ -114,7 +115,7 @@
                 size="lg"
                 right
               >
-                <b-dropdown-form>
+                <b-dropdown-form style="margin-top: 10px">
                   <b-form-group>
                     <GoogleLogin
                       :params="params"
@@ -148,27 +149,100 @@
                   </b-form-group>
                   <b-form-group>
                     <b-button
-                      variant="primary"
+                      variant="warning"
                       size="sm"
                       style="width: 100%"
                       @click="login()"
                       >Login</b-button
                     >
                   </b-form-group>
+                  <hr class="hr-text" data-content="OR" />
                 </b-dropdown-form>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item-button
-                  >New around here? Sign up</b-dropdown-item-button
-                >
+                <!-- SIGN UP FORM -->
+                <div style="color: grey; text-align: center">
+                  Sign up with us:
+                </div>
+                <b-dropdown-form style="margin-top: 10px">
+                  <b-form-group
+                    label-for="dropdown-form-name"
+                    @submit.stop.prevent
+                  >
+                    <b-form-input
+                      id="dropdown-form-name"
+                      v-model="inputNameSignUp"
+                      size="sm"
+                      placeholder="Name"
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group
+                    label-for="dropdown-form-email"
+                    style="width: 250px"
+                    @submit.stop.prevent
+                  >
+                    <b-form-input
+                      id="dropdown-form-email"
+                      v-model="inputEmailSignUp"
+                      size="sm"
+                      placeholder="Email"
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-for="dropdown-form-password">
+                    <b-form-input
+                      id="dropdown-form-password"
+                      type="password"
+                      size="sm"
+                      placeholder="Password"
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-button
+                      variant="warning"
+                      size="sm"
+                      style="width: 100%"
+                      @click="signUp()"
+                      >Sign Up</b-button
+                    >
+                  </b-form-group>
+                </b-dropdown-form>
               </b-dropdown>
             </div>
             <div v-else style="margin-top: 20px">
-              <div class="dropdown">
-                <img src="/profilePicture.jpg" width="40" />
-                Hi, {{ user.name }}!
-                <div class="dropdown-content" style="width: 40%">
-                  <nuxt-link to="/profile"> My Profile </nuxt-link> <br />
-                  <a href="/app" @click="signOut(), logout()"> Logout </a>
+              <div class="dropdown" right>
+                <a
+                  :href="'/profile'"
+                  style="
+                    color: black;
+                    text-decoration: none;
+                    background-color: white;
+                  "
+                >
+                  <img :src="image" width="40" />
+                  Hi, {{ user.name }}!
+                </a>
+                <button
+                  id="dropdownMenuButton"
+                  class="btn btn-warning dropdown-toggle"
+                  type="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  style="border-radius: 50%"
+                ></button>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <nuxt-link to="/profile" class="dropdown-item">
+                    My Profile
+                  </nuxt-link>
+                  <a
+                    class="dropdown-item"
+                    href="/app"
+                    @click="signOut(), logout()"
+                  >
+                    Logout
+                  </a>
                 </div>
               </div>
             </div>
@@ -176,7 +250,7 @@
         </div>
         <nav
           class="navbar navbar-expand-md navbar-light"
-          style="margin-bottom: 0px; margin-top: 15px"
+          style="margin-bottom: 0px; margin-top: 15px; background-color: orange"
           @click="emptyFocusOut"
           @mouseover="canScroll"
         >
@@ -195,14 +269,12 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <NuxtLink class="nav-link" to="/search">
-                    Restaurant Directory
-                  </NuxtLink>
+                  <a class="nav-link" href="/search"> Restaurant Directory </a>
                 </li>
                 <li class="nav-item">
-                  <NuxtLink class="nav-link" to="/visualiseTables">
+                  <a class="nav-link" href="/visualiseTables">
                     Visualise Tables
-                  </NuxtLink>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -331,6 +403,17 @@ html {
 html {
   width: 100vw;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+}
+#dropdownMenuButton:focus {
+  outline: 0;
+  border: 0;
+}
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -355,6 +438,8 @@ export default {
       loadFooter: true,
       inputEmail: '',
       inputPassword: '',
+      inputNameSignUp: '',
+      inputEmailSignUp: '',
       isLoggedIn: false,
       user: false,
       unregisteredEmail: false,
@@ -367,12 +452,15 @@ export default {
         height: 50,
         longtitle: true,
       },
+      image: '',
     }
   },
   created() {
     if (localStorage.user == 0) {
     } else {
       this.inputEmail = localStorage.user
+      this.image = localStorage.image
+      this.name = localStorage.name
       this.login()
       console.log(localStorage.user)
     }
@@ -433,32 +521,43 @@ export default {
       document.documentElement.style['overflow-x'] = 'hidden'
     },
     async login() {
-      let email = this.inputEmail
-      const userListGet = await db.collection('user').get()
-      let userList = []
-      userListGet.forEach((doc) => {
-        const userData = doc.data()
-        userList.push(userData)
-      })
-      for (let userElement of userList) {
-        userElement.email = userElement.email.trim()
-        if (this.inputEmail == userElement.email) {
-          this.isLoggedIn = true
-          this.user = userElement
-          localStorage.user = this.user.email
+      if (this.inputEmail) {
+        let email = this.inputEmail
+        const userListGet = await db.collection('user').get()
+        let userList = []
+        userListGet.forEach((doc) => {
+          const userData = doc.data()
+          userList.push(userData)
+        })
+        for (let userElement of userList) {
+          userElement.email = userElement.email.trim()
+          if (this.inputEmail == userElement.email) {
+            this.isLoggedIn = true
+            this.user = userElement
+            localStorage.user = this.user.email
+            localStorage.name = this.user.name
+            localStorage.credits = this.user.credits
+            if (!localStorage.image) {
+              localStorage.image = '/profilePicture.jpg'
+            }
+          }
         }
-      }
-      if (this.isLoggedIn == false) {
-        this.inputEmail = ''
-        this.logout()
-        this.signOut()
-        alert('Your email does not exist in our database :(')
+        if (this.isLoggedIn == false) {
+          this.inputEmail = ''
+          this.logout()
+          this.signOut()
+          alert('Your email does not exist in our database :(')
+        }
+      } else {
+        alert('Both login email and password field cannot be empty!')
       }
     },
     logout() {
       this.user = false
       localStorage.user = 0
-      console.log(localStorage.user)
+      localStorage.name = 0
+      localStorage.image = ''
+      localStorage.credits = 0
     },
     signOut() {
       var auth2 = gapi.auth2.getAuthInstance()
@@ -472,6 +571,8 @@ export default {
       const profile = googleUser.getBasicProfile()
       this.inputEmail = profile.getEmail()
       let name = profile.getName()
+      this.image = profile.getImageUrl()
+      localStorage.image = this.image
       console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
       console.log('Name: ' + profile.getName())
       console.log('Image URL: ' + profile.getImageUrl())
@@ -480,6 +581,21 @@ export default {
     },
     onFailure() {
       console.log('Please try logging in again :(')
+    },
+    async signUp() {
+      if (this.inputNameSignUp && this.inputEmailSignUp) {
+        await db.collection('user').add({
+          name: this.inputNameSignUp,
+          email: this.inputEmailSignUp,
+          credits: 100,
+        })
+        this.inputEmail = this.inputEmailSignUp
+        this.login()
+        this.inputNameSignUp = ''
+        this.inputEmailSignUp = ''
+      } else {
+        alert('Sign up email, name, and password text field cannot be empty!')
+      }
     },
   },
 }
