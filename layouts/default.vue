@@ -521,7 +521,7 @@ export default {
       document.documentElement.style['overflow-x'] = 'hidden'
     },
     async login() {
-      if (this.inputEmail) {
+      if (this.inputEmail != '') {
         let email = this.inputEmail
         const userListGet = await db.collection('user').get()
         let userList = []
