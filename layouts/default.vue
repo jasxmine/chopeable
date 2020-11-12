@@ -78,20 +78,22 @@
                 @keyup="getUser"
                 @focus="getUser"
               />
-              <div
-                id="displaySearch"
-                style="
-                  position: absolute;
-                  width: 750px;
-                  background-color: rgb(255, 255, 255, 1);
-                  display: none;
-                  z-index: 5;
-                  max-height: 300px;
-                  overflow: scroll;
-                "
-                @mouseover="cannotScroll"
-              >
-                <search :search="searchResult" />
+              <div class="row" style="margin-left: 0.3px">
+                <div
+                  id="displaySearch"
+                  style="
+                    position: absolute;
+                    background-color: rgb(255, 255, 255, 1);
+                    display: none;
+                    z-index: 5;
+                    max-height: 300px;
+                    overflow: scroll;
+                  "
+                  class="col-12"
+                  @mouseover="cannotScroll"
+                >
+                  <search :search="searchResult" />
+                </div>
               </div>
             </div>
           </div>
@@ -521,7 +523,7 @@ export default {
       document.documentElement.style['overflow-x'] = 'hidden'
     },
     async login() {
-      if (this.inputEmail != '') {
+      if (this.inputEmail) {
         let email = this.inputEmail
         const userListGet = await db.collection('user').get()
         let userList = []

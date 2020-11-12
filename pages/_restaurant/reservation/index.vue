@@ -6,7 +6,7 @@
         {{ restaurantData.name }}
       </h2>
       <div>
-        <b-form v-if="show" @submit="onSubmit" @reset="onReset">
+        <b-form v-if="show" @submit="onSubmit">
           <b-form-group
             id="input-group-1"
             label="Email address:"
