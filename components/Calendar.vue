@@ -82,6 +82,7 @@
                 >
                   create event
                 </v-btn>
+                <br /><br /><br /><br />
               </v-form>
             </v-container>
           </v-card>
@@ -125,6 +126,7 @@
                 >
                   create event
                 </v-btn>
+                <br /><br /><br /><br />
               </v-form>
             </v-container>
           </v-card>
@@ -359,10 +361,12 @@ export default {
   },
 }
 </script>
+
 <style scoped>
 /deep/ .v-text-field {
   width: 400px;
 }
+
 /deep/ .v-dialog {
   overflow-x: hidden;
 }
