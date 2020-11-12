@@ -36,14 +36,14 @@
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           >
-            <nuxt-link to="/app">
+            <a href="/app">
               <img
                 src="../logo_2.png"
                 alt="why is this taking so long"
                 style="margin-left: 20px"
                 width="200"
               />
-            </nuxt-link>
+            </a>
           </div>
           <div
             class="col-1"
@@ -78,20 +78,22 @@
                 @keyup="getUser"
                 @focus="getUser"
               />
-              <div
-                id="displaySearch"
-                style="
-                  position: absolute;
-                  width: 750px;
-                  background-color: rgb(255, 255, 255, 1);
-                  display: none;
-                  z-index: 5;
-                  max-height: 300px;
-                  overflow: scroll;
-                "
-                @mouseover="cannotScroll"
-              >
-                <search :search="searchResult" />
+              <div class="row" style="margin-left: 0.3px">
+                <div
+                  id="displaySearch"
+                  style="
+                    position: absolute;
+                    background-color: rgb(255, 255, 255, 1);
+                    display: none;
+                    z-index: 5;
+                    max-height: 300px;
+                    overflow: scroll;
+                  "
+                  class="col-12"
+                  @mouseover="cannotScroll"
+                >
+                  <search :search="searchResult" />
+                </div>
               </div>
             </div>
           </div>
@@ -209,8 +211,8 @@
             </div>
             <div v-else style="margin-top: 20px">
               <div class="dropdown" right>
-                <nuxt-link
-                  :to="'/profile'"
+                <a
+                  :href="'/profile'"
                   style="
                     color: black;
                     text-decoration: none;
@@ -219,7 +221,7 @@
                 >
                   <img :src="image" width="40" />
                   Hi, {{ user.name }}!
-                </nuxt-link>
+                </a>
                 <button
                   id="dropdownMenuButton"
                   class="btn btn-warning dropdown-toggle"
@@ -269,14 +271,12 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <NuxtLink class="nav-link" to="/search">
-                    Restaurant Directory
-                  </NuxtLink>
+                  <a class="nav-link" href="/search"> Restaurant Directory </a>
                 </li>
                 <li class="nav-item">
-                  <NuxtLink class="nav-link" to="/visualiseTables">
+                  <a class="nav-link" href="/visualiseTables">
                     Visualise Tables
-                  </NuxtLink>
+                  </a>
                 </li>
               </ul>
             </div>
