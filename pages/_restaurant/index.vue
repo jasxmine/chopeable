@@ -95,9 +95,8 @@
             <div>
               <div v-for="event in events" :key="event.key">
                 <div v-if="event.name === restaurantData.name">
-                  <p :value="counter">
-                    Currently {{ event.queue }} in the queue
-                  </p>
+                  <p>Currently {{ event.queue }} in the queue</p>
+                  <p>Estimated queue time is {{ output }} min</p>
                 </div>
               </div>
             </div>
@@ -201,7 +200,7 @@ export default {
       restaurantData: {},
       bookmarked: false,
       events: [],
-      event: [],
+      event: '',
       counter: 0,
     }
   },
@@ -212,7 +211,7 @@ export default {
       )
     },
     output() {
-      return 0.5 * this.event.queue
+      return this.event * 0.5
     },
   },
   async mounted() {
@@ -223,7 +222,21 @@ export default {
         this.loadFooter = true
         return res.restaurants[0].restaurant
       })
-    this.getEvents()
+    this.event = await db
+      .collection('restaurant')
+      .get()
+      .then((snap) => {
+        const events = []
+
+        snap.forEach((doc) => {
+          const appData = doc.data()
+          appData.id = doc.id
+          events.push(doc.data())
+        })
+        this.events = events
+
+        return this.events[0].queue
+      })
   },
   methods: {
     async getEvents() {
