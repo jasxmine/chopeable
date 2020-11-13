@@ -34,13 +34,13 @@
         <p>Contact Us @ {{ restaurantData.phone_numbers }}</p>
         <div class="mt-4">
           <a :href="'/' + restaurant + '/reservation'">
-            <b-button variant="warning" class="text-dark mr-2"
-              ><b-icon-calendar2-check
+            <b-button variant="warning" class="text-dark mr-2">
+              <b-icon-calendar2-check
                 class="mr-2"
                 scale="0.8"
               ></b-icon-calendar2-check
-              >Book Now</b-button
-            >
+              >Book Now
+            </b-button>
           </a>
           <a
             v-if="restaurantData.location"
@@ -53,43 +53,55 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <b-button variant="outline-warning" class="text-dark mr-2 border"
-              ><b-icon-arrow90deg-right
+            <b-button variant="outline-warning" class="text-dark mr-2 border">
+              <b-icon-arrow90deg-right
                 class="mr-2"
                 scale="0.8"
               ></b-icon-arrow90deg-right
-              >Directions</b-button
-            ></a
-          >
+              >Directions
+            </b-button>
+          </a>
           <span v-if="bookmarked">
             <b-button
               variant="warning"
               class="text-dark mr-2 border"
               @click="bookmarked = !bookmarked"
-              ><b-icon-bookmark-check-fill
+            >
+              <b-icon-bookmark-check-fill
                 class="mr-2"
                 scale="0.8"
               ></b-icon-bookmark-check-fill
-              >Bookmarked</b-button
-            >
+              >Bookmarked
+            </b-button>
           </span>
           <span v-else>
             <b-button
               variant="outline-warning"
               class="text-dark mr-2 border"
               @click="bookmarked = !bookmarked"
-              ><b-icon-bookmark class="mr-2" scale="0.8"></b-icon-bookmark
-              >Bookmark</b-button
             >
+              <b-icon-bookmark class="mr-2" scale="0.8"></b-icon-bookmark
+              >Bookmark
+            </b-button>
           </span>
-          <b-button variant="outline-warning" class="text-dark mr-2 border"
-            ><b-icon-share class="mr-2" scale="0.8"></b-icon-share
-            >Share</b-button
-          >
+          <b-button variant="outline-warning" class="text-dark mr-2 border">
+            <b-icon-share class="mr-2" scale="0.8"></b-icon-share>Share
+          </b-button>
         </div>
         <div class="restaurantContent">
           <h2 class="mb-3">About this place</h2>
           <div v-if="restaurantData.location">
+            <h3 class="mt-5 mb-4">Queue Info</h3>
+            <div>
+              <div v-for="event in events" :key="event.key">
+                <div v-if="event.name === restaurantData.name">
+                  <p :value="counter">
+                    Currently {{ event.queue }} in the queue
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <h3 class="mt-5 mb-4">Address</h3>
             <p>{{ restaurantData.location.address }}</p>
             <MapComponent
@@ -157,6 +169,7 @@
 </template>
 
 <script>
+import { db } from '@/main'
 import {
   BIconCalendar2Check,
   BIconArrow90degRight,
@@ -187,6 +200,9 @@ export default {
       restaurant: '',
       restaurantData: {},
       bookmarked: false,
+      events: [],
+      event: [],
+      counter: 0,
     }
   },
   computed: {
@@ -194,6 +210,9 @@ export default {
       return (
         this.restaurantData.cuisines && this.restaurantData.cuisines.split(',')
       )
+    },
+    output() {
+      return 0.5 * this.event.queue
     },
   },
   async mounted() {
@@ -204,8 +223,19 @@ export default {
         this.loadFooter = true
         return res.restaurants[0].restaurant
       })
+    this.getEvents()
   },
   methods: {
+    async getEvents() {
+      const snapshot = await db.collection('restaurant').get()
+      const events = []
+      snapshot.forEach((doc) => {
+        const appData = doc.data()
+        appData.id = doc.id
+        events.push(appData)
+      })
+      this.events = events
+    },
     emptyFocusOut() {
       // onclick, this function will close the search bar
       this.searchResult = []
@@ -239,6 +269,7 @@ export default {
   align-items: flex-start;
   align-content: center;
 }
+
 footer {
   position: absolute;
   left: 0;
