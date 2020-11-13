@@ -1,11 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
-    <h3 class="text-center my-5"><b>Complete your reservation</b></h3>
-=======
   <div class="page">
     <h3 class="text-center m-0 py-5"><b>Complete your reservation</b></h3>
->>>>>>> 114fa8b8cb895c77a75c102c4381a52546b33f1a
     <div class="container content">
       <h2 class="mt-1 mb-4">
         {{ restaurantData.name }}
@@ -39,6 +34,13 @@
             ></b-form-timepicker>
           </b-form-group>
 
+          <b-form-group id="input-group-4">
+            <b-form-checkbox-group id="checkboxes-4" v-model="form.checked">
+              <b-form-checkbox value="me">Check me out</b-form-checkbox>
+              <b-form-checkbox value="that">Check that out</b-form-checkbox>
+            </b-form-checkbox-group>
+          </b-form-group>
+
           <b-button type="submit" variant="warning">Reserve Now</b-button>
         </b-form>
       </div>
@@ -48,24 +50,31 @@
 
 <script>
 import restaurantService from '../../../services/restaurantService'
-
 export default {
   data() {
     return {
       restaurant: '',
       restaurantData: {},
       paxOptions: [
-        { value: 1, text: '1' },
-        { value: 2, text: '2' },
-        { value: 3, text: '3' },
-        { value: 4, text: '4' },
-        { value: 5, text: '5' },
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+        { value: '4', text: '4' },
+        { value: '5', text: '5' },
       ],
       form: {
         pax: 1,
         date: new Date(),
         time: new Date().getTime(),
+        checked: [],
       },
+      foods: [
+        { text: 'Select One', value: null },
+        'Carrots',
+        'Beans',
+        'Tomatoes',
+        'Corn',
+      ],
       show: true,
     }
   },
@@ -81,17 +90,6 @@ export default {
     onSubmit(evt) {
       evt.preventDefault()
       console.log(JSON.stringify(this.form))
-    },
-    emptyFocusOut() {
-      // onclick, this function will close the search bar
-      this.searchResult = []
-      document.getElementById('displaySearch').style.display = 'none'
-    },
-    canScroll() {
-      // this makes the whole page scrollable
-      document.documentElement.style.position = 'static'
-      document.documentElement.style['overflow-y'] = 'auto'
-      document.documentElement.style['overflow-x'] = 'hidden'
     },
   },
 }
