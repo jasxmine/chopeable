@@ -61,4 +61,7 @@ export default {
   display: flex;
   flex: 1 1 auto;
 }
+.card:hover {
+  background-color: rgb(240, 240, 240);
+}
 </style>
