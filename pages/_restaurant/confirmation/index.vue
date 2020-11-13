@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="emptyFocusOut" @mouseover="canScroll">
     <h1>
       {{ restaurantData.name }}
     </h1>
@@ -23,6 +23,19 @@ export default {
       .then((res) => {
         return res.restaurants[0].restaurant
       })
+  },
+  methods: {
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
   },
 }
 </script>

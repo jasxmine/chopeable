@@ -148,7 +148,6 @@ export default {
   },
   methods: {
     emptyFocusOut() {
-      console.log('empty function called')
       this.searchResult = []
       document.getElementById('displaySearch').style.display = 'none'
     },
@@ -208,7 +207,6 @@ export default {
                   url: restaurantUrl,
                   cuisine: cuisines,
                 }
-                console.log(restaurantObj)
                 if (this.nearbyResList1.length < 3) {
                   this.nearbyResList1.push(restaurantObj)
                 } else if (this.nearbyResList2.length < 3) {

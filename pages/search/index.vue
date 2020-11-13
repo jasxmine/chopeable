@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" @click="emptyFocusOut" @mouseover="canScroll">
     <div class="row">
       <div
         id="filter option"
@@ -213,6 +213,17 @@ export default {
         console.log('mas badhil <3')
         this.checkedCuisines.push(cuisine)
       }
+    },
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
   },
 }

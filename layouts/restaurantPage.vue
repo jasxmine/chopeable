@@ -123,7 +123,6 @@
                       :params="params"
                       :render-params="renderParams"
                       :on-success="onSuccess"
-                      :on-failure="onFailure"
                       data-theme="dark"
                     ></GoogleLogin>
                   </b-form-group>
@@ -272,11 +271,6 @@
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                   <a class="nav-link" href="/search"> Restaurant Directory </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/visualiseTables">
-                    Visualise Tables
-                  </a>
                 </li>
               </ul>
             </div>
@@ -463,7 +457,6 @@ export default {
       this.image = localStorage.image
       this.name = localStorage.name
       this.login()
-      console.log(localStorage.user)
     }
   },
   methods: {
@@ -480,13 +473,23 @@ export default {
           )
           for (let restaurant of response.data.restaurants) {
             let restaurantObj = { name: '', location: '' }
+
+            //restaurant name
             let name = restaurant.restaurant.name
+
+            //restaurant locality
             let locality = '(' + restaurant.restaurant.location.locality + ')'
+
+            //restaurant image
             let imageUrl = restaurant.restaurant.featured_image
+
+            //link to restaurant's page
             let restaurantUrl = restaurant.restaurant.url
             let index_question = restaurantUrl.indexOf('?')
             let restaurant_cuisine = restaurant.restaurant.cuisines
             restaurantUrl = restaurantUrl.slice(33, index_question)
+
+            //if zomato api restaurant doesn't have any imageUrl, it will be set to our logo photo
             if (imageUrl == '') {
               imageUrl = '/logo_photo.jpg'
             }
@@ -507,16 +510,18 @@ export default {
       }
     },
     emptyFocusOut() {
-      console.log('empty function called')
+      //onclick, this function will close the search bar
       this.searchResult = []
       document.getElementById('displaySearch').style.display = 'none'
     },
     canScroll() {
+      //this makes the whole page scrollable
       document.documentElement.style.position = 'static'
       document.documentElement.style['overflow-y'] = 'auto'
       document.documentElement.style['overflow-x'] = 'hidden'
     },
     cannotScroll() {
+      //this makes the whole page unscrollable (so that only the search div is scrollable)
       document.documentElement.style.position = 'fixed'
       document.documentElement.style['overflow-y'] = 'scroll'
       document.documentElement.style['overflow-x'] = 'hidden'
@@ -543,12 +548,14 @@ export default {
             }
           }
         }
+        //if the email doesn't exist
         if (this.isLoggedIn == false) {
           this.inputEmail = ''
           this.logout()
           this.signOut()
           alert('Your email does not exist in our database :(')
         }
+        //input validation
       } else {
         alert('Both login email and password field cannot be empty!')
       }
@@ -562,9 +569,7 @@ export default {
     },
     signOut() {
       var auth2 = gapi.auth2.getAuthInstance()
-      auth2.signOut().then(function () {
-        console.log('User signed out.')
-      })
+      auth2.signOut().then(function () {})
     },
 
     async onSuccess(googleUser) {
@@ -574,14 +579,7 @@ export default {
       let name = profile.getName()
       this.image = profile.getImageUrl()
       localStorage.image = this.image
-      console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName())
-      console.log('Image URL: ' + profile.getImageUrl())
-      console.log('Email: ' + profile.getEmail()) // This is null if the 'email' scope is not present.
       this.login()
-    },
-    onFailure() {
-      console.log('Please try logging in again :(')
     },
     async signUp() {
       if (this.inputNameSignUp && this.inputEmailSignUp) {

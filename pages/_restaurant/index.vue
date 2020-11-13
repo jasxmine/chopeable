@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="emptyFocusOut" @mouseover="canScroll">
     <div>
       <div class="container vh-100 mt-5 p-0">
         <img :src="restaurantData.featured_image" />
@@ -204,6 +204,19 @@ export default {
         this.loadFooter = true
         return res.restaurants[0].restaurant
       })
+  },
+  methods: {
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
   },
 }
 </script>

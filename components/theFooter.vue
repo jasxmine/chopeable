@@ -2,6 +2,8 @@
   <footer
     class="page-footer font-small pt-4"
     style="background-color: orange; width: 100vw"
+    @click="emptyFocusOut"
+    @mouseover="canScroll"
   >
     <div class="container text-center text-md-left">
       <div class="row">
@@ -69,3 +71,20 @@ a:hover {
   text-decoration: none;
 }
 </style>
+<script>
+export default {
+  methods: {
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
+    },
+  },
+}
+</script>

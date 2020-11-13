@@ -123,7 +123,6 @@
                       :params="params"
                       :render-params="renderParams"
                       :on-success="onSuccess"
-                      :on-failure="onFailure"
                       data-theme="dark"
                     ></GoogleLogin>
                   </b-form-group>
@@ -459,7 +458,6 @@ export default {
       this.image = localStorage.image
       this.name = localStorage.name
       this.login()
-      console.log(localStorage.user)
     }
   },
   methods: {
@@ -548,6 +546,7 @@ export default {
             localStorage.credits = this.user.credits
             if (!localStorage.image) {
               localStorage.image = '/profilePicture.jpg'
+              this.image = localStorage.image
             }
           }
         }
@@ -572,9 +571,7 @@ export default {
     },
     signOut() {
       var auth2 = gapi.auth2.getAuthInstance()
-      auth2.signOut().then(function () {
-        console.log('User signed out.')
-      })
+      auth2.signOut().then(function () {})
     },
 
     async onSuccess(googleUser) {

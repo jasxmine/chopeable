@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div @click="emptyFocusOut" @mouseover="canScroll">
     <div class="row" style="margin-left: 10%; margin-right: 10%">
       <div class="col-3">
         <div style="height: 60vh; width: 100%; border: 1px solid grey">
           <div style="height: 30%; margin-bottom: 30px">
-            <img :src="userPic" class="image" />
+            <img :src="userPic" class="image" width="30%" />
             <div style="margin-top: 30px"></div>
             <h3>{{ userName }}</h3>
           </div>
@@ -261,7 +261,6 @@ export default {
       this.clickedRewards = false
       this.clickedReservartion = true
       this.bookings = this.loaded
-      console.log(this.currentMilli)
     },
     showCredits() {
       this.clickedReservartion = false
@@ -283,8 +282,18 @@ export default {
         book.date = book.date.split(' ')
         books.push(book)
       })
-      console.log(books)
       this.loaded = books
+    },
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
   },
 }
