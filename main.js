@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueKonva from 'vue-konva'
 import firebase from 'firebase'
 import VueTextareaAutosize from 'vue-textarea-autosize'
@@ -6,6 +7,11 @@ import VueTimepicker from 'vue2-timepicker'
 import vuetify from './plugins/vuetify'
 import Calendar from './pages/calendar.vue'
 import 'vue2-timepicker/dist/VueTimepicker.css'
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 Vue.use(VueTextareaAutosize)
 Vue.use(VueKonva)
