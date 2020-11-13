@@ -16,9 +16,7 @@
               <div class="filter-content">
                 <div class="card-body">
                   <select v-model="estb" class="form-control">
-                    <option selected value="">
-                      Please select an establishment
-                    </option>
+                    <option value="">None</option>
                     <option
                       v-for="object in establishmentArr"
                       :key="object.id"
