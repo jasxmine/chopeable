@@ -97,7 +97,7 @@ export default {
         },
 
         {
-          href: '/doughnut',
+          href: '/VisualizeTable',
           title: 'Table',
           icon: {
             element: 'font-awesome-icon',

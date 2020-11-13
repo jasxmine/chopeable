@@ -1,11 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
-    <h3 class="text-center my-5"><b>Complete your reservation</b></h3>
-=======
   <div class="page">
     <h3 class="text-center m-0 py-5"><b>Complete your reservation</b></h3>
->>>>>>> 114fa8b8cb895c77a75c102c4381a52546b33f1a
     <div class="container content">
       <h2 class="mt-1 mb-4">
         {{ restaurantData.name }}
