@@ -34,13 +34,6 @@
             ></b-form-timepicker>
           </b-form-group>
 
-          <b-form-group id="input-group-4">
-            <b-form-checkbox-group id="checkboxes-4" v-model="form.checked">
-              <b-form-checkbox value="me">Check me out</b-form-checkbox>
-              <b-form-checkbox value="that">Check that out</b-form-checkbox>
-            </b-form-checkbox-group>
-          </b-form-group>
-
           <b-button type="submit" variant="warning">Reserve Now</b-button>
         </b-form>
       </div>
@@ -56,25 +49,17 @@ export default {
       restaurant: '',
       restaurantData: {},
       paxOptions: [
-        { value: '1', text: '1' },
-        { value: '2', text: '2' },
-        { value: '3', text: '3' },
-        { value: '4', text: '4' },
-        { value: '5', text: '5' },
+        { value: 1, text: '1' },
+        { value: 2, text: '2' },
+        { value: 3, text: '3' },
+        { value: 4, text: '4' },
+        { value: 5, text: '5' },
       ],
       form: {
         pax: 1,
         date: new Date(),
         time: new Date().getTime(),
-        checked: [],
       },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots',
-        'Beans',
-        'Tomatoes',
-        'Corn',
-      ],
       show: true,
     }
   },
