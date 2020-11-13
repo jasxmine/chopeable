@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
     <h3 class="text-center m-0 py-5"><b>Complete your reservation</b></h3>
     <div class="container content">
       <h2 class="mt-1 mb-4">
@@ -75,6 +75,17 @@ export default {
     onSubmit(evt) {
       evt.preventDefault()
       console.log(JSON.stringify(this.form))
+    },
+    emptyFocusOut() {
+      // onclick, this function will close the search bar
+      this.searchResult = []
+      document.getElementById('displaySearch').style.display = 'none'
+    },
+    canScroll() {
+      // this makes the whole page scrollable
+      document.documentElement.style.position = 'static'
+      document.documentElement.style['overflow-y'] = 'auto'
+      document.documentElement.style['overflow-x'] = 'hidden'
     },
   },
 }
