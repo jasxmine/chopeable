@@ -37,9 +37,13 @@
             @mouseover.self="canScroll"
           >
             <a href="/app">
-              <img <<<<<<< HEAD src="/logo_2.png" ======= src="/logo_2.PNG"
-              >>>>>>> 6d615ba07922d6736635aa06ad23bdd3266c00e8 alt="why is this
-              taking so long" style="margin-left: 20px" width="200" />
+              <img
+                src="/logo_2.PNG"
+                alt="why is this
+              taking so long"
+                style="margin-left: 20px"
+                width="200"
+              />
             </a>
           </div>
           <div
