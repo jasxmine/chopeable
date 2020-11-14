@@ -25,6 +25,7 @@
                 id="date"
                 v-model="form.date"
                 class="mb-2"
+                required
               ></b-form-datepicker>
             </b-form-group>
 
@@ -33,6 +34,7 @@
                 id="time"
                 v-model="form.time"
                 locale="en"
+                required
               ></b-form-timepicker>
             </b-form-group>
           </div>
@@ -98,6 +100,7 @@
 </template>
 
 <script>
+import { db } from '@/main'
 import emailjs from 'emailjs-com'
 import restaurantService from '../../../services/restaurantService'
 import theFooter from '../../../components/theFooter'
@@ -142,6 +145,8 @@ export default {
       evt.preventDefault()
       console.log(JSON.stringify(this.form))
       this.sendEmail(evt)
+      this.addEvent()
+      this.addBooking()
       this.$router.push('/' + this.restaurant + '/confirmation')
     },
     emptyFocusOut() {
@@ -171,6 +176,32 @@ export default {
             console.log('FAILED...', error)
           }
         )
+    },
+    async addEvent() {
+      if (this.form.name && this.form.date) {
+        await db.collection('calEvent').add({
+          name: this.form.name,
+          details: this.form.pax,
+          start:
+            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
+          end:
+            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
+          color: '#1976D2',
+        })
+      } else {
+        alert('You must enter name, date and time!')
+      }
+    },
+    async addBooking() {
+      if (this.restaurant && this.form.date) {
+        await db.collection('booking').add({
+          date: this.form.date.toISOString().substr(0, 10),
+          numberOfPeople: this.form.pax,
+          restaurant: this.restaurant,
+        })
+      } else {
+        alert('You must enter date and number of pax!')
+      }
     },
   },
 }
