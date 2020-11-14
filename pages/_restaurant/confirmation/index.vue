@@ -1,8 +1,8 @@
 <template>
-  <div @click="emptyFocusOut" @mouseover="canScroll">
-    <h1>
-      {{ restaurantData.name }}
-    </h1>
+  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
+    <div class="container">
+      <h1>Your reservation at {{ restaurantData.name }} has been confirmed!</h1>
+    </div>
   </div>
 </template>
 
@@ -39,3 +39,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.page {
+  background: #f7f8fa;
+  height: 100vh;
+}
+</style>

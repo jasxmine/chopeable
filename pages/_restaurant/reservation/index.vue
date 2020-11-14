@@ -73,7 +73,6 @@
               id="request"
               v-model="form.request"
               type="text"
-              required
               placeholder="Special Request?"
             ></b-form-input>
           </b-form-group>
@@ -87,7 +86,9 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com'
 import restaurantService from '../../../services/restaurantService'
+
 export default {
   data() {
     return {
@@ -112,7 +113,7 @@ export default {
     }
   },
   async mounted() {
-    this.restaurant = this.$route.path.substring(1)
+    this.restaurant = this.$route.path.split('/')[1]
     this.restaurantData = await restaurantService
       .searchRestaurants(this.restaurant)
       .then((res) => {
@@ -123,6 +124,8 @@ export default {
     onSubmit(evt) {
       evt.preventDefault()
       console.log(JSON.stringify(this.form))
+      this.sendEmail(evt)
+      this.$router.push('/' + this.restaurant + '/confirmation')
     },
     emptyFocusOut() {
       // onclick, this function will close the search bar
@@ -134,6 +137,23 @@ export default {
       document.documentElement.style.position = 'static'
       document.documentElement.style['overflow-y'] = 'auto'
       document.documentElement.style['overflow-x'] = 'hidden'
+    },
+    sendEmail: (e) => {
+      emailjs
+        .sendForm(
+          'gmail',
+          'template_M4djP4WK',
+          e.target,
+          'user_h0WwXWQ7W36bXKltap0N8'
+        )
+        .then(
+          (result) => {
+            console.log('SUCCESS!', result.status, result.text)
+          },
+          (error) => {
+            console.log('FAILED...', error)
+          }
+        )
     },
   },
 }
