@@ -2,21 +2,32 @@
   <div class="wrapper">
     <div class="data">
       <ul>
-        <h3>Double click a table to reserve it!</h3>
+        <h3 class="text-center">
+          <b-badge variant="primary">
+            Double click a table to reserve it!
+          </b-badge>
+        </h3>
         <li
           v-for="table in tables"
           :key="table.name"
           style="list-style-type: none"
         >
-          Table: {{ tables.indexOf(table) + 1 }}
+          <b-list-group>
+            <b-list-group-item variant="primary"
+              >Table: {{ tables.indexOf(table) + 1 }}</b-list-group-item
+            >
+          </b-list-group>
+          <!-- Table: {{ tables.indexOf(table) + 1 }} -->
           <!-- x: {{ table.x }} y: -->
           <!-- {{ table.y }}
           {{ table.reserved }} -->
         </li>
       </ul>
       <br />
-      <button @click="addTable">Add Table</button>
-      <button @click="closeTable">Close for social distancing</button>
+      <b-button variant="outline-primary" @click="addTable">Add Table</b-button>
+      <b-button variant="outline-primary" @click="closeTable"
+        >Close for social distancing</b-button
+      >
     </div>
     <v-stage
       id="container"
@@ -59,6 +70,7 @@
 <script>
 import Vue from 'vue'
 import VueKonva from 'vue-konva'
+// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import { v4 as uuidv4 } from 'uuid'
 
 Vue.config.productionTip = false
@@ -89,7 +101,7 @@ export default {
       e.preventDefault()
       this.tables.push({
         rotation: 0,
-        x: 600,
+        x: 200,
         y: 10,
         width: 100,
         height: 100,
