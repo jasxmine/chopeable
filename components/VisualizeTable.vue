@@ -68,11 +68,13 @@
 </template>
 
 <style lang="scss" scoped>
-/* #container {
+#container {
   background-image: linear-gradient(#e6e6e6 0.1rem, transparent 0.1rem),
     linear-gradient(90deg, #ddd 0.1rem, transparent 0.1rem) !important;
   background-size: 2rem 2rem !important;
-} */
+  background-repeat: repeat;
+}
+
 .wrapper {
   ul {
     display: flex;
