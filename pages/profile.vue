@@ -120,61 +120,61 @@
             </div>
           </div>
         </div>
-      </div>
-      <div v-if="clickedCredits">
-        <h1>You have {{ userCredits }} credits</h1>
-        <div v-if="userCredits > 0">
-          <button class="btn btn-warning" @click="showRewards()">
-            Redeem rewards now!
-          </button>
-        </div>
-      </div>
-      <div v-if="clickedRewards">
-        <div class="card mb-3">
-          <div class="row no-gutters">
-            <div class="col-md-12">
-              <div class="card-body">
-                <h3 style="margin-bottom: 20px; margin-top: ">
-                  Get a free beverage on Ichiban Boshi Novena
-                </h3>
-                <h4 class="card-text">
-                  Credits needed: 150
-                  <br />
-                  <br />
-
-                  Valid for: 1 month (from redeem date)
-                  <br />
-                  <br />
-                </h4>
-              </div>
-              <b-button disabled size="lg" variant="warning"
-                >Redeem now!</b-button
-              >
-              <div style="margin-bottom: 10px"></div>
-            </div>
+        <div v-if="clickedCredits">
+          <h1>You have {{ userCredits }} credits</h1>
+          <div v-if="userCredits > 0">
+            <button class="btn btn-warning" @click="showRewards()">
+              Redeem rewards now!
+            </button>
           </div>
         </div>
-        <div class="card mb-3">
-          <div class="row no-gutters">
-            <div class="col-md-12">
-              <div class="card-body">
-                <h3 style="margin-bottom: 20px; margin-top: ">
-                  Get 20% discount on your next bookings
-                </h3>
-                <h4 class="card-text">
-                  Credits needed: 500
-                  <br />
-                  <br />
+        <div v-if="clickedRewards">
+          <div class="card mb-3">
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <div class="card-body">
+                  <h3 style="margin-bottom: 20px; margin-top: ">
+                    Get a free beverage on Ichiban Boshi Novena
+                  </h3>
+                  <h4 class="card-text">
+                    Credits needed: 150
+                    <br />
+                    <br />
 
-                  Valid for: 1 month (from redeem date)
-                  <br />
-                  <br />
-                </h4>
+                    Valid for: 1 month (from redeem date)
+                    <br />
+                    <br />
+                  </h4>
+                </div>
+                <b-button disabled size="lg" variant="warning"
+                  >Redeem now!</b-button
+                >
+                <div style="margin-bottom: 10px"></div>
               </div>
-              <b-button disabled size="lg" variant="warning"
-                >Redeem now!</b-button
-              >
-              <div style="margin-bottom: 10px"></div>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <div class="card-body">
+                  <h3 style="margin-bottom: 20px; margin-top: ">
+                    Get 20% discount on your next bookings
+                  </h3>
+                  <h4 class="card-text">
+                    Credits needed: 500
+                    <br />
+                    <br />
+
+                    Valid for: 1 month (from redeem date)
+                    <br />
+                    <br />
+                  </h4>
+                </div>
+                <b-button disabled size="lg" variant="warning"
+                  >Redeem now!</b-button
+                >
+                <div style="margin-bottom: 10px"></div>
+              </div>
             </div>
           </div>
         </div>
