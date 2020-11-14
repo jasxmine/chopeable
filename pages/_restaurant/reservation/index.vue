@@ -195,7 +195,8 @@ export default {
     async addBooking() {
       if (this.restaurant && this.form.date) {
         await db.collection('booking').add({
-          date: this.form.date.toISOString().substr(0, 10),
+          date:
+            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
           numberOfPeople: this.form.pax,
           restaurant: this.restaurant,
         })
