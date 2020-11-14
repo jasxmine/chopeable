@@ -41,7 +41,7 @@
           >
             <a href="/app">
               <img
-                src="../logo_2.png"
+                src="/logo_2.png"
                 alt="why is this taking so long"
                 style="margin-left: 20px"
                 width="200"
@@ -569,11 +569,7 @@ export default {
           this.logout()
           this.signOut()
           alert('Your email does not exist in our database :(')
-        } else {
         }
-        //input validation
-      } else {
-        alert('Both login email and password field cannot be empty!')
       }
     },
     logout() {
@@ -608,8 +604,6 @@ export default {
         this.login()
         this.inputNameSignUp = ''
         this.inputEmailSignUp = ''
-      } else {
-        alert('Sign up email, name, and password text field cannot be empty!')
       }
     },
   },
