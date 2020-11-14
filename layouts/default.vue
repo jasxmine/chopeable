@@ -556,6 +556,7 @@ export default {
           this.logout()
           this.signOut()
           alert('Your email does not exist in our database :(')
+        } else {
         }
         //input validation
       } else {
