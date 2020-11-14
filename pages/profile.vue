@@ -47,8 +47,8 @@
               </nuxt-link>
             </div>
           </div>
+          <br />
           <div v-for="booking in bookings" :key="booking.id">
-            <br />
             <div
               v-if="currentMilli < booking.milli"
               :haveReservation="1"
