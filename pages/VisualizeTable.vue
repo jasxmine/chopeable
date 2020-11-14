@@ -16,13 +16,6 @@ export default {
   layout: 'admin',
   meta: { template: 'admin' },
 }
-
-// export default {
-//   name: 'Admin',
-//   components: {
-//     visualizeTable,
-//   },
-// }
 </script>
 
 <style>
