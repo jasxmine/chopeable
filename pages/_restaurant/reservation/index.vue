@@ -38,36 +38,48 @@
               ></b-form-timepicker>
             </b-form-group>
           </div>
-          <div v-if="userEmail != 0">&nbsp;</div>
-          <div v-else>
-            <h4 class="text-center m-0 py-5"><b>Continue with</b></h4>
-            <div class="container content mt-5">
-              <b-form-group
-                id="email-group"
-                label="Email address:"
-                label-for="email"
-                description="We'll never share your email with anyone else."
-              >
-                <b-form-input
-                  id="email"
-                  v-model="form.email"
-                  type="email"
-                  required
-                  placeholder="Enter email"
-                ></b-form-input>
-              </b-form-group>
+          <h4 class="text-center m-0 pt-5"><b>Continue with</b></h4>
+          <div class="container content mt-5">
+            <b-form-group
+              id="email-group"
+              label="Email address:"
+              label-for="email"
+              description="We'll never share your email with anyone else."
+            >
+              <b-form-input
+                id="email"
+                v-model="form.email"
+                type="email"
+                required
+                placeholder="Enter email"
+              ></b-form-input>
+            </b-form-group>
 
-              <b-form-group id="name-group" label="Your Name:" label-for="name">
-                <b-form-input
-                  id="name"
-                  v-model="form.name"
-                  required
-                  placeholder="Enter name"
-                ></b-form-input>
-              </b-form-group>
-            </div>
+            <b-form-group id="name-group" label="Your Name:" label-for="name">
+              <b-form-input
+                id="name"
+                v-model="form.name"
+                required
+                placeholder="Enter name"
+              ></b-form-input>
+            </b-form-group>
           </div>
-          <h4 class="text-center m-0 py-5"><b>Additional Information</b></h4>
+          <h4 class="text-center m-0 pt-5"><b>Payment</b></h4>
+          <div class="container content mt-5">
+            <p>
+              To prevent no show, a deposit of $10 will have to be made to
+              reservation
+            </p>
+            <h5>Please give us your payment details:</h5>
+            <card
+              class="stripe-card border"
+              :class="{ complete }"
+              stripe="pk_test_WEM18IMCp1Q4QF5MP1mbpRXz00gUKbr5Gz"
+              :options="stripeOptions"
+              @change="complete = $event.complete"
+            />
+          </div>
+          <h4 class="text-center m-0 pt-5"><b>Additional Information</b></h4>
           <div class="container content mt-5">
             <b-form-group
               id="request-group"
@@ -99,11 +111,13 @@
       </div>
       <theFooter />
     </div>
+    <script src="https://js.stripe.com/v3/"></script>
   </div>
 </template>
 
 <script>
 import { db } from '@/main'
+import { Card, createToken } from 'vue-stripe-elements-plus'
 import emailjs from 'emailjs-com'
 import restaurantService from '../../../services/restaurantService'
 import theFooter from '../../../components/theFooter'
@@ -111,6 +125,7 @@ import theFooter from '../../../components/theFooter'
 export default {
   components: {
     theFooter,
+    Card,
   },
   layout: 'restaurantPage',
   data() {
@@ -136,6 +151,8 @@ export default {
         request: '',
       },
       show: true,
+      complete: false,
+      stripeOptions: {},
     }
   },
   async mounted() {
@@ -153,6 +170,7 @@ export default {
       this.sendEmail(evt)
       this.addEvent()
       this.addBooking()
+      this.pay()
       this.$router.push('/' + this.restaurant + '/confirmation')
     },
     emptyFocusOut() {
@@ -210,6 +228,9 @@ export default {
         alert('You must enter date and number of pax!')
       }
     },
+    pay() {
+      createToken().then((data) => console.log(data.token))
+    },
   },
 }
 </script>
@@ -217,8 +238,7 @@ export default {
 <style scoped>
 .page {
   background: #f7f8fa;
-  margin-bottom: 80px;
-  height: 100vh;
+  height: 120%;
 }
 .content {
   background: #ffffff;
