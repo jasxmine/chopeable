@@ -67,7 +67,7 @@
                 <vue-timepicker
                   id="time"
                   v-model="time"
-                  input-width="200px"
+                  input-width="100px"
                 ></vue-timepicker>
                 <v-text-field
                   v-model="color"
@@ -111,7 +111,7 @@
                 <vue-timepicker
                   id="time"
                   v-model="time"
-                  input-width="200px"
+                  input-width="100px"
                 ></vue-timepicker>
                 <v-text-field
                   v-model="color"
