@@ -1,33 +1,39 @@
 <template>
   <div class="wrapper">
     <div class="data">
-      <ul>
-        <h3 class="text-center">
-          <b-badge variant="primary">
-            Double click a table to reserve it!
-          </b-badge>
-        </h3>
-        <li
-          v-for="table in tables"
-          :key="table.name"
-          style="list-style-type: none"
-        >
-          <b-list-group>
-            <b-list-group-item variant="primary"
-              >Table: {{ tables.indexOf(table) + 1 }}</b-list-group-item
-            >
-          </b-list-group>
-          <!-- Table: {{ tables.indexOf(table) + 1 }} -->
-          <!-- x: {{ table.x }} y: -->
-          <!-- {{ table.y }}
-          {{ table.reserved }} -->
-        </li>
-      </ul>
-      <br />
-      <b-button variant="outline-primary" @click="addTable">Add Table</b-button>
-      <b-button variant="outline-primary" @click="closeTable"
-        >Close for social distancing</b-button
-      >
+      <h3 class="text-center">
+        <b-badge variant="primary">
+          Double click a table to reserve it!
+        </b-badge>
+      </h3>
+      <div class="wrapper">
+        <ul>
+          <li
+            v-for="table in tables"
+            :key="table.name"
+            style="list-style-type: none"
+          >
+            <b-list-group>
+              <b-list-group-item variant="primary"
+                >Table: {{ table.displayNumber }}
+                {{ table.reserved }}</b-list-group-item
+              >
+            </b-list-group>
+            <!-- Table: {{ tables.indexOf(table) + 1 }} -->
+            <!-- x: {{ table.x }} y: -->
+            <!-- {{ table.y }}
+            {{ table.reserved }} -->
+          </li>
+        </ul>
+        <div class="buttons">
+          <b-button variant="outline-primary" @click="addTable"
+            >Add Table</b-button
+          >
+          <b-button variant="outline-primary" @click="closeTable"
+            >Close for social distancing</b-button
+          >
+        </div>
+      </div>
     </div>
     <v-stage
       id="container"
@@ -44,6 +50,8 @@
           :config="item"
           @transformend="handleTransformEnd"
         />
+        <br />
+
         <v-text
           v-for="item in closedTables"
           :key="item.id"
@@ -59,26 +67,30 @@
   </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 /* #container {
   background-image: linear-gradient(#e6e6e6 0.1rem, transparent 0.1rem),
     linear-gradient(90deg, #ddd 0.1rem, transparent 0.1rem) !important;
   background-size: 2rem 2rem !important;
 } */
+.wrapper {
+  ul {
+    display: flex;
+  }
+
+  .buttons {
+    display: flex;
+  }
+}
 </style>
 
 <script>
 import Vue from 'vue'
 import VueKonva from 'vue-konva'
-// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import { v4 as uuidv4 } from 'uuid'
 
 Vue.config.productionTip = false
 Vue.use(VueKonva)
-
-// new Vue({
-//   render: (h) => h(App),
-// }).$mount('#app')
 
 const width = window.innerWidth
 const height = window.innerHeight
@@ -94,6 +106,7 @@ export default {
       closedTables: [],
       selectedShapeName: '',
       tableNumbers: [],
+      tableCount: 1,
     }
   },
   methods: {
@@ -107,11 +120,13 @@ export default {
         height: 100,
         scaleX: 1,
         scaleY: 1,
-        fill: '#EDFAED',
+        fill: '#4dd8ff',
         name: uuidv4(),
+        displayNumber: this.tableCount,
         draggable: true,
         reserved: 'Currently Avalable',
       })
+      this.tableCount += 1
     },
     closeTable(e) {
       e.preventDefault()
