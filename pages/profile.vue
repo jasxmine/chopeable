@@ -33,12 +33,19 @@
           <div class="reservationTitle" style="text-align: left">
             <h2 class="my-auto">Upcoming reservations:</h2>
           </div>
-          <br />
-          <br />
+
           <div v-if="haveReservation == 0">
-            <nuxt-link to="/search" style="color: initial" class="classicLink">
-              <button class="btn btn-warning">Make a reservation now!</button>
-            </nuxt-link>
+            <div>
+              <br />
+              <br />
+              <nuxt-link
+                to="/search"
+                style="color: initial"
+                class="classicLink"
+              >
+                <button class="btn btn-warning">Make a reservation now!</button>
+              </nuxt-link>
+            </div>
           </div>
           <div v-for="booking in bookings" :key="booking.id">
             <br />
@@ -86,7 +93,7 @@
           </div>
           <br />
           <div v-for="booking in bookings" :key="booking.id">
-            <div v-if="currentMilli > booking.milli" class="card mb-3">
+            <div v-if="currentMilli >= booking.milli" class="card mb-3">
               <div class="row no-gutters">
                 <div
                   class="col-md-4"
@@ -282,7 +289,21 @@ export default {
         book.milli = Date.parse(book.date)
 
         book.date = book.date.split(' ')
+        if (book.date[1] !== undefined) {
+          book.date[1] = book.date[1].slice(0, 5)
+        }
+        book.restaurant = book.restaurant.split('-')
+        for (let i = 0; i < book.restaurant.length; i++) {
+          book.restaurant[i] =
+            book.restaurant[i].charAt(0).toUpperCase() +
+            book.restaurant[i].slice(1)
+        }
+        book.restaurant = book.restaurant.join(' ')
+
         books.push(book)
+        if (this.currentMilli < book.milli) {
+          this.haveReservation = 1
+        }
       })
       this.loaded = books
     },
