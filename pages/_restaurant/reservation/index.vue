@@ -1,5 +1,5 @@
 <template>
-  <div class="page mb-5" @click="emptyFocusOut" @mouseover="canScroll">
+  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
     <div class="container">
       <b-form v-if="show" @submit="onSubmit">
         <h3 class="text-center m-0 py-5"><b>Complete your reservation</b></h3>
@@ -142,6 +142,7 @@ export default {
 <style scoped>
 .page {
   background: #f7f8fa;
+  margin-bottom: 80px;
   height: 100vh;
 }
 .content {
