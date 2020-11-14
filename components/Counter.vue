@@ -66,7 +66,7 @@ export default {
   computed: {
     output() {
       // Output for computed property!
-      return 0.5 * this.counter
+      return 10 * this.counter
     },
   },
   methods: {
