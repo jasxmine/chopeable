@@ -38,31 +38,34 @@
               ></b-form-timepicker>
             </b-form-group>
           </div>
-          <h4 class="text-center m-0 py-5"><b>Continue with</b></h4>
-          <div class="container content mt-5">
-            <b-form-group
-              id="email-group"
-              label="Email address:"
-              label-for="email"
-              description="We'll never share your email with anyone else."
-            >
-              <b-form-input
-                id="email"
-                v-model="form.email"
-                type="email"
-                required
-                placeholder="Enter email"
-              ></b-form-input>
-            </b-form-group>
+          <div v-if="userEmail != 0">&nbsp;</div>
+          <div v-else>
+            <h4 class="text-center m-0 py-5"><b>Continue with</b></h4>
+            <div class="container content mt-5">
+              <b-form-group
+                id="email-group"
+                label="Email address:"
+                label-for="email"
+                description="We'll never share your email with anyone else."
+              >
+                <b-form-input
+                  id="email"
+                  v-model="form.email"
+                  type="email"
+                  required
+                  placeholder="Enter email"
+                ></b-form-input>
+              </b-form-group>
 
-            <b-form-group id="name-group" label="Your Name:" label-for="name">
-              <b-form-input
-                id="name"
-                v-model="form.name"
-                required
-                placeholder="Enter name"
-              ></b-form-input>
-            </b-form-group>
+              <b-form-group id="name-group" label="Your Name:" label-for="name">
+                <b-form-input
+                  id="name"
+                  v-model="form.name"
+                  required
+                  placeholder="Enter name"
+                ></b-form-input>
+              </b-form-group>
+            </div>
           </div>
           <h4 class="text-center m-0 py-5"><b>Additional Information</b></h4>
           <div class="container content mt-5">
@@ -114,6 +117,9 @@ export default {
     return {
       restaurant: '',
       restaurantData: {},
+      userEmail: localStorage.user,
+      userName: localStorage.name,
+      userCredits: localStorage.credits,
       paxOptions: [
         { value: 1, text: '1' },
         { value: 2, text: '2' },
