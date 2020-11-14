@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import cardComponent from '../../components/search/CardComponent'
+import cardComponent from '../../components/search/cardComponent'
 import restaurantService from '../../services/restaurantService'
 
 window.axios = require('axios')
