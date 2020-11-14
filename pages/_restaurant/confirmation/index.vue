@@ -2,7 +2,7 @@
   <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
     <div v-if="restaurantData.name" class="container">
       <h1>Your reservation at {{ restaurantData.name }} has been confirmed!</h1>
-      <div class="content mt-5 p-5">
+      <div class="content mt-5 p-5 text-center">
         <h1>Thanks!</h1>
         <p>We sent a confirmation email to you!</p>
         <p>Your reservation number is <b>#123451234</b></p>
