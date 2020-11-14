@@ -30,10 +30,17 @@
       </div>
       <div class="col-9">
         <div v-if="clickedReservartion">
+          <div class="reservationTitle" style="text-align: left">
+            <h2 class="my-auto">Upcoming reservations:</h2>
+          </div>
+          <br />
+          <br />
+          <div v-if="haveReservation == 0">
+            <nuxt-link to="/search" style="color: initial" class="classicLink">
+              <button class="btn btn-warning">Make a reservation now!</button>
+            </nuxt-link>
+          </div>
           <div v-for="booking in bookings" :key="booking.id">
-            <div class="reservationTitle" style="text-align: left">
-              <h2 class="my-auto">Upcoming reservations:</h2>
-            </div>
             <br />
             <div
               v-if="currentMilli < booking.milli"
@@ -71,20 +78,14 @@
                 </div>
               </div>
             </div>
-            <div v-if="haveReservation == 0">
-              <nuxt-link
-                to="/search"
-                style="color: initial"
-                class="classicLink"
-              >
-                <button class="btn btn-warning">Make a reservation now!</button>
-              </nuxt-link>
-            </div>
-            <br />
-            <div class="reservationTitle" style="text-align: left">
-              <h2 class="my-auto">Past reservations:</h2>
-            </div>
-            <br />
+          </div>
+
+          <br />
+          <div class="reservationTitle" style="text-align: left">
+            <h2 class="my-auto">Past reservations:</h2>
+          </div>
+          <br />
+          <div v-for="booking in bookings" :key="booking.id">
             <div v-if="currentMilli > booking.milli" class="card mb-3">
               <div class="row no-gutters">
                 <div
@@ -119,61 +120,61 @@
             </div>
           </div>
         </div>
-        <div v-if="clickedCredits">
-          <h1>You have {{ userCredits }} credits</h1>
-          <div v-if="userCredits > 0">
-            <button class="btn btn-warning" @click="showRewards()">
-              Redeem rewards now!
-            </button>
-          </div>
+      </div>
+      <div v-if="clickedCredits">
+        <h1>You have {{ userCredits }} credits</h1>
+        <div v-if="userCredits > 0">
+          <button class="btn btn-warning" @click="showRewards()">
+            Redeem rewards now!
+          </button>
         </div>
-        <div v-if="clickedRewards">
-          <div class="card mb-3">
-            <div class="row no-gutters">
-              <div class="col-md-12">
-                <div class="card-body">
-                  <h3 style="margin-bottom: 20px; margin-top: ">
-                    Get a free beverage on Ichiban Boshi Novena
-                  </h3>
-                  <h4 class="card-text">
-                    Credits needed: 150
-                    <br />
-                    <br />
+      </div>
+      <div v-if="clickedRewards">
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-12">
+              <div class="card-body">
+                <h3 style="margin-bottom: 20px; margin-top: ">
+                  Get a free beverage on Ichiban Boshi Novena
+                </h3>
+                <h4 class="card-text">
+                  Credits needed: 150
+                  <br />
+                  <br />
 
-                    Valid for: 1 month (from redeem date)
-                    <br />
-                    <br />
-                  </h4>
-                </div>
-                <b-button disabled size="lg" variant="warning"
-                  >Redeem now!</b-button
-                >
-                <div style="margin-bottom: 10px"></div>
+                  Valid for: 1 month (from redeem date)
+                  <br />
+                  <br />
+                </h4>
               </div>
+              <b-button disabled size="lg" variant="warning"
+                >Redeem now!</b-button
+              >
+              <div style="margin-bottom: 10px"></div>
             </div>
           </div>
-          <div class="card mb-3">
-            <div class="row no-gutters">
-              <div class="col-md-12">
-                <div class="card-body">
-                  <h3 style="margin-bottom: 20px; margin-top: ">
-                    Get 20% discount on your next bookings
-                  </h3>
-                  <h4 class="card-text">
-                    Credits needed: 500
-                    <br />
-                    <br />
+        </div>
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-12">
+              <div class="card-body">
+                <h3 style="margin-bottom: 20px; margin-top: ">
+                  Get 20% discount on your next bookings
+                </h3>
+                <h4 class="card-text">
+                  Credits needed: 500
+                  <br />
+                  <br />
 
-                    Valid for: 1 month (from redeem date)
-                    <br />
-                    <br />
-                  </h4>
-                </div>
-                <b-button disabled size="lg" variant="warning"
-                  >Redeem now!</b-button
-                >
-                <div style="margin-bottom: 10px"></div>
+                  Valid for: 1 month (from redeem date)
+                  <br />
+                  <br />
+                </h4>
               </div>
+              <b-button disabled size="lg" variant="warning"
+                >Redeem now!</b-button
+              >
+              <div style="margin-bottom: 10px"></div>
             </div>
           </div>
         </div>
@@ -277,6 +278,7 @@ export default {
       const books = []
       bookingList.forEach((doc) => {
         const book = doc.data()
+
         book.milli = Date.parse(book.date)
 
         book.date = book.date.split(' ')
