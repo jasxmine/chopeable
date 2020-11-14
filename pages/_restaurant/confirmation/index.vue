@@ -1,7 +1,15 @@
 <template>
   <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
-    <div class="container">
+    <div v-if="restaurantData.name" class="container">
       <h1>Your reservation at {{ restaurantData.name }} has been confirmed!</h1>
+    </div>
+    <div v-else>
+      <div class="d-flex justify-content-center mt-5">
+        <b-spinner
+          style="width: 5rem; height: 5rem"
+          label="Large Spinner"
+        ></b-spinner>
+      </div>
     </div>
   </div>
 </template>

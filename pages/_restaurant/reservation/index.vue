@@ -1,6 +1,6 @@
 <template>
   <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
-    <div class="container">
+    <div v-if="restaurantData.name" class="container">
       <b-form v-if="show" @submit="onSubmit">
         <h3 class="text-center m-0 py-5"><b>Complete your reservation</b></h3>
         <div class="container content">
@@ -81,6 +81,14 @@
           >Reserve Now</b-button
         >
       </b-form>
+    </div>
+    <div v-else>
+      <div class="d-flex justify-content-center mt-5">
+        <b-spinner
+          style="width: 5rem; height: 5rem"
+          label="Large Spinner"
+        ></b-spinner>
+      </div>
     </div>
   </div>
 </template>

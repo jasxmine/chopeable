@@ -1,6 +1,6 @@
 <template>
   <div @click="emptyFocusOut" @mouseover="canScroll">
-    <div>
+    <div v-if="restaurantData.location">
       <div class="container vh-100 mt-5 p-0">
         <img :src="restaurantData.featured_image" />
         <div class="d-flex justify-content-between">
@@ -162,6 +162,14 @@
           </div>
         </div>
         <theFooter />
+      </div>
+    </div>
+    <div v-else>
+      <div class="d-flex justify-content-center mt-5">
+        <b-spinner
+          style="width: 5rem; height: 5rem"
+          label="Large Spinner"
+        ></b-spinner>
       </div>
     </div>
   </div>
