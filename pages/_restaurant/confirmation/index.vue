@@ -2,6 +2,11 @@
   <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
     <div v-if="restaurantData.name" class="container">
       <h1>Your reservation at {{ restaurantData.name }} has been confirmed!</h1>
+      <div class="content mt-5 p-5">
+        <h1>Thanks!</h1>
+        <p>We sent a confirmation email to you!</p>
+        <p>Your reservation number is <b>#123451234</b></p>
+      </div>
     </div>
     <div v-else>
       <div class="d-flex justify-content-center mt-5">
@@ -52,5 +57,8 @@ export default {
 .page {
   background: #f7f8fa;
   height: 100vh;
+}
+.content {
+  background: #ffffff;
 }
 </style>
