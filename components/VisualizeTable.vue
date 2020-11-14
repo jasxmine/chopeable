@@ -19,10 +19,6 @@
                 {{ table.reserved }}</b-list-group-item
               >
             </b-list-group>
-            <!-- Table: {{ tables.indexOf(table) + 1 }} -->
-            <!-- x: {{ table.x }} y: -->
-            <!-- {{ table.y }}
-            {{ table.reserved }} -->
           </li>
         </ul>
         <div class="buttons">
@@ -202,7 +198,6 @@ export default {
         e.target.attrs.fill = '#FEECEA' // change color to red for booked
         rect.reserved = 'Table booked!'
       })
-      // console.log("rect is", rect);
 
       if (selectedNode) {
         // attach to another node
