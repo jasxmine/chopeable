@@ -554,11 +554,9 @@ export default {
           this.inputEmail = ''
           this.logout()
           this.signOut()
-          alert('Your email does not exist in our database :(')
         }
         //input validation
       } else {
-        alert('Both login email and password field cannot be empty!')
       }
     },
     logout() {
@@ -594,7 +592,6 @@ export default {
         this.inputNameSignUp = ''
         this.inputEmailSignUp = ''
       } else {
-        alert('Sign up email, name, and password text field cannot be empty!')
       }
     },
   },
