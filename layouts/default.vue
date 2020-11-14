@@ -8,7 +8,7 @@
     />
     <meta
       name="google-signin-client_id"
-      content="766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com"
+      content="766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com"
     />
     <meta name="google-signin-scope" content="profile email" />
 
@@ -126,7 +126,6 @@
                       :params="params"
                       :render-params="renderParams"
                       :on-success="onSuccess"
-                      data-theme="dark"
                     ></GoogleLogin>
                   </b-form-group>
                   <hr class="hr-text" data-content="OR" />
@@ -444,7 +443,7 @@ export default {
       unregisteredEmail: false,
       params: {
         client_id:
-          '766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com',
+          '766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com',
       },
       renderParams: {
         width: 250,
