@@ -123,7 +123,7 @@ export default {
         height: 100,
         scaleX: 1,
         scaleY: 1,
-        fill: '#4dd8ff',
+        fill: '#99c0ff',
         name: uuidv4(),
         displayNumber: this.tableCount,
         draggable: true,
@@ -221,7 +221,7 @@ export default {
       const complexText = new Konva.Text({
         x: 20,
         y: 60,
-        text: this.tableCount,
+        text: this.tableCount - 1,
         fontSize: 18,
         fontFamily: 'Calibri',
         fill: '#555',
