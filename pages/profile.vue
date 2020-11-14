@@ -265,7 +265,6 @@ export default {
   },
   created() {
     if (this.userEmail === '0') {
-      console.log('here')
       location.replace('/app')
     }
   },

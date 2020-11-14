@@ -131,12 +131,9 @@ export default {
   },
   methods: {
     onToggleCollapse(collapsed) {
-      console.log(collapsed)
       this.collapsed = collapsed
     },
-    onItemClick(event, item, node) {
-      console.log('onItemClick')
-    },
+    onItemClick(event, item, node) {},
     onResize() {
       if (window.innerWidth <= 767) {
         this.isOnMobile = true

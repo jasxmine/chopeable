@@ -119,7 +119,6 @@ export default {
     })
     this.observerError(this.cType)
     if (this.checkedCuisines.length > 0) {
-      console.log('hello there')
       this.allRestaurants = []
       this.search()
     } else {
@@ -140,16 +139,13 @@ export default {
       arr = JSON.parse(JSON.stringify(arr))
       for (let i = 0; i < arr.length; i++) {
         arr[i] = JSON.parse(JSON.stringify(arr[i]))
-        console.log(arr[i])
       }
     },
     search() {
-      console.log('function called')
       this.allRestaurants = []
       if (this.checkedCuisines === []) {
         restaurantService.getRestaurantsEstablishment(this.estb).then((res) => {
           const restaurantsArr = res.restaurants
-          console.log(restaurantsArr)
           // console.log(restaurantsArr)
           for (let i = 0; i < restaurantsArr.length; i++) {
             const toAdd = restaurantsArr[i].restaurant
@@ -180,7 +176,6 @@ export default {
           })
       }
       this.noImage(this.allRestaurants)
-      console.log(this.allRestaurants)
     },
     seeMore() {
       const moreText = document.getElementById('more')
@@ -189,14 +184,12 @@ export default {
       if (moreText.style.display === 'none') {
         btnText.innerHTML = 'See Less'
         moreText.style.display = 'block'
-        console.log('1st click')
       } else {
         btnText.innerHTML = 'See More'
         moreText.style.display = 'none'
       }
     },
     noImage(arr) {
-      console.log(arr)
       for (let i = 0; i < arr.length; i++) {
         if (arr.featured_image === '') {
           arr.featured_image = '/logo_photo.jpg'
@@ -205,12 +198,10 @@ export default {
     },
     readURL() {
       const url = window.location.search
-      console.log('readURL function called!')
       let cuisine = ''
       if (url !== '') {
         this.checkedCuisines = []
         cuisine = url.slice(url.indexOf('=') + 1, url.length)
-        console.log('mas badhil <3')
         this.checkedCuisines.push(cuisine)
       }
     },
