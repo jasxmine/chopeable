@@ -213,20 +213,20 @@ export default {
       const layer = transformerNode.getLayer()
       layer.add(group)
 
-      const complexText = new Konva.Text({
-        x: 20,
-        y: 60,
-        text: this.tableCount - 1,
-        fontSize: 18,
-        fontFamily: 'Calibri',
-        fill: '#555',
-        width: 300,
-        padding: 20,
-        align: 'center',
-      })
+      // const complexText = new Konva.Text({
+      //   x: 20,
+      //   y: 60,
+      //   text: this.tableCount - 1,
+      //   fontSize: 18,
+      //   fontFamily: 'Calibri',
+      //   fill: '#555',
+      //   width: 300,
+      //   padding: 20,
+      //   align: 'center',
+      // })
 
-      group.add(complexText)
-      layer.batchDraw()
+      // group.add(complexText)
+      // layer.batchDraw()
     },
   },
 }
