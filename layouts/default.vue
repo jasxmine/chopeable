@@ -41,7 +41,7 @@
           >
             <a href="/app">
               <img
-                src="/logo_2.png"
+                src="/logo_2.PNG"
                 alt="why is this taking so long"
                 style="margin-left: 20px"
                 width="200"
