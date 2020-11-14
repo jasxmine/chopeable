@@ -263,6 +263,12 @@ export default {
   mounted() {
     this.loadNow()
   },
+  created() {
+    if (this.userEmail === '0') {
+      console.log('here')
+      location.replace('/app')
+    }
+  },
   methods: {
     showReservation() {
       this.clickedCredits = false
