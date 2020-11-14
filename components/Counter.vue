@@ -57,30 +57,89 @@
 </template>
 
 <script>
+import { db } from '@/main'
 export default {
   data() {
     return {
       counter: 0, // Initial Value
+      events: [],
+      event: [],
     }
   },
   computed: {
     output() {
       // Output for computed property!
-      return 10 * this.counter
+      return 10 * this.event
     },
+  },
+  async mounted() {
+    this.getEvents()
+    this.event = await db
+      .collection('restaurant')
+      .get()
+      .then((snap) => {
+        const events = []
+
+        snap.forEach((doc) => {
+          const appData = doc.data()
+          appData.id = doc.id
+          events.push(doc.data())
+        })
+        this.events = events
+
+        return this.events[0].queue
+      })
+    this.counter = this.event
+    // this.id = await db
+    //   .collection('restaurant')
+    //   .get()
+    //   .then((snap) => {
+    //     const events = []
+    //     const id = ''
+    //     snap.forEach((doc) => {
+    //       const appData = doc.data()
+    //       appData.id = doc.id
+    //       events.push(doc.data())
+    //     })
+    //     this.events = events
+    //     this.appData.id = appData.id
+    //     return this.appData.id
+    //   })
+    // alert(this.id)
   },
   methods: {
     increaseCounter(increaseLimit) {
       // Increase
       if (this.counter < increaseLimit) this.counter++
+      db.collection('restaurant').doc('okGLD0Lyn9IhnW5tHRDU').update({
+        queue: this.counter,
+      })
     },
     decreaseCounter(decreaseLimit) {
       // Decrease
       if (this.counter > decreaseLimit) this.counter--
+      db.collection('restaurant').doc('okGLD0Lyn9IhnW5tHRDU').update({
+        queue: this.counter,
+      })
     },
     resetCounter() {
       // Reset
       this.counter = 0
+      db.collection('restaurant').doc('okGLD0Lyn9IhnW5tHRDU').update({
+        queue: this.counter,
+      })
+    },
+    async getEvents() {
+      const snapshot = await db.collection('restaurant').get()
+      const events = []
+
+      snapshot.forEach((doc) => {
+        const appData = doc.data()
+
+        appData.id = doc.id
+        events.push(appData)
+      })
+      this.events = events
     },
   },
 }
