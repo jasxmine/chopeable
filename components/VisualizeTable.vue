@@ -89,6 +89,7 @@
 <script>
 import Vue from 'vue'
 import VueKonva from 'vue-konva'
+import Konva from 'konva'
 import { v4 as uuidv4 } from 'uuid'
 
 Vue.config.productionTip = false
@@ -194,6 +195,7 @@ export default {
       if (selectedNode === transformerNode.node()) {
         return
       }
+
       stage.on('click', function (e) {
         this.renderComponent = true
         // e.target is a clicked Konva.Shape or current stage if you clicked on empty space
@@ -209,7 +211,27 @@ export default {
         // remove transformer
         transformerNode.nodes([])
       }
-      transformerNode.getLayer().batchDraw()
+
+      const group = new Konva.Group({
+        draggable: true,
+      })
+      const layer = transformerNode.getLayer()
+      layer.add(group)
+
+      const complexText = new Konva.Text({
+        x: 20,
+        y: 60,
+        text: this.tableCount,
+        fontSize: 18,
+        fontFamily: 'Calibri',
+        fill: '#555',
+        width: 300,
+        padding: 20,
+        align: 'center',
+      })
+
+      group.add(complexText)
+      layer.batchDraw()
     },
   },
 }
