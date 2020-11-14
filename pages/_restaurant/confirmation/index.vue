@@ -1,8 +1,21 @@
 <template>
-  <div @click="emptyFocusOut" @mouseover="canScroll">
-    <h1>
-      {{ restaurantData.name }}
-    </h1>
+  <div class="page" @click="emptyFocusOut" @mouseover="canScroll">
+    <div v-if="restaurantData.name" class="container">
+      <h1>Your reservation at {{ restaurantData.name }} has been confirmed!</h1>
+      <div class="content mt-5 p-5 text-center">
+        <h1>Thanks!</h1>
+        <p>We sent a confirmation email to you!</p>
+        <p>Your reservation number is <b>#123451234</b></p>
+      </div>
+    </div>
+    <div v-else>
+      <div class="d-flex justify-content-center mt-5">
+        <b-spinner
+          style="width: 5rem; height: 5rem"
+          label="Large Spinner"
+        ></b-spinner>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,3 +52,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.page {
+  background: #f7f8fa;
+  height: 100vh;
+}
+.content {
+  background: #ffffff;
+}
+</style>
