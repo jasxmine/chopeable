@@ -21,6 +21,9 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
+    <!--Start of Novocall App Script-->
+
+    <!--End of Novocall App Script-->
     <div
       style="padding-top: 10px; width: 100%; z-index: 1"
       @mouseover.self="canScroll"
@@ -459,8 +462,18 @@ export default {
       this.name = localStorage.name
       this.login()
     }
+    this.novocall()
   },
   methods: {
+    novocall: function () {
+      var d = document,
+        h = d.getElementsByTagName('head')[0],
+        s = d.createElement('script')
+      s.type = 'text/javascript'
+      s.async = !0
+      s.src = 'https://call.novocall.co/v1/widgets?id=uBaMvmmtkZg'
+      h.appendChild(s)
+    },
     async getUser() {
       this.searchResult = []
       document.getElementById('displaySearch').style.display = 'block'
