@@ -219,7 +219,7 @@ export default {
       )
     },
     output() {
-      return this.event * 0.5
+      return this.event * 10
     },
   },
   async mounted() {
