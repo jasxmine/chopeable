@@ -166,7 +166,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
-      console.log(JSON.stringify(this.form))
       this.sendEmail(evt)
       this.addEvent()
       this.addBooking()
@@ -192,14 +191,7 @@ export default {
           e.target,
           'user_h0WwXWQ7W36bXKltap0N8'
         )
-        .then(
-          (result) => {
-            console.log('SUCCESS!', result.status, result.text)
-          },
-          (error) => {
-            console.log('FAILED...', error)
-          }
-        )
+        .then((result) => {})
     },
     async addEvent() {
       if (this.form.name && this.form.date) {
@@ -229,7 +221,7 @@ export default {
       }
     },
     pay() {
-      createToken().then((data) => console.log(data.token))
+      createToken().then((data) => data.token)
     },
   },
 }

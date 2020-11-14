@@ -8,7 +8,7 @@
     />
     <meta
       name="google-signin-client_id"
-      content="766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com"
+      content="766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com"
     />
     <meta name="google-signin-scope" content="profile email" />
 
@@ -38,8 +38,9 @@
           >
             <a href="/app">
               <img
-                src="../logo_2.png"
-                alt="why is this taking so long"
+                src="/logo_2.PNG"
+                alt="why is this
+              taking so long"
                 style="margin-left: 20px"
                 width="200"
               />
@@ -440,7 +441,7 @@ export default {
       unregisteredEmail: false,
       params: {
         client_id:
-          '766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com',
+          '766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com',
       },
       renderParams: {
         width: 250,
@@ -553,11 +554,9 @@ export default {
           this.inputEmail = ''
           this.logout()
           this.signOut()
-          alert('Your email does not exist in our database :(')
         }
         //input validation
       } else {
-        alert('Both login email and password field cannot be empty!')
       }
     },
     logout() {
@@ -593,7 +592,6 @@ export default {
         this.inputNameSignUp = ''
         this.inputEmailSignUp = ''
       } else {
-        alert('Sign up email, name, and password text field cannot be empty!')
       }
     },
   },

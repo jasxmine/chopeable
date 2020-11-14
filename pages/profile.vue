@@ -47,8 +47,8 @@
               </nuxt-link>
             </div>
           </div>
+          <br />
           <div v-for="booking in bookings" :key="booking.id">
-            <br />
             <div
               v-if="currentMilli < booking.milli"
               :haveReservation="1"
@@ -265,7 +265,6 @@ export default {
   },
   created() {
     if (this.userEmail === '0') {
-      console.log('here')
       location.replace('/app')
     }
   },

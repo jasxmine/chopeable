@@ -4,7 +4,7 @@
       <b-alert show variant="info">
         <p class="text-center">
           Due to safe distancing, please note that the number of customers will
-          not cross the limit which is qcurrently set at <strong>50</strong>!
+          not cross the limit which is currently set at <strong>50</strong>!
         </p>
       </b-alert>
     </div>
