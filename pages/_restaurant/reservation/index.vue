@@ -199,9 +199,13 @@ export default {
           name: this.form.name,
           details: this.form.pax,
           start:
-            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
+            new Date(this.form.date).toISOString().substr(0, 10) +
+            ' ' +
+            this.form.time,
           end:
-            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
+            new Date(this.form.date).toISOString().substr(0, 10) +
+            ' ' +
+            this.form.time,
           color: '#1976D2',
         })
       } else {
@@ -212,7 +216,9 @@ export default {
       if (this.restaurant && this.form.date) {
         await db.collection('booking').add({
           date:
-            this.form.date.toISOString().substr(0, 10) + ' ' + this.form.time,
+            new Date(this.form.date).toISOString().substr(0, 10) +
+            ' ' +
+            this.form.time,
           numberOfPeople: this.form.pax,
           restaurant: this.restaurant,
         })
