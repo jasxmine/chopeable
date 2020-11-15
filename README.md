@@ -20,8 +20,8 @@ $ Pw: chopeablebestapp
 
 ## Deployed Application
 Our application has been deployed using Heroku
-Client URL: https://sleepy-temple-19309.herokuapp.com/app
-Admin Dashboard URL: https://sleepy-temple-19309.herokuapp.com/dashboard
+- Client URL: https://sleepy-temple-19309.herokuapp.com/app
+- Admin Dashboard URL: https://sleepy-temple-19309.herokuapp.com/dashboard
 
 ## Our repo
 	1. package.json (All required libraries are mentioned into this)
