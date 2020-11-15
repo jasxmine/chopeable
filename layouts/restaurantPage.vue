@@ -33,7 +33,7 @@
           @mouseover.self="canScroll"
         >
           <div
-            class="col-2"
+            class="col-md-2"
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           >
@@ -48,12 +48,12 @@
             </a>
           </div>
           <div
-            class="col-1"
+            class="col-md-1"
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           ></div>
           <div
-            class="col-6"
+            class="col-md-6"
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           >
@@ -91,7 +91,7 @@
                     max-height: 300px;
                     overflow: scroll;
                   "
-                  class="col-12"
+                  class="col-md-12"
                   @mouseover="cannotScroll"
                 >
                   <search :search="searchResult" />
@@ -100,12 +100,12 @@
             </div>
           </div>
           <div
-            class="col-1"
+            class="col-md-1"
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           ></div>
           <div
-            class="col-2"
+            class="col-md-2"
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           >
