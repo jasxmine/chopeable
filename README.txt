@@ -14,6 +14,11 @@ $ Customer Chopeable client: http://localhost:8080/app
 $ Admin Chopeable dashboard: http://localhost:8080/dashboard 
 ```
 
+## Deployed Application
+Our application has been deployed using Heroku
+Client URL: https://sleepy-temple-19309.herokuapp.com/app
+Admin Dashboard URL: https://sleepy-temple-19309.herokuapp.com/dashboard
+
 ## Our repo
 	1. package.json (All required libraries are mentioned into this)
 	2. pages/app.vue (Vue Root Component)
