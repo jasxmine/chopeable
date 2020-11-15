@@ -12,6 +12,10 @@ $ npm run dev
 # Open browser to view our app
 $ Customer Chopeable client: http://localhost:8080/app 
 $ Admin Chopeable dashboard: http://localhost:8080/dashboard 
+
+# Login options
+$ Email: chopeablewad2test@gmail.com
+$ Pw: chopeablebestapp
 ```
 
 ## Deployed Application
