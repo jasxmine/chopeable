@@ -10,6 +10,7 @@
       name="google-signin-client_id"
       content="766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com"
     />
+    <!--  change meta content to "766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com" if run locally -->
     <meta name="google-signin-scope" content="profile email" />
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -443,6 +444,8 @@ export default {
         client_id:
           '766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com',
       },
+      // change client id to "766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com" if run locally
+
       renderParams: {
         width: 250,
         height: 50,
