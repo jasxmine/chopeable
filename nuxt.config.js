@@ -42,7 +42,7 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: "AIzaSyBxbNnTzZGyrMjPKG_8fAM4HUc2d-aZ3eY",
+          apiKey: process.env.FIREBASE_API_KEY,
           authDomain: "vue-calendar-bda37.firebaseapp.com",
           databaseURL: "https://vue-calendar-bda37.firebaseio.com",
           projectId: "vue-calendar-bda37",
