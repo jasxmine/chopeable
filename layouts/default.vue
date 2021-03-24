@@ -26,21 +26,10 @@
     <!--Start of Novocall App Script-->
 
     <!--End of Novocall App Script-->
-    <div
-      style="padding-top: 10px; width: 100%; z-index: 1"
-      @mouseover.self="canScroll"
-    >
+    <div style="padding-top: 10px; width: 100%; z-index: 1" @mouseover.self="canScroll">
       <div @click.self="emptyFocusOut" @mouseover.self="canScroll">
-        <div
-          class="row"
-          @click.self="emptyFocusOut"
-          @mouseover.self="canScroll"
-        >
-          <div
-            class="col-md-2"
-            @click.self="emptyFocusOut"
-            @mouseover.self="canScroll"
-          >
+        <div class="row" @click.self="emptyFocusOut" @mouseover.self="canScroll">
+          <div class="col-md-2" @click.self="emptyFocusOut" @mouseover.self="canScroll">
             <a href="/app">
               <img
                 src="/logo_2.PNG"
@@ -55,11 +44,7 @@
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           ></div>
-          <div
-            class="col-md-6"
-            @click.self="emptyFocusOut"
-            @mouseover.self="canScroll"
-          >
+          <div class="col-md-6" @click.self="emptyFocusOut" @mouseover.self="canScroll">
             <div
               id="parenting"
               class="form-group has-search"
@@ -74,12 +59,7 @@
                 class="form-control randomizedClick"
                 placeholder="Search"
                 autocomplete="off"
-                style="
-                  height: 45px;
-                  width: 100%;
-                  font-size: 18px;
-                  line-height: 40px;
-                "
+                style="height: 45px; width: 100%; font-size: 18px; line-height: 40px"
                 @keyup="getUser"
                 @focus="getUser"
               />
@@ -107,11 +87,7 @@
             @click.self="emptyFocusOut"
             @mouseover.self="canScroll"
           ></div>
-          <div
-            class="col-md-2"
-            @click.self="emptyFocusOut"
-            @mouseover.self="canScroll"
-          >
+          <div class="col-md-2" @click.self="emptyFocusOut" @mouseover.self="canScroll">
             <div v-if="!user" style="margin-top: 10px">
               <b-dropdown
                 id="dropdown-form"
@@ -133,10 +109,7 @@
                   </b-form-group>
                   <hr class="hr-text" data-content="OR" />
 
-                  <b-form-group
-                    label-for="dropdown-form-email"
-                    @submit.stop.prevent
-                  >
+                  <b-form-group label-for="dropdown-form-email" @submit.stop.prevent>
                     <b-form-input
                       id="dropdown-form-email"
                       v-model="inputEmail"
@@ -165,14 +138,9 @@
                   <hr class="hr-text" data-content="OR" />
                 </b-dropdown-form>
                 <!-- SIGN UP FORM -->
-                <div style="color: grey; text-align: center">
-                  Sign up with us:
-                </div>
+                <div style="color: grey; text-align: center">Sign up with us:</div>
                 <b-dropdown-form style="margin-top: 10px">
-                  <b-form-group
-                    label-for="dropdown-form-name"
-                    @submit.stop.prevent
-                  >
+                  <b-form-group label-for="dropdown-form-name" @submit.stop.prevent>
                     <b-form-input
                       id="dropdown-form-name"
                       v-model="inputNameSignUp"
@@ -217,11 +185,7 @@
               <div class="dropdown" right>
                 <a
                   :href="'/profile'"
-                  style="
-                    color: black;
-                    text-decoration: none;
-                    background-color: white;
-                  "
+                  style="color: black; text-decoration: none; background-color: white"
                 >
                   <img :src="image" width="40" />
                   Hi, {{ user.name }}!
@@ -239,14 +203,8 @@
                   class="dropdown-menu dropdown-menu-right"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  <nuxt-link to="/profile" class="dropdown-item">
-                    My Profile
-                  </nuxt-link>
-                  <a
-                    class="dropdown-item"
-                    href="/app"
-                    @click="signOut(), logout()"
-                  >
+                  <nuxt-link to="/profile" class="dropdown-item"> My Profile </nuxt-link>
+                  <a class="dropdown-item" href="/app" @click="signOut(), logout()">
                     Logout
                   </a>
                 </div>
@@ -305,8 +263,8 @@
 
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -393,7 +351,7 @@ html {
   background-color: #fcfcfa;
 }
 .hr-text::before {
-  content: '';
+  content: "";
   background: #818078;
   position: absolute;
   left: 0;
@@ -418,12 +376,12 @@ a:hover {
 </style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-import search from '../components/search'
-import theFooter from '../components/theFooter'
-import { db } from '@/main'
-import GoogleLogin from 'vue-google-login'
+import search from "../components/search";
+import theFooter from "../components/theFooter";
+import { db } from "@/main";
+import GoogleLogin from "vue-google-login";
 
-window.axios = require('axios')
+window.axios = require("axios");
 export default {
   components: {
     search,
@@ -433,20 +391,20 @@ export default {
   data() {
     return {
       searchResult: [],
-      msg: 'hello',
-      isModalVisible: 'false',
+      msg: "hello",
+      isModalVisible: "false",
       isHovering: false,
       loadFooter: true,
-      inputEmail: '',
-      inputPassword: '',
-      inputNameSignUp: '',
-      inputEmailSignUp: '',
+      inputEmail: "",
+      inputPassword: "",
+      inputNameSignUp: "",
+      inputEmailSignUp: "",
       isLoggedIn: false,
       user: false,
       unregisteredEmail: false,
       params: {
         client_id:
-          '766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com',
+          "766630512827-olaqtnovm53g655at63nrtg21kpstqsf.apps.googleusercontent.com",
       },
       // change client id to "766630512827-mne39835j3j9cot1ql9j8rfc02qg0i6u.apps.googleusercontent.com" if run locally
       renderParams: {
@@ -454,160 +412,161 @@ export default {
         height: 50,
         longtitle: true,
       },
-      image: '',
-    }
+      image: "",
+    };
   },
   created() {
     if (localStorage.user == 0) {
     } else {
-      this.inputEmail = localStorage.user
-      this.image = localStorage.image
-      this.name = localStorage.name
-      this.login()
+      this.inputEmail = localStorage.user;
+      this.image = localStorage.image;
+      this.name = localStorage.name;
+      this.login();
     }
-    this.novocall()
+    this.novocall();
   },
   methods: {
     novocall: function () {
       var d = document,
-        h = d.getElementsByTagName('head')[0],
-        s = d.createElement('script')
-      s.type = 'text/javascript'
-      s.async = !0
-      s.src = 'https://call.novocall.co/v1/widgets?id=uBaMvmmtkZg'
-      h.appendChild(s)
+        h = d.getElementsByTagName("head")[0],
+        s = d.createElement("script");
+      s.type = "text/javascript";
+      s.async = !0;
+      s.src = "https://call.novocall.co/v1/widgets?id=uBaMvmmtkZg";
+      h.appendChild(s);
     },
     async getUser() {
-      this.searchResult = []
-      document.getElementById('displaySearch').style.display = 'block'
-      const search = document.getElementById('search_restaurant').value
+      this.searchResult = [];
+      document.getElementById("displaySearch").style.display = "block";
+      const search = document.getElementById("search_restaurant").value;
       if (search.length > 2) {
         try {
           const response = await axios.get(
-            'https://developers.zomato.com/api/v2.1/search?q=' +
+            "https://developers.zomato.com/api/v2.1/search?q=" +
               search +
-              '&apikey=e5567dabfe03e800b9c322a7c552684d'
-          )
+              "&apikey=" +
+              process.env.DEFAULT_API_KEY
+          );
           for (let restaurant of response.data.restaurants) {
-            let restaurantObj = { name: '', location: '' }
+            let restaurantObj = { name: "", location: "" };
 
             //restaurant name
-            let name = restaurant.restaurant.name
+            let name = restaurant.restaurant.name;
 
             //restaurant locality
-            let locality = '(' + restaurant.restaurant.location.locality + ')'
+            let locality = "(" + restaurant.restaurant.location.locality + ")";
 
             //restaurant image
-            let imageUrl = restaurant.restaurant.featured_image
+            let imageUrl = restaurant.restaurant.featured_image;
 
             //link to restaurant's page
-            let restaurantUrl = restaurant.restaurant.url
-            let index_question = restaurantUrl.indexOf('?')
-            let restaurant_cuisine = restaurant.restaurant.cuisines
-            restaurantUrl = restaurantUrl.slice(33, index_question)
+            let restaurantUrl = restaurant.restaurant.url;
+            let index_question = restaurantUrl.indexOf("?");
+            let restaurant_cuisine = restaurant.restaurant.cuisines;
+            restaurantUrl = restaurantUrl.slice(33, index_question);
 
             //if zomato api restaurant doesn't have any imageUrl, it will be set to our logo photo
-            if (imageUrl == '') {
-              imageUrl = '/logo_photo.jpg'
+            if (imageUrl == "") {
+              imageUrl = "/logo_photo.jpg";
             }
-            restaurantObj.name = name
-            restaurantObj.location = locality
-            restaurantObj.imageUrl = imageUrl
-            restaurantObj.restaurantUrl = restaurantUrl
-            restaurantObj.cuisines = restaurant_cuisine
-            restaurantObj.styling = 'border-top: 1px solid black; clear: left;'
-            this.searchResult.push(restaurantObj)
+            restaurantObj.name = name;
+            restaurantObj.location = locality;
+            restaurantObj.imageUrl = imageUrl;
+            restaurantObj.restaurantUrl = restaurantUrl;
+            restaurantObj.cuisines = restaurant_cuisine;
+            restaurantObj.styling = "border-top: 1px solid black; clear: left;";
+            this.searchResult.push(restaurantObj);
           }
-          this.searchResult[0].styling = 'clear: left'
+          this.searchResult[0].styling = "clear: left";
         } catch (error) {
-          console.error(error)
+          console.error(error);
         }
       } else {
-        document.getElementById('displaySearch').style.display = 'none'
+        document.getElementById("displaySearch").style.display = "none";
       }
     },
     emptyFocusOut() {
       //onclick, this function will close the search bar
-      this.searchResult = []
-      document.getElementById('displaySearch').style.display = 'none'
+      this.searchResult = [];
+      document.getElementById("displaySearch").style.display = "none";
     },
     canScroll() {
       //this makes the whole page scrollable
-      document.documentElement.style.position = 'static'
-      document.documentElement.style['overflow-y'] = 'auto'
-      document.documentElement.style['overflow-x'] = 'hidden'
+      document.documentElement.style.position = "static";
+      document.documentElement.style["overflow-y"] = "auto";
+      document.documentElement.style["overflow-x"] = "hidden";
     },
     cannotScroll() {
       //this makes the whole page unscrollable (so that only the search div is scrollable)
-      document.documentElement.style.position = 'fixed'
-      document.documentElement.style['overflow-y'] = 'scroll'
-      document.documentElement.style['overflow-x'] = 'hidden'
+      document.documentElement.style.position = "fixed";
+      document.documentElement.style["overflow-y"] = "scroll";
+      document.documentElement.style["overflow-x"] = "hidden";
     },
     async login() {
       if (this.inputEmail) {
-        let email = this.inputEmail
-        const userListGet = await db.collection('user').get()
-        let userList = []
+        let email = this.inputEmail;
+        const userListGet = await db.collection("user").get();
+        let userList = [];
         userListGet.forEach((doc) => {
-          const userData = doc.data()
-          userList.push(userData)
-        })
+          const userData = doc.data();
+          userList.push(userData);
+        });
         for (let userElement of userList) {
-          userElement.email = userElement.email.trim()
+          userElement.email = userElement.email.trim();
           if (this.inputEmail == userElement.email) {
-            this.isLoggedIn = true
-            this.user = userElement
-            localStorage.user = this.user.email
-            localStorage.name = this.user.name
-            localStorage.credits = this.user.credits
+            this.isLoggedIn = true;
+            this.user = userElement;
+            localStorage.user = this.user.email;
+            localStorage.name = this.user.name;
+            localStorage.credits = this.user.credits;
             if (!localStorage.image) {
-              localStorage.image = '/profilePicture.jpg'
-              this.image = localStorage.image
+              localStorage.image = "/profilePicture.jpg";
+              this.image = localStorage.image;
             }
           }
         }
         //if the email doesn't exist
         if (this.isLoggedIn == false) {
-          this.inputEmail = ''
-          this.logout()
-          this.signOut()
+          this.inputEmail = "";
+          this.logout();
+          this.signOut();
         }
       }
     },
     logout() {
-      this.user = false
-      localStorage.user = 0
-      localStorage.name = 0
-      localStorage.image = ''
-      localStorage.credits = 0
+      this.user = false;
+      localStorage.user = 0;
+      localStorage.name = 0;
+      localStorage.image = "";
+      localStorage.credits = 0;
     },
     signOut() {
-      var auth2 = gapi.auth2.getAuthInstance()
-      auth2.signOut().then(function () {})
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {});
     },
 
     async onSuccess(googleUser) {
       // This only gets the user information: id, name, imageUrl and email
-      const profile = googleUser.getBasicProfile()
-      this.inputEmail = profile.getEmail()
-      let name = profile.getName()
-      this.image = profile.getImageUrl()
-      localStorage.image = this.image
-      this.login()
+      const profile = googleUser.getBasicProfile();
+      this.inputEmail = profile.getEmail();
+      let name = profile.getName();
+      this.image = profile.getImageUrl();
+      localStorage.image = this.image;
+      this.login();
     },
     async signUp() {
       if (this.inputNameSignUp && this.inputEmailSignUp) {
-        await db.collection('user').add({
+        await db.collection("user").add({
           name: this.inputNameSignUp,
           email: this.inputEmailSignUp,
           credits: 100,
-        })
-        this.inputEmail = this.inputEmailSignUp
-        this.login()
-        this.inputNameSignUp = ''
-        this.inputEmailSignUp = ''
+        });
+        this.inputEmail = this.inputEmailSignUp;
+        this.login();
+        this.inputNameSignUp = "";
+        this.inputEmailSignUp = "";
       }
     },
   },
-}
+};
 </script>
